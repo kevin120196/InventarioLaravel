@@ -19,7 +19,7 @@ class CreateProveedoresTable extends Migration
             $table->string('cedula')->unique();
             $table->string('direccion_proveedor',100);
             $table->string('numero_telefono_proveedor',11);
-            $table->string('correo_electronico_proveedor',200)->unique();
+            $table->string('correo_electronico_proveedor',100)->unique();
             $table->timestamps();
         });
     }

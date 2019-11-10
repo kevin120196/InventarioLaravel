@@ -13,4 +13,8 @@ class Cliente extends Model
     public function descuento_cliente () {
         return $this-> belongsTo('app\Descuento_Cliente');
     }
+
+    public function factura_venta () {
+        return $this-> belongsTo('app\Factura_Venta');
+    }
 }

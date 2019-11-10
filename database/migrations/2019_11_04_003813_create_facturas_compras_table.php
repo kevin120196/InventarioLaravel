@@ -16,17 +16,20 @@ class CreateFacturasComprasTable extends Migration
         Schema::create('facturas_compras', function (Blueprint $table) {
             $table->increments('id');
             $table->date('fecha_compra');
-            $table->enum('tipos_factura',['Credito','Contado']);
-            $table->enum('estado_factura',['Cancelada','Pendiente']);            
+            //$table->enum('tipos_factura',['Credito','Contado']);
+            //$table->enum('estado_factura',['Cancelada','Pendiente']);            
             //claves foraneas
-            //$table->integer('tipo_factura_id')->unsigned();
+            $table->integer('tipo_factura_id')->unsigned();
             $table->integer('proveedores_id')->unsigned();
-
+            $table->integer('estados_facturas_id')->unsigned();
             //Referencias claves
-            //$table->foreign('tipo_factura_id')->on('id')->references('tipos_facturas')->onDelete('cascade');
+            $table->foreign('tipo_factura_id')->references('id')->on('tipos_facturas')->onDelete('cascade');
+            //$table->foreign('tipo_factura_id')->references('id')->on('tipos_facturas')->onDelete('cascade');
+            $table->foreign('estados_facturas_id')->references('id')->on('estados_facturas')->onDelete('cascade');
             $table->foreign('proveedores_id')->references('id')->on('proveedores')->onDelete('cascade');
             //
         });
+<<<<<<< HEAD
 
         Schema::create('detalle_factura_compra',function(Blueprint $table){
             $table->increments('id');
@@ -58,6 +61,8 @@ class CreateFacturasComprasTable extends Migration
             
         });
 
+=======
+>>>>>>> 9f14e1e7766bfbd953666ff01457baac58d5a4b8
     }
 
     /**

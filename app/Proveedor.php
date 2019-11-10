@@ -12,6 +12,10 @@ class Proveedor extends Model
 
     public function facturas_compras() { 
         return $this-> hashMany('app\Factura_Compra');
-     }        
+     }
+     
+     public function producto () {
+        return $this-> hashMany('app\Productos');     
+    }
 
 }

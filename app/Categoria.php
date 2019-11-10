@@ -9,4 +9,8 @@ class Categoria extends Model
     //
     protected $table="categorias";
     protected $fillable=['nombre_categoria'];
+
+    public function producto () {
+        return $this-> hashMany('app\Productos');     
+    }
 }

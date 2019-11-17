@@ -29,40 +29,6 @@ class CreateFacturasComprasTable extends Migration
             $table->foreign('proveedores_id')->references('id')->on('proveedores')->onDelete('cascade');
             //
         });
-<<<<<<< HEAD
-
-        Schema::create('detalle_factura_compra',function(Blueprint $table){
-            $table->increments('id');
-            //$table->date('fecha');
-            $table->double('cantidad');
-            $table->double('precio');
-            $table->double('total');
-            //claves foraneas
-            $table->integer('facturas_compras_id')->unsigned();
-            //$table->integer('facturas_compras_estados_facturas_id')->unsigned();
-            //$table->integer('facturas_compras_tipos_facturas_id')->unsigned();
-            $table->integer('facturas_compras_proveedores_id')->unsigned();
-            $table->integer('productos_id_productos')->unsigned();
-            $table->integer('productos_categorias_productos_id')->unsigned();
-            $table->integer('productos_marcas_productos_id')->unsigned();
-            $table->integer('productos_proveedores_id')->unsigned();
-            //referncias claves foraneas
-            $table->foreign('facturas_compras_id')->references('id')->on('facturas_compras')->onDelete('cascade');
-            //$table->foreign('facturas_compras_estados_facturas')->on('id')->references('facturas_compras')->onDelete('cascade');
-            //$table->foreign('facturas_compras_tipos_facturas_id')->on('id')->references('facturas_compras')->onDelete('cascade');
-            $table->foreign('facturas_compras_proveedores_id')->references('id')->on('facturas_compras')->onDelete('cascade');
-            $table->foreign('productos_id_productos')->references('id')->on('productos')->onDelete('cascade');
-            $table->foreign('productos_categorias_productos_id')->references('id')->on('productos')->onDelete('cascade');
-            $table->foreign('productos_marca_id')->references('id')->on('productos')->onDelete('cascade');
-            $table->foreign('productos_proveedores_id')->references('id')->on('productos')->onDelete('cascade');
-            //
-            $table->timestamps();
-
-            
-        });
-
-=======
->>>>>>> 9f14e1e7766bfbd953666ff01457baac58d5a4b8
     }
 
     /**

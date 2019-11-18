@@ -43,7 +43,7 @@
                     <nav class="menu">
                             <ul>
                                 <li><i class="fa fa-home"></i> Inicio</li>
-                                <li><i><img src="{{asset('img/categoria.png')}}" alt=""></i> <a href="#">Categorias</a></li>
+                                <li><i><img src="{{asset('img/categoria.png')}}" alt=""></i> <a href="{{ route('categorias.index')}}">Categorias</a></li>
                                 <li><i><img src="{{asset('img/repuesto.png')}}" alt=""></i> <a href="#">Marcas</a></li>
                                 <li><i><img src="{{asset('img/cajas.png')}}" alt=""></i> <a href="#">Productos</a></li>
                                 <li><i><img src="{{asset('img/inventario.png')}}" alt=""></i> <a href="#">Proveedores</a></li>
@@ -74,6 +74,7 @@
                         </nav>
                 <article>
                     <div class:"container">
+                        @include('flash::message')
                         @yield('contenido')    
                     </div>
                 </article>

@@ -3,10 +3,10 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="css/stylos.css" rel="stylesheet">
-        <link rel="stylesheet" href="css/bootstrap-grid.css">
+        <link href="{{asset('css/stylos.css')}}" rel="stylesheet">
+        <link rel="stylesheet" href="{{asset('css/bootstrap-grid.css')}}">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link rel="stylesheet" href="css/font-awesome-4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="{{asset('css/font-awesome-4.7.0/css/font-awesome.min.css')}}">
         <title>@yield('title','Default') | Panel de Administracion Sistema de Inventario</title>
     </head>
     <body>
@@ -43,21 +43,21 @@
                     <nav class="menu">
                             <ul>
                                 <li><i class="fa fa-home"></i> Inicio</li>
-                                <li><i><img src="img/categoria.png" alt=""></i> <a href="#">Categorias</a></li>
-                                <li><i><img src="img/repuesto.png" alt=""></i> <a href="#">Marcas</a></li>
-                                <li><i><img src="img/cajas.png" alt=""></i> <a href="#">Productos</a></li>
-                                <li><i><img src="img/inventario.png" alt=""></i> <a href="#">Proveedores</a></li>
-                                <li><i><img src="img/vendedor.png" alt=""></i> <a href="#">Vendedores</a></li>
-                                <li><i><img src="img/compras.png" alt=""></i> <a href="#">Compras</a>
+                                <li><i><img src="{{asset('img/categoria.png')}}" alt=""></i> <a href="#">Categorias</a></li>
+                                <li><i><img src="{{asset('img/repuesto.png')}}" alt=""></i> <a href="#">Marcas</a></li>
+                                <li><i><img src="{{asset('img/cajas.png')}}" alt=""></i> <a href="#">Productos</a></li>
+                                <li><i><img src="{{asset('img/inventario.png')}}" alt=""></i> <a href="#">Proveedores</a></li>
+                                <li><i><img src="{{asset('img/vendedor.png')}}" alt=""></i> <a href="#">Vendedores</a></li>
+                                <li><i><img src="{{asset('img/compras.png')}}" alt=""></i> <a href="#">Compras</a>
                                     <ul>
                                         <li><i class="material-icons">library_add</i><a href="#"> Nueva Compra</a></li>
-                                        <li><i><img src="img/Factura.png" alt=""></i> <a href="#"> Detalles Compras</a></li>
+                                        <li><i><img src="{{asset('img/Factura.png')}}" alt=""></i> <a href="#"> Detalles Compras</a></li>
                                     </ul>
                                 </li>
-                                <li><i><img src="img/camion-de-reparto.png" alt=""></i> <a href="#">Ventas</a>
+                                <li><i><img src="{{asset('img/camion-de-reparto.png')}}" alt=""></i> <a href="#">Ventas</a>
                                     <ul>
                                         <li><i class="material-icons">library_add</i><a href="#"> Nueva Venta</a></li>
-                                        <li><i><img src="img/Factura.png" alt=""></i> <a href="#"> Detalles Ventas</a></li>
+                                        <li><i><img src="{{asset('img/Factura.png')}}" alt=""></i> <a href="#"> Detalles Ventas</a></li>
                                     </ul>
                                 </li>
                                 <li id="user">                    
@@ -89,4 +89,5 @@
             </footer>
         </main>
     </body>
+
 </html>

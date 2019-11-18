@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Categoria;
-use Laracasts\Flash\Flash;
+use RealRashid\SweetAlert\Facades\Alert;
+
 
 class CategoriaController extends Controller
 {
@@ -24,6 +25,7 @@ class CategoriaController extends Controller
     public function store(Request $reques){
         $categoria=new Categoria($reques->all());
         $categoria->save();
+        Alert::success('Exito!','La categoria ' . $categoria->nombre_categoria . ' ha sido creada con exito' );
         //flash('La categoria' . $categoria->nombre_categoria . ' ha sido creada con exito', 'success');
         return redirect()->route('categorias.index');
     }

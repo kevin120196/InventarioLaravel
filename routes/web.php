@@ -21,4 +21,6 @@ Route::group(['prefix'=>'admin'],function(){
         'uses'=>'CategoriaController@destroy',
         'as'=>'admin.categorias.destroy'
     ]);
+
+    Route::resource('proveedores','ProveedorController');
 });

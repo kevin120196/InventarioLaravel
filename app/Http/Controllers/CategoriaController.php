@@ -17,12 +17,12 @@ class CategoriaController extends Controller
         
     }
 
-    public function create(){
+    public function store(){
         return view('admin.categoria.create');
 
     }
 
-    public function store(Request $reques){
+    public function create(Request $reques){
         $categoria=new Categoria($reques->all());
         $categoria->save();
         Alert::success('Exito!','La categoria ' . $categoria->nombre_categoria . ' ha sido creada con exito' );

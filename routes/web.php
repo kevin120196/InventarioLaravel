@@ -22,3 +22,11 @@ Route::group(['prefix'=>'admin'],function(){
         'as'=>'admin.categorias.destroy'
     ]);
 });
+
+Route::group(['prefix'=>'admin'],function(){
+    Route::resource('marcas','MarcaController');
+    Route::get('admin/marca/{id}/destroy',[
+        'uses'=>'MarcaController@destroy',
+        'as'=>'admin.marca.destroy'
+    ]);
+});

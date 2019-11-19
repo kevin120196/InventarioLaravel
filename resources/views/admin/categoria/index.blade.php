@@ -33,7 +33,10 @@
                             <tr> 
                                 <td>{{$categorias->id}}</td>
                                 <td>{{$categorias->nombre_categoria}}</td>                            
-                                <td><button class="button-danger"><span class="fa fa-trash"></span></button> <button class="button-warning"><span class="fa fa-edit"></span></button> <button class="button-show"><span class="fa fa-eye"></span></button></td>
+                                <td>
+                                    <a href="{{route('categorias.edit',$categorias->id)}}" class="button-warning"><i class="fa fa-edit"></i></a>
+                                    <a href="{{route('admin.categorias.destroy',$categorias->id)}}" class="button-danger" onclick="return confirm('¿Seguro que deseas eliminar este registro?')"><i class="fa fa-trash"></i></a>
+                                </td>
                             </tr>
                         
                         @endforeach

@@ -7,10 +7,9 @@
         </div>
         <div class="input-contenedor input-100">
             <i class="fa fa-pencil icon"></i>
-            {!! Form::text('nombre_categoria', null, ['class'=>''])!!}
+            {!! Form::text('nombre_categoria', null, ['placeholder'=>'Nombre Categoria'])!!}
         </div>
-
-        {!! Form::submit('Guardar', ['class'=>'button-primary']) !!}
-
+        
+        <button type="submit" class="button-primary"><i class="fa fa-save"></i> Guardar</button>
     {!!Form::close()!!}
 @endsection

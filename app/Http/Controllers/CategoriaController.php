@@ -30,5 +30,24 @@ class CategoriaController extends Controller
         return redirect()->route('categorias.index');
     }
 
+    public function edit($id){
+        $categoria=Categoria::find($id);
+        return view('admin.categoria.edit')->with('categoria',$categoria);
+    }
+
+    public function update(Request $request,$id){
+        $categoria=Categoria::find($id);
+        $categoria->fill($request->all());
+        $categoria->save();
+        Alert::success('Exito!','La categoria ' .$categoria->nombre_categoria. ' ha sido actualizado');
+        return redirect()->route('categorias.index');
+    }
+
+    public function destroy($id){
+        $categoria=Categoria::find($id);
+        $categoria->delete();
+        Alert::error('Eliminado!', 'La categoria ' .$categoria->nombre_categoria. ' ha sido eliminada');
+        return redirect()->route('categorias.index');
+    }
 
 }

@@ -6,7 +6,8 @@
         <link href="{{asset('css/stylos.css')}}" rel="stylesheet">
         <link rel="stylesheet" href="{{asset('css/bootstrap-grid.css')}}">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link rel="stylesheet" href="{{asset('css/font-awesome-4.7.0/css/font-awesome.min.css')}}">
+        <link rel="stylesheet" href="{{asset('css/font-awesome-4.7.0/css/font-awesome.min.css')}}"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.css">
+
         <title>@yield('title','Default') | Panel de Administracion Sistema de Inventario</title>
     </head>
     <body>
@@ -74,7 +75,6 @@
                         </nav>
                 <article>
                     <div class:"container">
-                        @include('flash::message')
                         @yield('contenido')    
                     </div>
                 </article>
@@ -89,6 +89,10 @@
                 </ul>
             </footer>
         </main>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.js"></script>
+
+	@include('sweetalert::alert')
+	@yield('js')
     </body>
 
 </html>

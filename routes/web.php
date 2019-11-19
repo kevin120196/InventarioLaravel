@@ -30,3 +30,11 @@ Route::group(['prefix'=>'admin'],function(){
         'as'=>'admin.marca.destroy'
     ]);
 });
+
+Route::group(['prefix'=>'admin'],function(){
+    Route::resource('descuentos_clientes','DescuentoClienteController');
+    Route::get('admin/descuento_cliente/{id}/destroy',[
+        'uses'=>'DescuentoClienteController@destroy',
+        'as'=>'admin.descuentos_clientes.destroy'
+    ]);
+});

@@ -38,3 +38,11 @@ Route::group(['prefix'=>'admin'],function(){
         'as'=>'admin.descuentos_clientes.destroy'
     ]);
 });
+
+Route::group(['prefix'=>'admin'],function(){
+    Route::resource('estados_facturas','EstadoFacturaController');
+    Route::get('admin/estados_facturas/{id}/destroy',[
+        'uses'=>'EstadoFactura@destroy',
+        'as'=>'admin.estados_facturas.destroy'
+    ]);
+});

@@ -15,6 +15,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+//las rutas siempre van adentro del mismo grupo
 Route::group(['prefix'=>'admin'],function(){
     Route::resource('categorias','CategoriaController');
     Route::get('admin/categoria/{id}/destroy',[
@@ -28,25 +30,17 @@ Route::group(['prefix'=>'admin'],function(){
         'as'=>'admin.proveedores.destroy'
     ]);
 
-});
-
-Route::group(['prefix'=>'admin'],function(){
     Route::resource('marcas','MarcaController');
     Route::get('admin/marca/{id}/destroy',[
         'uses'=>'MarcaController@destroy',
         'as'=>'admin.marca.destroy'
     ]);
-});
-
-Route::group(['prefix'=>'admin'],function(){
     Route::resource('descuentos_clientes','DescuentoClienteController');
     Route::get('admin/descuento_cliente/{id}/destroy',[
         'uses'=>'DescuentoClienteController@destroy',
         'as'=>'admin.descuentos_clientes.destroy'
     ]);
-});
 
-Route::group(['prefix'=>'admin'],function(){
     Route::resource('estados_facturas','EstadoFacturaController');
     Route::get('admin/estados_facturas/{id}/destroy',[
         'uses'=>'EstadoFactura@destroy',

@@ -3,7 +3,7 @@
 @section('contenido')
 
     <div class="row">
-        <form action="" class="formulario" style="box-shadow: none;" >
+        <form action="" class="formulario" style="box-shadow: none;padding:3px;" >
         <div class="cabeceraForm">
             <h1>Gestion de Marcas</h1>
         </div>

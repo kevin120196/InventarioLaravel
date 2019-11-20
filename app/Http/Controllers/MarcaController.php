@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use app\Marca;
+use App\Marca; //levi siempre tiene que ir en mayuscula el App porque es donde estan los modelos fujate como esta escrito
 use Illuminate\Http\Request;
 
 class MarcaController extends Controller

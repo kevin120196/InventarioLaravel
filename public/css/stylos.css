@@ -18,7 +18,8 @@ header{
 
 main{
     width: 100%;
-    height: 1000px;
+    height: auto;
+    max-height:max-content ;
     background: #34495E;
     margin-top: -5em;
 }
@@ -220,7 +221,7 @@ a{
 .content-all{
     width: 100%;
     max-width: 1000px;
-    height: 830px;
+    height: auto;
     background: rgb(255, 255, 255);
     margin: auto;
     margin-top: 80px;
@@ -322,7 +323,7 @@ article .parrafo2{
     width: 100%;
     height: auto;
     margin: auto;
-    padding: 1em;
+    padding: 2em;
     position: absolute;
     box-shadow: 1px -3px 6px black;
     z-index: 5;
@@ -350,7 +351,7 @@ article .parrafo2{
     grid-template-columns: auto;
     background: #fff;
     margin-top:150px;
-    padding: 3px;
+    padding: 1em;
     width: 300px;
 }
 
@@ -404,7 +405,7 @@ input[type="password"],
     border: 1px solid #aaa;
     display: flex;
     flex-wrap: wrap;
-    grid-auto-columns: 1;
+    grid-auto-columns: 2;
     float: left;
 
 }
@@ -591,12 +592,12 @@ table{
 th{
     position: sticky;
     top: 0;
-    
 }
 
 th,td{
-    padding: 20px;
+    padding: 10px;
     font-family: 'Montserrat', sans-serif;
+    text-transform: capitalize;
 }
 
 thead th{
@@ -805,7 +806,7 @@ tr:hover td{
     td{
         display: block;
         text-align: left;
-        padding: 10px 20px 10px 150px;
+        padding: 8px 0px 10px 150px;  
         align-items: center;
     }
 
@@ -817,8 +818,8 @@ tr:hover td{
         width: 100%;
     }
 
-    td:before{
-        content: 'producto';
+    .categoria td:before{
+        content: 'Categoria';
         font-weight: bold;
         position: relative;
         font-family: sans-serif;
@@ -827,26 +828,50 @@ tr:hover td{
         transform: translateY(-50%);
     }
 
-    td:nth-of-type(2)::before{
-        content: 'Precio';
+
+    .categoria td:nth-of-type(2)::before{
+        content: 'Acción';
     }
 
-    td:nth-of-type(3)::before{
-        content: 'Cantidad';
-    }
-    td:nth-of-type(4)::before{
-        content: 'Total';
-    }
-    td:nth-of-type(5)::before{
-        content: 'Subtotal';
-    }
-
-    td:nth-of-type(6)::before{
-        content: 'Impuesto';
-    }
-
-    td:nth-of-type(7)::before{
+    .categoria td:nth-of-type(3)::before{
         content: 'Accion';
+    }
+
+    .proveedor td:before{
+        content: '';
+        font-weight: bold;
+        position: relative;
+        font-family: sans-serif;
+        top: 7%;
+        left: -100px;
+        transform: translateY(-50%);
+    }
+    
+    .proveedor td:nth-of-type(1)::before{
+        content: 'Proveedor:';
+        margin-right: -6px;
+    }
+    .proveedor td:nth-of-type(2)::before{
+        content: 'Cedula:';
+        margin-right: 19px;
+    }
+
+    .proveedor td:nth-of-type(3)::before{
+        content: 'Dirección:';
+    }
+
+    .proveedor td:nth-of-type(4)::before{
+        content: 'Télefono:';
+        margin-right: 5px;
+    }
+
+    .proveedor td:nth-of-type(5)::before{
+        content: 'Email:';
+        margin-right: 32px;
+    }
+
+    .proveedor td:nth-of-type(6)::before{
+        content: 'Acción:';
     }
     
     input[type="button"],
@@ -898,6 +923,7 @@ tr:hover td{
     
     .input-40{
         width: 40%;
+        float: left;
     }
     
     .input-50{

@@ -11,10 +11,10 @@ class Estado_Factura extends Model
 
 
     public function facturas_compras () {
-        return $this-> hashMany('app\Factura_Compra');     
+        return $this->hasMany('app\Factura_Compra');     
     }
 
     public function facturas_ventas () {
-        return $this-> hashMany('app\Factura_Venta');     
+        return $this->hasMany('app\Factura_Venta');     
     }
 }

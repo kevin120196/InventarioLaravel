@@ -11,11 +11,11 @@ class Proveedor extends Model
                          'numero_telefono_proveedor','correo_electronico_proveedor'];
 
     public function facturas_compras() { 
-        return $this-> hashMany('app\Factura_Compra');
+        return $this->hasMany('App\Factura_Compra');
      }
      
-     public function producto () {
-        return $this-> hashMany('app\Productos');     
+     public function producto() {
+        return $this->hasMany('App\Productos');     
     }
 
 }

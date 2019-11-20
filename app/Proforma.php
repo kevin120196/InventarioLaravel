@@ -11,15 +11,15 @@ class Proforma extends Model
     protected $fillable=['fecha_proforma','vendedores_id',
     'clientes_id','descuentos_clientes_id'];
 
-    public function Cliente () {
-        return $this-> hashMany('app\Cliente');     
+    public function Cliente() {
+        return $this->hasMany('app\Cliente');     
     }
 
-    public function vendedor () {
-        return $this-> hashMany('app\Vendedor');     
+    public function vendedor() {
+        return $this->hasMany('app\Vendedor');     
     }
 
-    public function descuentos_clientes () {
-        return $this-> belongsTo('app\Descuento_Cliente');     
+    public function descuentos_clientes() {
+        return $this->belongsTo('app\Descuento_Cliente');     
     }
 }

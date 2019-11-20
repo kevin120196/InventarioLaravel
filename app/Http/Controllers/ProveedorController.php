@@ -1,11 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-<<<<<<< HEAD
-use app\Proveedor;
-=======
 use App\Proveedor;
->>>>>>> kevinBranch
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 

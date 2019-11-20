@@ -2,7 +2,7 @@
 @section('title','Gestion de Proveedores')
 @section('contenido')
     <div class="row">
-        <div class="formulario" style="box-shadow: none;">
+        <div class="formulario" style="box-shadow: none; padding:3px;">
             <div class="cabeceraForm">
                 <h1>Gestion de Proveedores</h1>
             </div>
@@ -18,7 +18,7 @@
                 </div>
 
                 <div class="main-container">
-                    <table>
+                    <table class="proveedor">
                         <thead>
                             <tr>
                                 <th>Nombre de Provedor</th>
@@ -35,11 +35,11 @@
                                     <td>{{$proveedores->nombre_proveedor}}</td>
                                     <td>{{$proveedores->cedula}}</td>
                                     <td>{{$proveedores->direccion_proveedor}}</td>
-                                    <td>{{$proveedores->numero_telefono}}</td>
-                                    <td>{{$proveedores->correo_electronico}}</td>
+                                    <td>{{$proveedores->numero_telefono_proveedor}}</td>
+                                    <td>{{$proveedores->correo_electronico_proveedor}}</td>
                                     <td>
-                                        <a href="#" class="button-danger"><i class="fa fa-trash"></i></a>
-                                        <a href="#" class="button-warning"><i class="fa fa-edit"></i></a>
+                                        <a href="{{route('proveedores.edit',$proveedores->id)}}" class="button-warning"><i class="fa fa-edit"></i></a>
+                                        <a href="{{route('admin.proveedores.destroy',$proveedores->id)}}" class="button-danger" onclick="return confirm('¿Seguro que deseas eliminar este registro?')"><i class="fa fa-trash"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach

@@ -1,9 +1,9 @@
 @extends('admin.template.template')
-@section('title','Crear Categoria' . $categoria->nombre_categoria)
+@section('title','Actualizar Categoria')
 @section('contenido')
     {!!Form::open(['route'=>['categorias.update',$categoria],'method'=>'PUT','class'=>'formulario'])!!}
         <div class="cabeceraForm">
-            <h1>Crear Categoria<h1>
+            <h1>Actualizar Categoria<h1>
         </div>
         <div class="input-contenedor input-100">
             <i class="fa fa-pencil icon"></i>

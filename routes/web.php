@@ -23,4 +23,9 @@ Route::group(['prefix'=>'admin'],function(){
     ]);
 
     Route::resource('proveedores','ProveedorController');
+        Route::get('admin/proveedor/{id}/destroy',[
+        'uses'=>'ProveedorController@destroy',
+        'as'=>'admin.proveedores.destroy'
+    ]);
+
 });

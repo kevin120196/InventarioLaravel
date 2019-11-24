@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Marca; //levi siempre tiene que ir en mayuscula el App porque es donde estan los modelos fujate como esta escrito
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class MarcaController extends Controller
 {
@@ -22,7 +23,7 @@ class MarcaController extends Controller
         $marca->save();
         Alert::success('Exito!','La marca ' . $marca->nombre_marca . ' ha sido creada con exito' );
         //flash('La categoria' . $categoria->nombre_categoria . ' ha sido creada con exito', 'success');
-        return redirect()->route('marca.index');
+        return redirect()->route('admin.marca.index');
     }
 
     public function edit($id){
@@ -35,13 +36,13 @@ class MarcaController extends Controller
         $marca->fill($request->all());
         $marca->save();
         Alert::success('Exito!','La marca ' .$marca->nombre_marca. ' ha sido actualizado');
-        return redirect()->route('marca.index');
+        return redirect()->route('admin.marca.index');
     }
 
     public function destroy($id){
         $marca=Marca::find($id);
         $marca->delete();
-        Alert::error('Eliminado!', 'La categoria ' .$marca->nombre_marca. ' ha sido eliminada');
-        return redirect()->route('categorias.index');
+        Alert::error('Eliminado!', 'La marca ' .$marca->nombre_marca. ' ha sido eliminada');
+        return redirect()->route('admin.marca.index');
     }
 }

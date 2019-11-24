@@ -31,11 +31,11 @@ Route::group(['prefix'=>'admin'],function(){
     ]);
 
     Route::resource('marcas','MarcaController');
-    Route::get('admin/marca/{id}/destroy',[
+    Route::get('admin/marcas/{id}/destroy',[
         'uses'=>'MarcaController@destroy',
-        'as'=>'admin.marca.destroy'
+        'as'=>'admin.marcas.destroy'
     ]);
-    Route::resource('descuentos_clientes','DescuentoClienteController');
+   /* Route::resource('descuentos_clientes','DescuentoClienteController');
     Route::get('admin/descuento_cliente/{id}/destroy',[
         'uses'=>'DescuentoClienteController@destroy',
         'as'=>'admin.descuentos_clientes.destroy'
@@ -45,5 +45,5 @@ Route::group(['prefix'=>'admin'],function(){
     Route::get('admin/estados_facturas/{id}/destroy',[
         'uses'=>'EstadoFactura@destroy',
         'as'=>'admin.estados_facturas.destroy'
-    ]);
+    ]);*/
 });

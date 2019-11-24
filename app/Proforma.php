@@ -12,14 +12,14 @@ class Proforma extends Model
     'clientes_id','descuentos_clientes_id'];
 
     public function Cliente() {
-        return $this->hasMany('app\Cliente');     
+        return $this->hasMany('App\Cliente');     
     }
 
     public function vendedor() {
-        return $this->hasMany('app\Vendedor');     
+        return $this->hasMany('App\Vendedor');     
     }
 
     public function descuentos_clientes() {
-        return $this->belongsTo('app\Descuento_Cliente');     
+        return $this->belongsTo('App\Descuento_Cliente');     
     }
 }

@@ -28,4 +28,15 @@ Route::group(['prefix'=>'admin'],function(){
         'as'=>'admin.proveedores.destroy'
     ]);
 
+    Route::get('admin/proveedor/{id}/show',[
+        'uses'=>'ProveedorController@show',
+        'as'=>'admin.proveedores.show'
+    ]);
+
+    Route::resource('productos','ProductosController');
+    Route::get('admin/producto/{id}/destroy',[
+        'uses'=>'ProductosController@destroy',
+        'as'=>'admin.productos.destroy'
+    ]);
+
 });

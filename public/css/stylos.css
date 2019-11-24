@@ -295,11 +295,6 @@ article .parrafo-1{
     margin-top: 40px; 
     letter-spacing: 2px;  
 }
-article img{
-    width: 100%;
-    border: 4px solid white;
-    margin-top: 40px;
-}
 
 article .parrafo2{
     font-size: 20px;
@@ -367,6 +362,26 @@ h1{
     font-size: 40px;
 }
 
+textarea{
+    width: 94.3%;
+    border: none;
+    font-size: 20px;
+    margin: auto;
+    padding: 10px;
+    border: none;
+    outline: none;
+}
+
+select{
+    width: 94.3%;
+    outline: none;
+    border: none;
+    font-size: 20px;
+    margin:0px;
+    padding: 10px;
+}
+
+input[type="number"],
 input[type="text"],
 input[type="password"],
 .button-primary,
@@ -419,7 +434,7 @@ input[type="password"],
 }
 
 .buscar-input{
-    margin: 20px 46px;
+    margin: 20px 45px;
 }
 .button{
     border: none;
@@ -440,12 +455,6 @@ input[type="password"],
     width: 20%;
 }
 
-.input-30{
-    width: 30%;
-}
-
-
-
 .input-90{
     width: 90%;
 }
@@ -461,6 +470,81 @@ input[type="password"],
 p{
     text-align: center;
 }
+
+/*Modal*/
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content/Box */
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+  }
+  
+  /* The Close Button */
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  .modal-header {
+    padding: 2px 16px;
+    background-color: #5cb85c;
+    color: white;
+  }
+  
+  /* Modal Body */
+  .modal-body {padding: 2px 16px;}
+  
+  /* Modal Footer */
+  .modal-footer {
+    padding: 2px 16px;
+    background-color: #5cb85c;
+    color: white;
+  }
+  
+  /* Modal Content */
+  .modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 80%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    animation-name: animatetop;
+    animation-duration: 0.4s
+  }
+  
+  /* Add Animation */
+  @keyframes animatetop {
+    from {top: -300px; opacity: 0}
+    to {top: 0; opacity: 1}
+  }
+  
+/**/
 
 /**botones*/
 .button-primary{
@@ -572,9 +656,9 @@ p{
 }
 
 .main-container{
-    margin: 20px auto;
+    margin: 20px -6px;
     width: 100%;
-    height: 500px;
+    height: auto;
     overflow: auto;
 }
 
@@ -719,6 +803,7 @@ tr:hover td{
         box-shadow: 1px 4px 10px 1px black;
     }
 
+
     .menu ul li ul{
         margin-right: -36em;
     }
@@ -779,6 +864,11 @@ tr:hover td{
     #user{
         visibility: visible;
     }
+
+    textarea,select{
+        width: 89.3%;
+    }
+    
 }
 
 @media only screen and (max-width: 767px){
@@ -846,6 +936,7 @@ tr:hover td{
         left: -100px;
         transform: translateY(-50%);
     }
+
     
     .proveedor td:nth-of-type(1)::before{
         content: 'Proveedor:';
@@ -873,6 +964,82 @@ tr:hover td{
     .proveedor td:nth-of-type(6)::before{
         content: 'Acción:';
     }
+
+    .productos td:before{
+        content: '';
+        font-weight: bold;
+        position: relative;
+        font-family: sans-serif;
+        top: 7%;
+        left: -100px;
+        transform: translateY(-50%);
+    }
+
+
+    .productos td:nth-of-type(1)::before{
+        content: 'Codigo Original:';
+        margin-right: 2px;
+    }
+    .productos td:nth-of-type(2)::before{
+        content: 'Codigo Producto:';
+        margin-right: -6px;
+    }
+
+    .productos td:nth-of-type(3)::before{
+        content: 'Existencia:';
+        margin-right: 45px;
+    }
+
+    .productos td:nth-of-type(4)::before{
+        content: 'Precio compra:';
+        margin-right: 10px;
+    }
+
+    .productos td:nth-of-type(5)::before{
+        content: 'Precio venta:';
+        margin-right: 28px;
+    }
+
+    .productos td:nth-of-type(6)::before{
+        content: 'Aplicación:';
+        margin-right: 43px;
+    }
+
+    .productos td:nth-of-type(7)::before{
+        content: 'descripción:';
+        margin-right: 30px;
+    }
+
+    .productos td:nth-of-type(8)::before{
+        content: 'U/M:';
+        margin-right: 92px;
+    }
+
+    .productos td:nth-of-type(9)::before{
+        content: 'Número rack:';
+        margin-right: 18px;
+    }
+
+    .productos td:nth-of-type(10)::before{
+        content: 'Marca:';
+        margin-right: 75px;
+    }
+
+    .productos td:nth-of-type(11)::before{
+        content: 'Categoría:';
+        margin-right: 46px;
+    }
+
+    .productos td:nth-of-type(12)::before{
+        content: 'Proveedor:';
+        margin-right: 39px;
+    }
+
+    .productos td:nth-of-type(13)::before{
+        content: 'Acción:';
+        margin-right: 44px;
+    }
+
     
     input[type="button"],
     .button-danger,.button-warning, .button-show{
@@ -904,10 +1071,14 @@ tr:hover td{
         margin: 0;
     }
 
+    
+
 }
 
 
 @media only screen and (min-width: 890px){
+
+
 
     #user1{
         visibility: hidden;
@@ -1128,6 +1299,10 @@ tr:hover td{
 
     .enlaceLogo{
         visibility: visible;
+    }
+
+    .input-30{
+        width: 30%;
     }
 
     .input-40{

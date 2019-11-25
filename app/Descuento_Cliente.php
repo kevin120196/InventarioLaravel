@@ -10,6 +10,6 @@ class Descuento_Cliente extends Model
     protected $fillable=['descuento_cliente'];
 
     public function cliente() {
-        return $this->hasMany('app\Cliente');     
+        return $this->hasMany('App\Cliente');     
     }
 }

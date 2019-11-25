@@ -14,6 +14,10 @@ class ProveedorController extends Controller
         return view('admin.proveedor.index')->with('proveedor',$proveedor);
     }
 
+    public function show($id)
+    {
+    }
+
     public function create(){
         return view('admin.proveedor.create');
     }

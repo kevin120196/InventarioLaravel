@@ -23,7 +23,7 @@ class MarcaController extends Controller
         $marca->save();
         Alert::success('Exito!','La marca ' . $marca->nombre_marca . ' ha sido creada con exito' );
         //flash('La categoria' . $categoria->nombre_categoria . ' ha sido creada con exito', 'success');
-        return redirect()->route('admin.marca.index');
+        return redirect()->route('marcas.index');
     }
 
     public function edit($id){
@@ -36,13 +36,13 @@ class MarcaController extends Controller
         $marca->fill($request->all());
         $marca->save();
         Alert::success('Exito!','La marca ' .$marca->nombre_marca. ' ha sido actualizado');
-        return redirect()->route('admin.marca.index');
+        return redirect()->route('marcas.index');
     }
 
     public function destroy($id){
         $marca=Marca::find($id);
         $marca->delete();
         Alert::error('Eliminado!', 'La marca ' .$marca->nombre_marca. ' ha sido eliminada');
-        return redirect()->route('admin.marca.index');
+        return redirect()->route('marcas.index');
     }
 }

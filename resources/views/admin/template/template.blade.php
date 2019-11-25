@@ -46,7 +46,7 @@
                                 <li><i class="fa fa-home"></i> Inicio</li>
                                 <li><i><img src="{{asset('img/categoria.png')}}" alt=""></i> <a href="{{ route('categorias.index')}}">Categorias</a></li>
                                 <li><i><img src="{{asset('img/repuesto.png')}}" alt=""></i> <a href="{{ route('marcas.index')}}">Marcas</a></li>
-                                <li><i><img src="{{asset('img/cajas.png')}}" alt=""></i> <a href="#">Productos</a></li>
+                                <li><i><img src="{{asset('img/cajas.png')}}" alt=""></i> <a href="{{ route('productos.index')}}">Productos</a></li>
                                 <li><i><img src="{{asset('img/inventario.png')}}" alt=""></i> <a href="{{route('proveedores.index')}}">Proveedores</a></li>
                                 <li><i><img src="{{asset('img/vendedor.png')}}" alt=""></i> <a href="#">Vendedores</a></li>
                                 <li><i><img src="{{asset('img/compras.png')}}" alt=""></i> <a href="#">Compras</a>

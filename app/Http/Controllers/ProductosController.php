@@ -33,7 +33,8 @@ class ProductosController extends Controller
 
     public function store(Request $request){
         
-        $producto=new Producto();
+        $producto=new Producto($request->all());
+        /*dd($producto->marca);
         $producto->codigo_original=$request->codigo_original;
         $producto->codigo_alterno=$request->codigo_alterno;
         $producto->cantidad=$request->cantidad;
@@ -46,6 +47,7 @@ class ProductosController extends Controller
         $producto->categoria_id=$request->categoria_id;
         $producto->marca_id=$request->marca_id;
         $producto->proveedor_id=$request->proveedor_id;        
+        */
         $producto->save();
         
          Alert::success('Exito!','El producto '.$producto->marca->nombre_marca .' ha sido registrado Correctamente');

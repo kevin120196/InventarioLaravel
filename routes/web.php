@@ -30,6 +30,7 @@ Route::group(['prefix'=>'admin'],function(){
         'as'=>'admin.proveedores.destroy'
     ]);
 
+<<<<<<< HEAD
     Route::resource('marcas','MarcaController');
     Route::get('admin/marcas/{id}/destroy',[
         'uses'=>'MarcaController@destroy',
@@ -46,4 +47,17 @@ Route::group(['prefix'=>'admin'],function(){
         'uses'=>'EstadoFactura@destroy',
         'as'=>'admin.estados_facturas.destroy'
     ]);*/
+=======
+    Route::get('admin/proveedor/{id}/show',[
+        'uses'=>'ProveedorController@show',
+        'as'=>'admin.proveedores.show'
+    ]);
+
+    Route::resource('productos','ProductosController');
+    Route::get('admin/producto/{id}/destroy',[
+        'uses'=>'ProductosController@destroy',
+        'as'=>'admin.productos.destroy'
+    ]);
+
+>>>>>>> kevinBranch
 });

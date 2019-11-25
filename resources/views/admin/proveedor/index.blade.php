@@ -40,12 +40,14 @@
                                     <td>
                                         <a href="{{route('proveedores.edit',$proveedores->id)}}" class="button-warning"><i class="fa fa-edit"></i></a>
                                         <a href="{{route('admin.proveedores.destroy',$proveedores->id)}}" class="button-danger" onclick="return confirm('¿Seguro que deseas eliminar este registro?')"><i class="fa fa-trash"></i></a>
+                                        <a href="{{route('proveedores.show',$proveedores->id)}}" id="myBtn" class="button-show" data-toggle="modal" data-target="#myModal"><i class="fa fa-eye"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach
                         </tbody>
                     </table>
                     {!!$proveedor->render()!!}
+                    @include('admin.proveedor.show')
                 </div>
             </div>
         </div>

@@ -12,21 +12,21 @@ class Factura_Venta extends Model
 
 
     public function clientes () {
-        return $this-> hashMany('app\Cliente');     
+        return $this->hasMany('App\Cliente');     
     }
     public function vendedor () {
-        return $this-> hashMany('app\Vendedor');     
+        return $this->hasMany('App\Vendedor');     
     }
 
     public function tipos_factura () {
-        return $this-> belongsTo('app\Tipo_Factura');     
+        return $this->belongsTo('App\Tipo_Factura');     
     }
     public function estados_factura () {
-        return $this-> belongsTo('app\Estado_Factura');     
+        return $this->belongsTo('App\Estado_Factura');     
     }
 
     public function descuentos_clientes () {
-        return $this-> belongsTo('app\Descuento_Cliente');     
+        return $this->belongsTo('App\Descuento_Cliente');     
     }
 
 }

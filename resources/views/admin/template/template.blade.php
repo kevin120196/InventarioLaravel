@@ -44,9 +44,16 @@
                     <nav class="menu">
                             <ul>
                                 <li><i class="fa fa-home"></i> Inicio</li>
+<<<<<<< HEAD
                                 <li><i><img src="{{asset('img/categoria.png')}}" alt=""></i> <a href="{{ route('categorias.index')}}">Categorias</a></li>
                                 <li><i><img src="{{asset('img/repuesto.png')}}" alt=""></i> <a href="{{ route('marcas.index')}}">Marcas</a></li>
                                 <li><i><img src="{{asset('img/cajas.png')}}" alt=""></i> <a href="#">Productos</a></li>
+=======
+                                <li><i class="fa fa-user-secret"></i> Clientes</li>
+                                <li><i><img src="{{asset('img/categoria.png')}}" alt=""></i> <a href="{{route('categorias.index')}}">Categorias</a></li>
+                                <li><i><img src="{{asset('img/repuesto.png')}}" alt=""></i> <a href="#">Marcas</a></li>
+                                <li><i><img src="{{asset('img/cajas.png')}}" alt=""></i> <a href="{{route('productos.index')}}">Productos</a></li>
+>>>>>>> kevinBranch
                                 <li><i><img src="{{asset('img/inventario.png')}}" alt=""></i> <a href="{{route('proveedores.index')}}">Proveedores</a></li>
                                 <li><i><img src="{{asset('img/vendedor.png')}}" alt=""></i> <a href="#">Vendedores</a></li>
                                 <li><i><img src="{{asset('img/compras.png')}}" alt=""></i> <a href="#">Compras</a>
@@ -74,7 +81,7 @@
 
                         </nav>
                 <article>
-                    <div class:"container">
+                    <div class="container">
                         @yield('contenido')    
                     </div>
                 </article>
@@ -92,6 +99,33 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.js"></script>
 
 	@include('sweetalert::alert')
+        <script>
+            // Get the modal
+        var modal = document.getElementById("myModal");
+
+        // Get the button that opens the modal
+        var btn = document.getElementById("myBtn");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks on the button, open the modal
+        btn.onclick = function() {
+        modal.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+        modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+        }
+    </script>
 	@yield('js')
     </body>
 

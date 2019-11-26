@@ -12,9 +12,12 @@
                     <div class="input-contenedor input-40 input-100" style="border: none;">
                         <a href="{{route('productos.create')}}" class="button-primary">Nuevo Productos</a>
                     </div>
+                    {!! Form::open(['route'=>'productos.index','method'=>'GET']) !!}
                     <div class="input-contenedor input-50 input-100 buscar-input" >
-                        <i class="fa fa-search icon"></i> <input type="text" name="" id="" placeholder="Buscar">
+                        <i class="fa fa-search icon"></i> <input type="text" name="codigo" id="codigo" placeholder="Buscar">
                     </div>
+
+                    {!! Form::close() !!}
                 </div>
             </div>
 
@@ -40,7 +43,7 @@
                         <tbody>
                             @foreach($productos as $producto)
                                 <tr>
-                                    <td>{{$producto->codigo_alterno}}</td>
+                                    <td>{{$producto->codigo_original}}</td>
                                     <td>{{$producto->codigo_alterno}}</td>
                                     <td>{{$producto->cantidad}}</td>
                                     <td>{{$producto->precio_compra}}</td>
@@ -66,4 +69,17 @@
             </div>
         </div>
     </div>
+    <script>
+        
+        function mostrar(dato) {
+            if (dato == "1") {
+                document.getElementById("codigo").style.display = "block";
+                document.getElementById("marca").style.display = "none";
+            }
+            if (dato == "2") {
+                document.getElementById("codigo").style.display = "none";
+                document.getElementById("marca").style.display = "block";
+            }
+        }
+    </script>
 @endsection

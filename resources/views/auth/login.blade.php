@@ -1,24 +1,37 @@
 @extends('auth.layouts.layouts')
 @section('contenido')
-
+<div class="container">
+        @if ($errors->any())
+        <div class="alert danger">
+            
+        <span class="closebtn">&times;</span>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li style="list-style: none">{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+</div>
 <form class="formulario" action="{{route('login')}}" method="POST">
-<h1>Login</h1>
-{{@csrf_field()}}
+    <h1>Login</h1>
+    <h2>Sistema de Inventario y Facturación</h2>
+    <h3>Repuestos El Triunfo</h3>
+{{ csrf_field() }}
     <div class="contenedor">
-        <div class="input-contenedor">
+        <div class="input-contenedor {{ $errors->has('email') ? ' has-error' : '' }}">
             <i class="fa fa-envelope icon"></i>
             <input type="text" name="email" id="email">
             <span data-placeholder="Email"></span>
         </div>
-        <div class="input-contenedor2">
+        <div class="input-contenedor2 {{ $errors->has('password') ? ' has-error' : '' }}">
             <i class="fa fa-key icon"></i>
             <input type="password" name="password" id="password">
             <span  data-placeholder="Password"></span>
             <span class="logbtn2" style="color: #999;" onclick="showcont();"> <i class="fa fa-eye"></i></span>
         </div>
         <input type="submit" value="Login" class="button">
-        <p>Al registrarte, aceptas nuestras condiciones de uso y politica de privacidad</p>
-        <p>¿No tienes una cuenta?<a class="link" href="form.html">Registrate</a></p>
+      
     </div>
 </form>
 @endsection

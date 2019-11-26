@@ -18,8 +18,8 @@ class ProductosController extends Controller
 =======
     //
 
-    public function index(){
-        $productos=Producto::orderBy('id','ASC')->paginate(10);
+    public function index(Request $request){
+        $productos=Producto::codigo($request->codigo)->orderBy('id','ASC')->paginate(10);
         $productos->each(function($productos){
             $productos->categoria;
             $productos->marca;

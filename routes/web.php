@@ -11,13 +11,22 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 
-//las rutas siempre van adentro del mismo grupo
 Route::group(['prefix'=>'admin'],function(){
+
+    
+	Route::get('/',['as'=>'admin.index', function () {
+        return view('welcome');
+    }]);
+    
+
+    Route::resource('usuarios','UsersController');
+    Route::get('admin/usuarios/{id}/destroy',[
+        'uses'=>'UsersController@destroy',
+        'as'=>'admin.usuarios.destroy'
+    ]);
+
     Route::resource('categorias','CategoriaController');
     Route::get('admin/categoria/{id}/destroy',[
         'uses'=>'CategoriaController@destroy',
@@ -58,3 +67,5 @@ Route::group(['prefix'=>'admin'],function(){
     ]);
 
 });
+
+

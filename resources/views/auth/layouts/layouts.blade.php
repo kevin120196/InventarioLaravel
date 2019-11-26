@@ -6,13 +6,30 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>login</title>
     <link rel="stylesheet" href="{{asset('css/formStyle.css')}}">
+    <link rel="stylesheet" href="{{asset('css/bootstrap-grid.css')}}">
     <link rel="stylesheet" href="css/font-awesome-4.7.0/css/font-awesome.min.css">
     <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
 </head>
 <body>
-    @yield('contenido')
+    <div class="container">
+        <div class="row">
+                @yield('contenido')
+        </div>
+    </div>
 </body>
+
 <script type="text/javascript">
+    var close = document.getElementsByClassName("closebtn");
+    var i;
+
+    for (i = 0; i < close.length; i++) {
+        close[i].onclick = function(){
+            var div = this.parentElement;
+            div.style.opacity = "0";
+            setTimeout(function(){ div.style.display = "none"; }, 600);
+        }
+    }
+
     $(".input-contenedor input").on("focus",function(){
         $(this).addClass("focus");
     });
@@ -40,4 +57,6 @@
     }
 
 </script>
+
+@yield('js')
 </html>

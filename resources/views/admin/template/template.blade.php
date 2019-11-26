@@ -23,12 +23,14 @@
                                 <li>
                                     <label class="labl" for="">Sistema de Inventario Repuestos El Triunfo</label>
                                 </li>
-                                <li id="user1">
-                                    Usuario
+                                <li class="enlace1" id="user1">
+                                    <a href="#"><i class="fa fa-user"></i>  {{Auth::user()->name}}
                                         <ul>
-                                        <li class="enlace1"><a href="#"><i class="fa fa-user"></i>  kevintalavera12</a></li>
                                         <hr>
-                                        <li class="enlace1"><a href="#"><i class="fa fa-sign-out"></i>  Cerrar Sesion</a></li>
+                                        <li class="enlace1"><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"> <i class="fa fa-sign-out"></i> Cerrar Sesion</a>
+
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
+                                        </li>
                                         <li class="enlace1"><a href="#"><i class="fa fa-cog"></i> Configuracion</a></li>
                                         <hr>
                                         <li class="enlace1"><a href="#"><i class="fa fa-home"></i> Inicio</a></span></li>        
@@ -44,6 +46,7 @@
                     <nav class="menu">
                             <ul>
                                 <li><i class="fa fa-home"></i> Inicio</li>
+                                <li><i class="fa fa-users"></i> <a href="{{route('usuarios.index')}}">Usuario</a></li>
 <<<<<<< HEAD
                                 <li><i><img src="{{asset('img/categoria.png')}}" alt=""></i> <a href="{{ route('categorias.index')}}">Categorias</a></li>
                                 <li><i><img src="{{asset('img/repuesto.png')}}" alt=""></i> <a href="{{ route('marcas.index')}}">Marcas</a></li>
@@ -73,11 +76,14 @@
                                     </ul>
                                 </li>
                                 <li id="user">                    
-                                    Usuario <span class="fa fa-arrow-down"></span>
+                                        <i class="fa fa-user"></i>  {{Auth::user()->name}}
+                                            <span class="fa fa-arrow-down"></span>
                                     <ul>
-                                        <li><i class="fa fa-user"></i> Kevintalavera12</li>
                                         <hr>
-                                        <li><i class="fa fa-sign-out"></i> Cerrar Sesion</li>
+                                        <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"> <i class="fa fa-sign-out"></i> Cerrar Sesion</a>
+
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
+                                        </li>
                                         <li><i class="fa fa-cog"></i> Configuracion</li>
                                     </ul>
                                 </li>
@@ -104,6 +110,17 @@
 
 	@include('sweetalert::alert')
         <script>
+                var close = document.getElementsByClassName("closebtn");
+        var i;
+
+        for (i = 0; i < close.length; i++) {
+            close[i].onclick = function(){
+                var div = this.parentElement;
+                div.style.opacity = "0";
+                setTimeout(function(){ div.style.display = "none"; }, 600);
+            }
+        }
+        
             // Get the modal
         var modal = document.getElementById("myModal");
 
@@ -115,20 +132,20 @@
 
         // When the user clicks on the button, open the modal
         btn.onclick = function() {
-        modal.style.display = "block";
+            modal.style.display = "block";
         }
 
         // When the user clicks on <span> (x), close the modal
         span.onclick = function() {
-        modal.style.display = "none";
+            modal.style.display = "none";
         }
 
         // When the user clicks anywhere outside of the modal, close it
         window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-        }
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }        
     </script>
 	@yield('js')
     </body>

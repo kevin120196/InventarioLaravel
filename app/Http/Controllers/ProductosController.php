@@ -10,16 +10,10 @@ use App\Proveedor;
 use RealRashid\SweetAlert\Facades\Alert;
 class ProductosController extends Controller
 {
-<<<<<<< HEAD
-    public function index(){
-        $productos=Productos::orderBy('id','ASC')->paginate(3);
-        return view('admin.productos.index')->with('productos',$productos);
-        
-=======
     //
 
-    public function index(){
-        $productos=Producto::orderBy('id','ASC')->paginate(10);
+    public function index(Request $request){
+        $productos=Producto::codigo($request->codigo)->orderBy('id','ASC')->paginate(10);
         $productos->each(function($productos){
             $productos->categoria;
             $productos->marca;
@@ -84,6 +78,5 @@ class ProductosController extends Controller
         Alert::error('Eliminado!', 'El producto ' .$producto->marca->nombre_marca. ' ha sido eliminado');
         return redirect()->route('productos.index');
 
->>>>>>> kevinBranch
     }
 }

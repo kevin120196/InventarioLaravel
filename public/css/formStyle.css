@@ -35,6 +35,18 @@ h1{
     font-size: 40px;
 }
 
+h2{
+    text-align: center;
+    font-size: large;
+    color: #1a2537;
+}
+
+h3{
+    text-align: center;
+    font-size: larger;
+    color: #1a2537;
+}
+
 
 .input-contenedor input{    
     font-size: 20px;
@@ -103,7 +115,7 @@ p{
 .input-contenedor span::before{
     content: attr(data-placeholder);
     position: absolute;
-    top: 143px;
+    top: 54%;
     left: 18%;
     color: #aaa;
     transform: translateY(-50%);
@@ -116,7 +128,7 @@ p{
 .input-contenedor2 span::before{
     content: attr(data-placeholder);
     position: absolute;
-    top: 50%;
+    top: 72%;
     left: 18%;
     color: #aaa;
     transform: translateY(-50%);
@@ -127,7 +139,7 @@ p{
 
 
 .focus + span::before{
-    top: 100px;
+    top: 45%;
     visibility: hidden;
     transition: .5s;
 }
@@ -137,7 +149,7 @@ p{
 }
 
 .focus2 + span::before{
-    top: 184px;
+    top: 64%;
     visibility: hidden;
     transition: .5s;
 }
@@ -145,6 +157,36 @@ p{
 .focus2 + span::after{
     width: 100%;
 }
+
+/*Alerta*/
+
+.alert {
+    padding: 7px;
+    background-color: #1a2537;
+    color: white;
+    opacity: 1;
+    transition: opacity 0.6s;
+    margin-bottom: 0px;
+    border-radius: 5px;
+    border: 1px solid;
+    text-decoration: none;
+  }
+  
+  .closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .closebtn:hover {
+    color: black;
+  }
+/**/
 
 
 @media(min-width:768px){

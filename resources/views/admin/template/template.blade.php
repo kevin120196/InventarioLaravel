@@ -47,20 +47,10 @@
                             <ul>
                                 <li><i class="fa fa-home"></i> Inicio</li>
                                 <li><i class="fa fa-users"></i> <a href="{{route('usuarios.index')}}">Usuario</a></li>
-<<<<<<< HEAD
+
                                 <li><i><img src="{{asset('img/categoria.png')}}" alt=""></i> <a href="{{ route('categorias.index')}}">Categorias</a></li>
                                 <li><i><img src="{{asset('img/repuesto.png')}}" alt=""></i> <a href="{{ route('marcas.index')}}">Marcas</a></li>
-<<<<<<< HEAD
                                 <li><i><img src="{{asset('img/cajas.png')}}" alt=""></i> <a href="{{ route('productos.index')}}">Productos</a></li>
-=======
-                                <li><i><img src="{{asset('img/cajas.png')}}" alt=""></i> <a href="#">Productos</a></li>
-=======
-                                <li><i class="fa fa-user-secret"></i> Clientes</li>
-                                <li><i><img src="{{asset('img/categoria.png')}}" alt=""></i> <a href="{{route('categorias.index')}}">Categorias</a></li>
-                                <li><i><img src="{{asset('img/repuesto.png')}}" alt=""></i> <a href="#">Marcas</a></li>
-                                <li><i><img src="{{asset('img/cajas.png')}}" alt=""></i> <a href="{{route('productos.index')}}">Productos</a></li>
->>>>>>> kevinBranch
->>>>>>> da0cf49881a5699768c0fb4b9b8b08e1f830de29
                                 <li><i><img src="{{asset('img/inventario.png')}}" alt=""></i> <a href="{{route('proveedores.index')}}">Proveedores</a></li>
                                 <li><i><img src="{{asset('img/vendedor.png')}}" alt=""></i> <a href="#">Vendedores</a></li>
                                 <li><i><img src="{{asset('img/compras.png')}}" alt=""></i> <a href="#">Compras</a>

@@ -9,7 +9,7 @@ class Descuento_Cliente extends Model
     protected $table="descuentos_clientes";
     protected $fillable=['descuento_cliente'];
 
-    public function cliente () {
-        return $this-> hashMany('app\Cliente');     
+    public function cliente() {
+        return $this->hasMany('App\Cliente');     
     }
 }

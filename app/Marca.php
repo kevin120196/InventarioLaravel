@@ -9,7 +9,7 @@ class Marca extends Model
     protected $table="marcas";
     protected $fillable=['nombre_marca'];
 
-    public function producto () {
-        return $this-> hashMany('app\Productos');     
+    public function producto() {
+        return $this->hasMany('App\Productos');     
     }
 }

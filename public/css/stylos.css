@@ -18,7 +18,8 @@ header{
 
 main{
     width: 100%;
-    height: 1000px;
+    height: auto;
+    max-height:max-content ;
     background: #34495E;
     margin-top: -5em;
 }
@@ -220,7 +221,7 @@ a{
 .content-all{
     width: 100%;
     max-width: 1000px;
-    height: 830px;
+    height: auto;
     background: rgb(255, 255, 255);
     margin: auto;
     margin-top: 80px;
@@ -236,7 +237,7 @@ a{
     transition: all 500ms cubic-bezier(1,0,0,1);
     transition-timing-function: cubic-bezier(1,0,0,1);
     overflow: hidden;
-    z-index: 2;
+    z-index: 10;
 }
 .menu li{
     list-style: none;
@@ -294,11 +295,6 @@ article .parrafo-1{
     margin-top: 40px; 
     letter-spacing: 2px;  
 }
-article img{
-    width: 100%;
-    border: 4px solid white;
-    margin-top: 40px;
-}
 
 article .parrafo2{
     font-size: 20px;
@@ -322,7 +318,7 @@ article .parrafo2{
     width: 100%;
     height: auto;
     margin: auto;
-    padding: 1em;
+    padding: 2em;
     position: absolute;
     box-shadow: 1px -3px 6px black;
     z-index: 5;
@@ -350,7 +346,7 @@ article .parrafo2{
     grid-template-columns: auto;
     background: #fff;
     margin-top:150px;
-    padding: 3px;
+    padding: 1em;
     width: 300px;
 }
 
@@ -366,6 +362,26 @@ h1{
     font-size: 40px;
 }
 
+textarea{
+    width: 94.3%;
+    border: none;
+    font-size: 20px;
+    margin: auto;
+    padding: 10px;
+    border: none;
+    outline: none;
+}
+
+select{
+    width: 94.3%;
+    outline: none;
+    border: none;
+    font-size: 20px;
+    margin:0px;
+    padding: 10px;
+}
+
+input[type="number"],
 input[type="text"],
 input[type="password"],
 .button-primary,
@@ -404,7 +420,7 @@ input[type="password"],
     border: 1px solid #aaa;
     display: flex;
     flex-wrap: wrap;
-    grid-auto-columns: 1;
+    grid-auto-columns: 2;
     float: left;
 
 }
@@ -418,7 +434,7 @@ input[type="password"],
 }
 
 .buscar-input{
-    margin: 20px 46px;
+    margin: 20px 45px;
 }
 .button{
     border: none;
@@ -439,12 +455,6 @@ input[type="password"],
     width: 20%;
 }
 
-.input-30{
-    width: 30%;
-}
-
-
-
 .input-90{
     width: 90%;
 }
@@ -460,6 +470,81 @@ input[type="password"],
 p{
     text-align: center;
 }
+
+/*Modal*/
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content/Box */
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+  }
+  
+  /* The Close Button */
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  .modal-header {
+    padding: 2px 16px;
+    background-color: #5cb85c;
+    color: white;
+  }
+  
+  /* Modal Body */
+  .modal-body {padding: 2px 16px;}
+  
+  /* Modal Footer */
+  .modal-footer {
+    padding: 2px 16px;
+    background-color: #5cb85c;
+    color: white;
+  }
+  
+  /* Modal Content */
+  .modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 80%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    animation-name: animatetop;
+    animation-duration: 0.4s
+  }
+  
+  /* Add Animation */
+  @keyframes animatetop {
+    from {top: -300px; opacity: 0}
+    to {top: 0; opacity: 1}
+  }
+  
+/**/
 
 /**botones*/
 .button-primary{
@@ -560,6 +645,36 @@ p{
 
 /**/
 
+/*Alerta*/
+
+.alert {
+    padding: 2em;
+    background-color: #ae0b08e6;
+    color: white;
+    opacity: 1;
+    transition: opacity 0.6s;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 3px solid #ff0500e6;
+  }
+  
+  
+  .closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .closebtn:hover {
+    color: black;
+  }
+/**/
+
 .link{
     text-decoration: none;
     color: #1a2537;
@@ -571,9 +686,9 @@ p{
 }
 
 .main-container{
-    margin: 20px auto;
+    margin: 20px -6px;
     width: 100%;
-    height: 500px;
+    height: auto;
     overflow: auto;
 }
 
@@ -591,12 +706,12 @@ table{
 th{
     position: sticky;
     top: 0;
-    
 }
 
 th,td{
-    padding: 20px;
+    padding: 10px;
     font-family: 'Montserrat', sans-serif;
+    text-transform: capitalize;
 }
 
 thead th{
@@ -718,6 +833,7 @@ tr:hover td{
         box-shadow: 1px 4px 10px 1px black;
     }
 
+
     .menu ul li ul{
         margin-right: -36em;
     }
@@ -778,6 +894,17 @@ tr:hover td{
     #user{
         visibility: visible;
     }
+
+    textarea,select{
+        width: 89.3%;
+    }
+    
+}
+
+@media only screen and (min-width: 681px){
+    .menu ul li ul {
+        margin-right: -43em;
+    }
 }
 
 @media only screen and (max-width: 767px){
@@ -805,7 +932,7 @@ tr:hover td{
     td{
         display: block;
         text-align: left;
-        padding: 10px 20px 10px 150px;
+        padding: 8px 0px 10px 150px;  
         align-items: center;
     }
 
@@ -817,8 +944,8 @@ tr:hover td{
         width: 100%;
     }
 
-    td:before{
-        content: 'producto';
+    .categoria td:before{
+        content: 'Categoria';
         font-weight: bold;
         position: relative;
         font-family: sans-serif;
@@ -827,27 +954,154 @@ tr:hover td{
         transform: translateY(-50%);
     }
 
-    td:nth-of-type(2)::before{
-        content: 'Precio';
+
+    .categoria td:nth-of-type(1)::before{
+        content: 'Acción';
     }
 
-    td:nth-of-type(3)::before{
-        content: 'Cantidad';
+
+    .usuario td:before{
+        content: '';
+        font-weight: bold;
+        position: relative;
+        font-family: sans-serif;
+        top: 7%;
+        left: -100px;
+        transform: translateY(-50%);
     }
-    td:nth-of-type(4)::before{
-        content: 'Total';
-    }
-    td:nth-of-type(5)::before{
-        content: 'Subtotal';
+    .usuario td:nth-of-type(1)::before{
+        content: 'Usuario:';
+        margin-right: 24px;
     }
 
-    td:nth-of-type(6)::before{
-        content: 'Impuesto';
+
+    .usuario td:nth-of-type(2)::before{
+        content: 'Email:';
+        margin-right: 41px;
     }
 
-    td:nth-of-type(7)::before{
-        content: 'Accion';
+    .usuario td:nth-of-type(3)::before{
+        content: 'Tipo de Usuario:';
+        margin-right: -40px;
     }
+    .usuario td:nth-of-type(4)::before{
+        content: 'Accion:';
+        margin-right: 10px;
+    }
+
+    .proveedor td:before{
+        content: '';
+        font-weight: bold;
+        position: relative;
+        font-family: sans-serif;
+        top: 7%;
+        left: -100px;
+        transform: translateY(-50%);
+    }
+
+    
+    .proveedor td:nth-of-type(1)::before{
+        content: 'Proveedor:';
+        margin-right: -6px;
+    }
+    .proveedor td:nth-of-type(2)::before{
+        content: 'Cedula:';
+        margin-right: 19px;
+    }
+
+    .proveedor td:nth-of-type(3)::before{
+        content: 'Dirección:';
+    }
+
+    .proveedor td:nth-of-type(4)::before{
+        content: 'Télefono:';
+        margin-right: 5px;
+    }
+
+    .proveedor td:nth-of-type(5)::before{
+        content: 'Email:';
+        margin-right: 32px;
+    }
+
+    .proveedor td:nth-of-type(6)::before{
+        content: 'Acción:';
+    }
+
+    .productos td:before{
+        content: '';
+        font-weight: bold;
+        position: relative;
+        font-family: sans-serif;
+        top: 7%;
+        left: -100px;
+        transform: translateY(-50%);
+    }
+
+
+    .productos td:nth-of-type(1)::before{
+        content: 'Codigo Original:';
+        margin-right: 2px;
+    }
+    .productos td:nth-of-type(2)::before{
+        content: 'Codigo Producto:';
+        margin-right: -6px;
+    }
+
+    .productos td:nth-of-type(3)::before{
+        content: 'Existencia:';
+        margin-right: 45px;
+    }
+
+    .productos td:nth-of-type(4)::before{
+        content: 'Precio compra:';
+        margin-right: 10px;
+    }
+
+    .productos td:nth-of-type(5)::before{
+        content: 'Precio venta:';
+        margin-right: 28px;
+    }
+
+    .productos td:nth-of-type(6)::before{
+        content: 'Aplicación:';
+        margin-right: 43px;
+    }
+
+    .productos td:nth-of-type(7)::before{
+        content: 'descripción:';
+        margin-right: 30px;
+    }
+
+    .productos td:nth-of-type(8)::before{
+        content: 'U/M:';
+        margin-right: 92px;
+    }
+
+    .productos td:nth-of-type(9)::before{
+        content: 'Número rack:';
+        margin-right: 18px;
+    }
+
+    .productos td:nth-of-type(10)::before{
+        content: 'Marca:';
+        margin-right: 75px;
+    }
+
+    .productos td:nth-of-type(11)::before{
+        content: 'Categoría:';
+        margin-right: 46px;
+    }
+
+    .productos td:nth-of-type(12)::before{
+        content: 'Proveedor:';
+        margin-right: 39px;
+    }
+
+    .productos td:nth-of-type(13)::before{
+        content: 'Acción:';
+        margin-right: 44px;
+    }
+
     
     input[type="button"],
     .button-danger,.button-warning, .button-show{
@@ -879,10 +1133,14 @@ tr:hover td{
         margin: 0;
     }
 
+    
+
 }
 
 
 @media only screen and (min-width: 890px){
+
+
 
     #user1{
         visibility: hidden;
@@ -898,6 +1156,7 @@ tr:hover td{
     
     .input-40{
         width: 40%;
+        float: left;
     }
     
     .input-50{
@@ -1102,6 +1361,10 @@ tr:hover td{
 
     .enlaceLogo{
         visibility: visible;
+    }
+
+    .input-30{
+        width: 30%;
     }
 
     .input-40{

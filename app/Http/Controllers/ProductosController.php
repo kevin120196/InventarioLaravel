@@ -34,8 +34,8 @@ class ProductosController extends Controller
     public function store(Request $request){
         
         $producto=new Producto($request->all());
-        /*dd($producto->marca);
-        $producto->codigo_original=$request->codigo_original;
+        dd($producto->categoria);
+        /*$producto->codigo_original=$request->codigo_original;
         $producto->codigo_alterno=$request->codigo_alterno;
         $producto->cantidad=$request->cantidad;
         $producto->precio_compra=$request->precio_compra;

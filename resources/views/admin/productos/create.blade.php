@@ -6,7 +6,7 @@
         {!!Form::open(['route'=>'productos.store','method'=>'POST','class'=>'formulario'])!!}
 
         <div class="cabeceraForm">
-            <h1>Nuevo Cliente</h1>
+            <h1>Nuevo Producto</h1>
         </div>
 
         <div class="contenedor">

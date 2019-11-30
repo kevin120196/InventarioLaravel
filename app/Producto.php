@@ -23,6 +23,10 @@ class Producto extends Model
         return $this->belongsTo('App\Proveedor');
     }
 
+    public function detallesVenta(){
+        return $this->belongsTo('App\Detalle_Factura_Venta');
+    }
+
     public function scopeCodigo($query,$codigo){
         return $query->where('codigo_alterno','LIKE',"%$codigo%");
     }
@@ -31,5 +35,8 @@ class Producto extends Model
         return $query->where('marca_id','LIKE',"%$marca%");
     }
 
-    
+    public function scopeEstante($query,$estante){
+        return $query->where('numero_rack','LIKE',"%$estante%");
+    }
 }
+

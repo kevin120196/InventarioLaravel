@@ -381,7 +381,45 @@ select{
     padding: 10px;
 }
 
-input[type="number"],
+.selectFactura{
+    width: 86.3%;
+}
+
+.selectproduc{
+    width: 78.3%;
+}
+
+.selectipoclien{
+    width: 84.3%;
+    padding: 10.8px;
+}
+
+.selectipofactura{
+    width: 78.3%;
+}
+
+.selectdescuen{
+    width: 78.3%;
+}
+
+input[type="date"]{
+    font-size: 20px;
+    width: 80%;
+    margin: auto;
+    margin-left: 1px;
+    padding: 7px;
+    border: none;
+    outline: none;
+}
+input[type="number"]{
+    font-size: 20px;
+    width: 79%;
+    margin: auto;
+    margin-left: 1px;
+    padding: 10.3px;
+    border: none;
+    outline: none;
+}
 input[type="text"],
 input[type="password"],
 .button-primary,
@@ -896,7 +934,7 @@ tr:hover td{
     }
 
     textarea,select{
-        width: 89.3%;
+        width: 88.3%;
     }
     
 }

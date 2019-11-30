@@ -61,7 +61,7 @@
                                 </li>
                                 <li><i><img src="{{asset('img/camion-de-reparto.png')}}" alt=""></i> <a href="#">Ventas</a>
                                     <ul>
-                                        <li><i class="material-icons">library_add</i><a href="#"> Nueva Venta</a></li>
+                                        <li><i class="material-icons">library_add</i><a href="{{ route('ventas.index')}}"> Nueva Venta</a></li>
                                         <li><i><img src="{{asset('img/Factura.png')}}" alt=""></i> <a href="#"> Detalles Ventas</a></li>
                                     </ul>
                                 </li>
@@ -96,8 +96,9 @@
                 </ul>
             </footer>
         </main>
+        <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.js"></script>
-
+        
 	@include('sweetalert::alert')
         <script>
                 var close = document.getElementsByClassName("closebtn");
@@ -135,8 +136,34 @@
             if (event.target == modal) {
                 modal.style.display = "none";
             }
-        }        
+        }    
+        
+        $document.ready(function(){
+            $('#btnagregar').click(function(){
+                agregar();
+            });
+    
+            var cont=0;
+            function agregar(){
+                cont++;
+                var fila='<tr id="fila'+cont+'">
+                        <td>'+cont+'</td>
+                        <td>sdf</td>
+                        <td>sdf</td>
+                        <td>sdf</td>
+                        <td>sdf</td>
+                        <td>dsf</td>
+                        <td>
+                        <button type="submit" class="button-danger">
+                            <i class="fa fa-trash"></i>
+                        </button></td>
+                </tr>';
+                $('#produc').append(fila);
+            }
+
+
     </script>
+
 	@yield('js')
     </body>
 

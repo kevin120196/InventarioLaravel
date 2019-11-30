@@ -6,7 +6,7 @@
         {!!Form::open(['route'=>'productos.store','method'=>'POST','class'=>'formulario'])!!}
 
         <div class="cabeceraForm">
-            <h1>Nuevo Cliente</h1>
+            <h1>Nuevo Producto</h1>
         </div>
 
         <div class="contenedor">
@@ -67,7 +67,7 @@
     
             <div class="input-contenedor input-100">
                 <i class="icon"><img src="{{asset('img/inventario (3).png')}}"></i>
-                {!! Form::select('proveedor_id', $proveedores, ['placeholder'=>'Seleccione un proveedor']) !!}
+                {!! Form::select('proveedor_id', $proveedores, ['placeholder'=>'Seleccione un proveedor','id'=>"proveedor_id"]) !!}
             </div>
 
             <button type="submit" class="button-primary"><i class="fa fa-save"></i> Guardar</button>

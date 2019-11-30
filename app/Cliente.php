@@ -10,11 +10,11 @@ class Cliente extends Model
     protected $table="clientes";
     protected $fillable=['nombre','direccion','cedula','numero_telefono','correo_electronico','descuento_id'];
 
-    public function descuentos_clientes() {
+    public function descuento() {
         return $this->belongsTo('App\Descuento_Cliente');
     }
 
-    public function factura_venta() {
+    public function factura() {
         return $this->belongsTo('App\Factura_Venta');
     }
 

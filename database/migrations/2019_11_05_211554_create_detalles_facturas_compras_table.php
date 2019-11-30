@@ -20,20 +20,20 @@ class CreateDetallesFacturasComprasTable extends Migration
             $table->double('total');
             //claves foraneas
             $table->integer('facturas_compras_id')->unsigned();
-            $table->integer('facturas_compras_estados_id')->unsigned();
+            //$table->integer('facturas_compras_estados_id')->unsigned();
             $table->integer('facturas_compras_tipos_id')->unsigned();
             $table->integer('facturas_compras_proveedor_id')->unsigned();
             $table->integer('productos_id_productos')->unsigned();
             $table->integer('productos_categoria_id')->unsigned();
-            $table->integer('productos_proveedores_id')->unsigned();
+           // $table->integer('productos_proveedores_id')->unsigned();
             //referncias claves foraneas
             $table->foreign('facturas_compras_id')->references('id')->on('facturas_compras')->onDelete('cascade');
-            $table->foreign('facturas_compras_estados_id')->references('id')->on('facturas_compras')->onDelete('cascade');
+            //$table->foreign('facturas_compras_estados_id')->references('id')->on('facturas_compras')->onDelete('cascade');
             $table->foreign('facturas_compras_tipos_id')->references('id')->on('facturas_compras')->onDelete('cascade');
             $table->foreign('facturas_compras_proveedor_id')->references('id')->on('facturas_compras')->onDelete('cascade');
             $table->foreign('productos_id_productos')->references('id')->on('productos')->onDelete('cascade');
             $table->foreign('productos_categoria_id')->references('id')->on('productos')->onDelete('cascade');
-            $table->foreign('productos_proveedores_id')->references('id')->on('productos')->onDelete('cascade');
+            //$table->foreign('productos_proveedores_id')->references('id')->on('productos')->onDelete('cascade');
             //
             $table->timestamps();
 

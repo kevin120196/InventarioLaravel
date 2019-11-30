@@ -13,7 +13,10 @@ class ProductosController extends Controller
     //
 
     public function index(Request $request){
-        $productos=Producto::codigo($request->codigo)->orderBy('id','ASC')->paginate(10);
+        $productos=Producto::codigo($request->codigo)->orderBy('id','ASC')
+        ->marcas($request->marca)
+        ->estante($request->estante)
+        ->paginate(10);
         $productos->each(function($productos){
             $productos->categoria;
             $productos->marca;
@@ -34,7 +37,7 @@ class ProductosController extends Controller
     public function store(Request $request){
         
         $producto=new Producto($request->all());
-        dd($producto->categoria);
+        //dd($producto->categoria);
         /*$producto->codigo_original=$request->codigo_original;
         $producto->codigo_alterno=$request->codigo_alterno;
         $producto->cantidad=$request->cantidad;

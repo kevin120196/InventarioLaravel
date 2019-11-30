@@ -9,16 +9,37 @@
 
             <div class="row">
                 <div class="col-md-12 col-lg-12">
-                    <div class="input-contenedor input-40 input-100" style="border: none;">
+                    <div class="input-contenedor input-30 input-100" style="border: none;">
                         <a href="{{route('productos.create')}}" class="button-primary">Nuevo Productos</a>
                     </div>
-                    {!! Form::open(['route'=>'productos.index','method'=>'GET']) !!}
-                    <div class="input-contenedor input-50 input-100 buscar-input" >
-                        <i class="fa fa-search icon"></i> <input type="text" name="codigo" id="codigo" placeholder="Buscar">
+                    {!! Form::open(['id'=>'inputcodigo','route'=>'productos.index','method'=>'GET']) !!}
+                    <div class="input-contenedor input-30 input-100 buscar-input">
+                        <i class="fa fa-search icon"></i> <input type="text" name="codigo" id="codigo" placeholder="Codigo">
                     </div>
 
                     {!! Form::close() !!}
+
+                    {!! Form::open(['id'=>'inputbuscar','route'=>'productos.index','method'=>'GET','style'=>'display:none']) !!}
+                    <div class="input-contenedor input-30 input-100 buscar-input" >
+                        <i class="fa fa-search icon"></i> <input type="text" name="marca" id="marca" placeholder="Marca">
+                    </div>
+
+                    {!! Form::close() !!}
+
+                    {!! Form::open(['id'=>'inputestante','route'=>'productos.index','method'=>'GET','style'=>'display:none']) !!}
+                    <div class="input-contenedor input-30 input-100 buscar-input" >
+                        <i class="fa fa-search icon"></i> <input type="text" name="estante" id="estante" placeholder="Estante">
+                    </div>
+
+                    {!! Form::close() !!}
+                    <div class="input-contenedor input-30 input-100" style="padding: 13px; margin: 20px auto;">
+                        
+                        <input type="radio" style="margin-left: 1em" name="radio" value="1" id=""  onchange="mostrar(this.value);"> codigo
+                        <input type="radio" style="margin-left: 2em" name="radio" value="2" id="" onchange="mostrar(this.value);"> Marca
+                        <input type="radio" style="margin-left: 1em" name="radio" value="3" id="" onchange="mostrar(this.value);"> Estante
+                    </div>
                 </div>
+
             </div>
 
             <div class="main-container">
@@ -33,7 +54,7 @@
                                 <th>Aplicacion</th>
                                 <th>Descripcion</th>
                                 <th>U/M</th>
-                                <th>Numero Rack</th>
+                                <th>Numero Estante</th>
                                 <th>Marca</th>
                                 <th>Categoria</th>
                                 <th>Proveedor</th>
@@ -71,14 +92,25 @@
     </div>
     <script>
         
+        jQuery(function ($) {
+            $("input:radio[name=radio]").click(disp)
+        })
+
         function mostrar(dato) {
             if (dato == "1") {
-                document.getElementById("codigo").style.display = "block";
-                document.getElementById("marca").style.display = "none";
+                document.getElementById("inputcodigo").style.display = "block";
+                document.getElementById("inputbuscar").style.display = "none";
+                document.getElementById("inputestante").style.display = "none";
             }
             if (dato == "2") {
-                document.getElementById("codigo").style.display = "none";
-                document.getElementById("marca").style.display = "block";
+                document.getElementById("inputcodigo").style.display = "none";
+                document.getElementById("inputbuscar").style.display = "block";
+                document.getElementById("inputestante").style.display = "none";
+            }
+            if (dato == "3") {
+                document.getElementById("inputcodigo").style.display = "none";
+                document.getElementById("inputbuscar").style.display = "none";
+                document.getElementById("inputestante").style.display = "block";
             }
         }
     </script>

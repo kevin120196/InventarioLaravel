@@ -6,7 +6,7 @@
             <h1>Crear Descuento<h1>
         </div>
         <div class="input-contenedor input-100">
-            <i class="fa fa-pencil icon"></i>
+            <i class="icon"><img src="{{asset('img/porciento.png')}}" alt=""></i>
             {!! Form::text('descuento_cliente', null, ['placeholder'=>'Descuento'])!!}
         </div>
         

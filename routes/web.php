@@ -91,6 +91,10 @@ Route::group(['prefix'=>'admin'],function(){
 
     Route::resource('ventas','FacturaVentaController');
     Route::resource('compra','FacturaCompraController');
+    Route::get('admin/compra/{id}/report',[
+        'uses'=>'FacturaCompraController@report',
+        'as'=>'admin.compra.report'
+    ]);
     Route::resource('detalleVenta','DetalleFacturaVentaController');
 });
 

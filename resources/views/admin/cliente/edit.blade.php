@@ -32,7 +32,7 @@
             </div>
 
             <div class="input-contenedor input-100">
-                <i class="fa fa-user-plus icon"></i>
+                <i class="icon"><img src="{{asset('img/porciento.png')}}" alt=""></i>
                 {!! Form::select('descuento_id', $descuentos,$cliente->descuento_id) !!}
             </div>
             

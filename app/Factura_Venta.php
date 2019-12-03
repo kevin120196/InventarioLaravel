@@ -8,7 +8,7 @@ class Factura_Venta extends Model
 {
     protected $table="facturas_ventas";
     protected $fillable=['fecha_factura','tipos_factura','estado_factura','clientes_id',
-    'descuentos_clientes_id','vendedores_id'];
+    'descuentos_clientes_id','vendedores_id','totalgeneral'];
 
 
     public function clientes () {
@@ -25,9 +25,10 @@ class Factura_Venta extends Model
     public function descuentos_clientes () {
         return $this->belongsTo('App\Descuento_Cliente');     
     }
+    
 
     public function detalleVenta(){
-        return $this->belongsToMany('App\Detalle_Factura_Venta');
+        return $this->belongsToMany('App\Detalle_Factura_Venta','factura_producto_venta')->withPivot('facturas_ventas_id','id');
     }
 
 }

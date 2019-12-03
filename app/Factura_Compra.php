@@ -9,9 +9,9 @@ class Factura_Compra extends Model
 {
     protected $table="facturas_compras";
     protected $fillable=['fecha_compra','tipo_factura_id','proveedores_id',
-    'estado_factura'];
+    'estado_factura','totalgeneral'];
 
-    public function proveedor() { 
+    public function proveedores() { 
         return $this->belongsTo('App\Proveedor');
     } 
 
@@ -21,5 +21,9 @@ class Factura_Compra extends Model
 
     public function detallesCompra(){
         return $this->belongsTo('App\Detalle_Factura_Compra','Detalles_facturas_compras');
+    }
+
+    public function tipoFactura(){
+        return $this->belongsTo('App\Tipo_Factura');
     }
 }

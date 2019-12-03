@@ -6,7 +6,8 @@
         <link href="{{asset('css/stylos.css')}}" rel="stylesheet">
         <link rel="stylesheet" href="{{asset('css/bootstrap-grid.css')}}">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link rel="stylesheet" href="{{asset('css/font-awesome-4.7.0/css/font-awesome.min.css')}}"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.css">
+        <link rel="stylesheet" href="{{asset('css/font-awesome-4.7.0/css/font-awesome.min.css')}}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.css">
 
         <title>@yield('title','Default') | Panel de Administracion Sistema de Inventario</title>
     </head>
@@ -52,17 +53,18 @@
                                 <li><i><img src="{{asset('img/repuesto.png')}}" alt=""></i> <a href="{{ route('marcas.index')}}">Marcas</a></li>
                                 <li><i><img src="{{asset('img/cajas.png')}}" alt=""></i> <a href="{{ route('productos.index')}}">Productos</a></li>
                                 <li><i><img src="{{asset('img/inventario.png')}}" alt=""></i> <a href="{{route('proveedores.index')}}">Proveedores</a></li>
+                                <li><i><img src="{{asset('img/clientes (1).png')}}" alt=""></i> <a href="{{route('cliente.index')}}">Clientes</a></li>
                                 <li><i><img src="{{asset('img/vendedor.png')}}" alt=""></i> <a href="#">Vendedores</a></li>
                                 <li><i><img src="{{asset('img/compras.png')}}" alt=""></i> <a href="#">Compras</a>
                                     <ul>
-                                        <li><i class="material-icons">library_add</i><a href="#"> Nueva Compra</a></li>
+                                        <li><i class="material-icons">library_add</i><a href="{{route('compra.index')}}"> Nueva Compra</a></li>
                                         <li><i><img src="{{asset('img/Factura.png')}}" alt=""></i> <a href="#"> Detalles Compras</a></li>
                                     </ul>
                                 </li>
-                                <li><i><img src="{{asset('img/camion-de-reparto.png')}}" alt=""></i> <a href="#">Ventas</a>
+                                <li><i><img src="{{asset('img/camion-de-reparto.png')}}" alt=""></i> <a href="{{route('ventas.index')}}">Ventas</a>
                                     <ul>
                                         <li><i class="material-icons">library_add</i><a href="{{ route('ventas.index')}}"> Nueva Venta</a></li>
-                                        <li><i><img src="{{asset('img/Factura.png')}}" alt=""></i> <a href="#"> Detalles Ventas</a></li>
+                                        <li><i><img src="{{asset('img/Factura.png')}}" alt=""></i> <a href="{{route('detalleVenta.index')}}"> Detalles Ventas</a></li>
                                     </ul>
                                 </li>
                                 <li id="user">                    

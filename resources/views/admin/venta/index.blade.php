@@ -28,6 +28,8 @@
                                 <th>Cliente</th>
                                 <th>Descuento</th>
                                 <th>Vendedor</th>
+                                <th>Total</th>
+                                <th>Accion</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -40,6 +42,12 @@
                                     <td>{{$ventas->clientes->nombre}}</td>
                                     <td>{{$ventas->descuentos_clientes->descuento_cliente}}</td>
                                     <td>{{$ventas->vendedores->nombre_vendedor}}</td>
+                                    <td>{{$ventas->totalgeneral}}</td>
+                                    <td>
+                                        <a href="{{route('ventas.show',$ventas->id)}}" class="button-danger"><i class="fa fa-list"></i></a>
+                                        <a href="{{route('ventas.show',$ventas->id)}}" class="button-show"><i class="fa fa-print"></i></a>
+                                        
+                                    </td>
                                 </tr>
                                 @endforeach
                         </tbody>

@@ -24,7 +24,7 @@ class Producto extends Model
     }
 
     public function detallesVenta(){
-        return $this->belongsTo('App\Detalle_Factura_Venta');
+        return $this->belongsToMany('App\Detalle_Factura_Venta');
     }
 
     public function scopeCodigo($query,$codigo){

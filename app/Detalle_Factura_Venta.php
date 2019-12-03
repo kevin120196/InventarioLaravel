@@ -7,14 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class Detalle_Factura_Venta extends Model
 {
     //
-    protected $table="detalles_facturas_ventas";
-    protected $fillable=['cantidad','precio','total','facturas_ventas_id','productos_producto_id'];
+    protected $table="factura_producto_venta";
+    protected $fillable=['cantidad','precio','total','venta_id','marca_id'];
     
     public function facturaVenta(){
-        return $this->belongsTo('App\Factura_Venta');
+        return $this->belongsToMany('App\Factura_Venta','factura_producto_venta','venta_id','marca_id');
     }
 
-    public function productos(){
-        return $this->belongsTo('App\Productos');
+    public function producto(){
+        return $this->belongsTo('App\Producto','factura_producto_venta','marca_id','venta_id');
     }
 }

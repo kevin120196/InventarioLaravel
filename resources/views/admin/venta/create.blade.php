@@ -1,5 +1,5 @@
 @extends('admin.template.template')
-@section('title','Crear Proveedor')
+@section('title','Crear Venta')
 @section('contenido')
     {!!Form::open(['route'=>'ventas.store','Method'=>'POST'],['class'=>'formulario'])!!}
         <div class="cabeceraForm">
@@ -13,17 +13,17 @@
             </div>
     
             <div class="input-50 input-contenedor input-100">
-                <i class="fa fa-id-card icon" aria-hidden="true"></i>
+                <i class="icon"><img src="{{asset('img/factura (1).png')}}" alt=""></i>                
                 {!! Form::select('estado_factura',['Cancelada'=>'Cancelada','Pendiente'=>'Pendiente','Anulada'=>'Anulada'],null, ['class'=>'selectFactura','id'=>"estado_factura",'placeholder'=>'Estado factura','required'])!!}
             </div>
     
             <div class="input-contenedor input-30 input-100">
-                <i class="material-icons icon">place</i>                        
+                <i class="icon"><img src="{{asset('img/factur.png')}}" alt=""></i>
                 {!! Form::select('tipos_factura_id',$Tipo,null, ['class'=>"selectipofactura",'id'=>"tipos_factura_id"]) !!}
             </div>
     
             <div class="input-contenedor input-40 input-100">
-                <i class="fa fa-phone icon" aria-hidden="true"></i>
+                <i class="icon"><img src="{{asset('img/clientes.png')}}" alt=""></i>
                 {!! Form::select('clientes_id',$cliente,null, ['class'=>'selectipoclien','id'=>"cliente_id"]) !!}
             </div>
 
@@ -33,18 +33,18 @@
             </div>
 
             <div class="input-contenedor input-100">
-                <i class="fa fa-phone icon" aria-hidden="true"></i>
+                <i class="icon"><img src="{{asset('img/compras (2).png')}}" alt=""></i>
                 {!! Form::select('vendedores_id',$vendedor,null, ['class'=>'selectdescuen','id'=>'vendedores_id']) !!}
             </div>
             
             <div class="input-contenedor input-30 input-100">
-                <i class="fa fa-phone icon" aria-hidden="true"></i>
-                {!! Form::select('productos_marcas_id',$producto,null, ['class'=>'selectproduc','id'=>"productos_marcas_id"]) !!}
+                <i class="icon"><img src="{{asset('img/caja.png')}}" alt=""></i>
+                {!! Form::select('marca_id',$producto,null, ['class'=>'selectproduc','id'=>"marca_id"]) !!}
             </div>
             
 
             <div class="input-contenedor input-30 input-100">
-                <i class="fa fa-user icon" aria-hidden="true"></i>
+                <i class="icon"><img src="{{asset('img/cantidad (4).png')}}" alt=""></i>
                 {!! Form::number('cantidad', null, ['placeholder'=>'Cantidad','id'=>"cantidad"])!!}
             </div>
     
@@ -83,10 +83,11 @@
 <script >
 
         var totalgeneral;
+        var totalgeneral1;
         function agregar(){
         var fecha = $('#fecha').val();
         var estado_factura= $('#estado_factura option:selected').text();
-        var cliente1= $('#estado_factura option:selected').val();
+        var estado_factura1= $('#estado_factura option:selected').val();
         var tipo= $('#tipo_factura_id option:selected').text();
         var tipo1=$('#tipo_factura_id option:selected').val();
         var cliente= $('#cliente_id option:selected').text();
@@ -95,16 +96,17 @@
         var descuento1= $('#descuento_id option:selected').val();
         var vendedores= $('#vendedores_id option:selected').text();
         var vendedores1= $('#vendedores_id option:selected').val();
-        var producto= $('#productos_marcas_id option:selected').text();
-        var producto1= $('#productos_marcas_id option:selected').val();
+        var producto= $('#marca_id option:selected').text();
+        var producto1= $('#marca_id option:selected').val();
         var cantidad= $('#cantidad').val();
         var precio= $('#precio').val();
         var descuent=precio*descuento;
         var preciot=cantidad*precio;
         totalgeneral=0;
+        totalgeneral1=0;
       /*precio descontado*/  var total=preciot-descuent;
 
-        $("#venta > tbody").append("<tr><td><input type='hidden' name='productos_marcas_id[]' value="+producto1+">"+producto+"</td><td><input type='hidden' name='cantidad[]' value="+cantidad+">"+cantidad+"</td><td><input type='hidden' name='factura_descuento_id[]' value="+descuento1+">"+descuento+"</td><td><input type='hidden' name='precio[]' value="+precio+">"+precio+"</td><td><input type='hidden' name='total[]' value="+total+">"+total+"</td><td><a class='button-danger btnEliminar'><i class='fa fa-remove'></i></a></td></tr>");
+        $("#venta > tbody").append("<tr><td><input type='hidden' name='marca_id[]' value="+producto1+">"+producto+"</td><td><input type='hidden' name='cantidad[]' value="+cantidad+">"+cantidad+"</td><td><input type='hidden' name='factura_descuento_id[]' value="+descuento1+">"+descuento+"</td><td><input type='hidden' name='precio[]' value="+precio+">"+precio+"</td><td><input type='hidden' name='total[]' value="+total+">"+total+"</td><td><a class='button-danger btnEliminar'><i class='fa fa-remove'></i></a></td></tr>");
         
         
         
@@ -114,8 +116,10 @@
             var columnacon = $(this).closest('tr').find("td:eq(4)").text()
             var valor=parseFloat(totalgeneral);
             var valor2=parseFloat(columnacon);
-            totalgeneral = (valor-valor2);
+            totalgeneral = parseFloat(valor - valor2).toFixed(2,1);
+            totalgeneral1= parseFloat(valor - valor2).toFixed(2,1);
             $("#total").text(totalgeneral);
+            $("#totalgeneral").text(totalgeneral1);
             console.log(Math.ceil(totalgeneral).toFixed(2));
             $(this).closest('tr').remove();
 
@@ -124,6 +128,13 @@
         });
 
         $('#venta > tbody > tr').each(function (index,tr){
+            
+            var columnacon=$(this).find("td:eq(4)").text();
+            totalgeneral += parseFloat(columnacon);
+            totalgeneral1 += parseFloat(columnacon);
+            $("#total").text(totalgeneral.toFixed());
+            $("#totalgeneral").text(totalgeneral1.toFixed(2));
+            console.log(totalgeneral);           
             if (producto1 == $(this).find('input:eq(0)').val() ) {
                 //  block of code to be executed if the condition is true
                 var columnaFila=$(this).find("td:eq(1)").text();
@@ -131,15 +142,13 @@
                 console.log(columnaFila);
               } else {
                 //  block of code to be executed if the condition is false
-                var columnacon=$(this).find("td:eq(4)").text();
-                totalgeneral = parseFloat(totalgeneral) + parseFloat(columnacon);
-                $("#total").text(totalgeneral);
-                console.log(totalgeneral);            
+                
               }
             
                 
             
-            
+              $("#venta > tbody").append("<input type='hidden' name='totalgeneral' id='totalgeneral' value="+totalgeneral+">")
+
             
             
         });

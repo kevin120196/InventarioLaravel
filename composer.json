@@ -5,6 +5,8 @@
     "license": "MIT",
     "type": "project",
     "require": {
+        "barryvdh/laravel-dompdf": "0.8.2.*",
+        "dompdf/dompdf": "^0.8.3",
         "php": ">=5.6.4",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",

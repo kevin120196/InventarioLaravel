@@ -21,7 +21,7 @@
     
     
             <div class="input-contenedor input-50 input-100">
-                <i class="fa fa-user-plus icon"></i>
+                <i class="icon"><img src="{{asset('img/cantidad (4).png')}}"></i>
                 {!! Form::number('cantidad', null, ['placeholder'=>'Cantidad']) !!}
             </div>
     
@@ -31,10 +31,9 @@
             </div>
     
             <div class="input-contenedor input-50 input-100">
-                <i class="fa fa-money icon"></i>
+                <i class="material-icons icon">attach_money </i>
                 {!! Form::text('precio_venta', null, ['placeholder'=>'Precio Venta']) !!}
             </div>
-    
             <div class="input-contenedor input-50 input-100">
                 <i class="fa fa-user-plus icon"></i>
                 {!! Form::text('aplicacion', null, ['placeholder'=>'Aplicacion']) !!}
@@ -46,17 +45,17 @@
             </div>
 
             <div class="input-contenedor input-100">
-                <i class="fa fa-user-plus icon"></i>
+                <i class="icon"><img src="{{asset('img/transporte.png')}}" alt=""></i>
                 {!! Form::text('unidad_medida', null, ['placeholder'=>'unidad de medida']) !!}
             </div>
 
             <div class="input-contenedor input-100">
-                <i class="fa fa-user-plus icon"></i>
+                <i class="icon"><img src="{{asset('img/Estante.png')}}" alt=""></i>
                 {!! Form::text('numero_rack', null, ['placeholder'=>'numero rack o estante']) !!}
             </div>
     
             <div class="input-contenedor input-100">
-                <i class="fa fa-user-plus icon"></i>
+                <i class="icon"><img src="{{asset('img/repues.png')}}" alt=""></i>
                 {!! Form::select('marca_id', $marcas, ['placeholder'=>'Seleccione una marca']) !!}
             </div>
 

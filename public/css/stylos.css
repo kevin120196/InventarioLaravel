@@ -379,6 +379,7 @@ select{
     font-size: 20px;
     margin:0px;
     padding: 10px;
+    color: #757575;
 }
 
 .selectFactura{
@@ -391,7 +392,7 @@ select{
 
 .selectipoclien{
     width: 84.3%;
-    padding: 10.8px;
+    padding: 9.8px;
 }
 
 .selectipofactura{
@@ -410,16 +411,23 @@ input[type="date"]{
     padding: 7px;
     border: none;
     outline: none;
+    color: #757575;
 }
 input[type="number"]{
     font-size: 20px;
     width: 79%;
     margin: auto;
     margin-left: 1px;
-    padding: 10.3px;
+    padding: 10px;
     border: none;
     outline: none;
+    color: #757575;
 }
+
+input[type="text"]:read-only{
+    text-transform: capitalize;   
+}
+
 input[type="text"],
 input[type="password"],
 .button-primary,
@@ -468,7 +476,7 @@ input[type="password"],
     text-align: center;
     color: #999;
     border-right: 2px solid #999;
-    padding: 11px 11px 11px 0px;
+    padding:8px 1px 7px 0px;
 }
 
 .buscar-input{
@@ -1064,6 +1072,83 @@ tr:hover td{
     .proveedor td:nth-of-type(6)::before{
         content: 'Acción:';
     }
+
+    .detalleVenta td:before{
+        content: '';
+        font-weight: bold;
+        position: relative;
+        font-family: sans-serif;
+        top: 7%;
+        left: -100px;
+        transform: translateY(-50%);
+    }
+
+    .detalleVenta td:nth-of-type(1)::before{
+        content: 'Producto:';
+        margin-right: 2px;
+    }
+
+    .detalleVenta td:nth-of-type(2)::before{
+        content: 'Cantidad:';
+        margin-right: 4px;
+    }
+
+    .detalleVenta td:nth-of-type(3)::before{
+        content: 'Precio:';
+        margin-right: 22px;
+    }
+
+    .detalleVenta td:nth-of-type(4)::before{
+        content: 'Descuento:';
+        margin-right: -10px;
+    }
+
+    .detalleVenta td:nth-of-type(5)::before{
+        content: 'SubTotal:';
+        margin-right: 4px;
+    }
+
+    .detalleVenta th:nth-of-type(1)::before{
+        content: '';
+        margin-left: 37px;
+    }
+
+    .detallefact td:before{
+        content: '';
+        font-weight: bold;
+        position: relative;
+        font-family: sans-serif;
+        top: 7%;
+        left: -100px;
+        transform: translateY(-50%);
+    }
+
+    .detallefact td:nth-of-type(1)::before{
+        content: 'Producto:';
+        margin-right: 2px;
+    }
+
+    .detallefact td:nth-of-type(2)::before{
+        content: 'Cantidad:';
+        margin-right: 4px;
+    }
+
+    .detallefact td:nth-of-type(3)::before{
+        content: 'Precio:';
+        margin-right: 22px;
+    }
+
+    .detallefact td:nth-of-type(4)::before{
+        content: 'SubTotal:';
+        margin-right: 4px;
+    }
+
+    .detallefact th:nth-of-type(1)::before{
+        content: '';
+        margin-left: 37px;
+    }
+
+
 
     .productos td:before{
         content: '';

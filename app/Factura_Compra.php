@@ -26,4 +26,12 @@ class Factura_Compra extends Model
     public function tipoFactura(){
         return $this->belongsTo('App\Tipo_Factura');
     }
+
+    public function scopeCodigo($query,$codigo){
+        return $query->where('id','LIKE',"%$codigo%");
+    }
+
+    public function scopeFecha($query,$fecha){
+        return $query->where('fecha_compra','LIKE',"%$fecha%");
+    }
 }

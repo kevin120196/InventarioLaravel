@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="{{asset('css/stylos.css')}}" rel="stylesheet">
+        <link href="{{asset('css/datatables.css')}}" rel="stylesheet">
         <link rel="stylesheet" href="{{asset('css/bootstrap-grid.css')}}">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" href="{{asset('css/font-awesome-4.7.0/css/font-awesome.min.css')}}">
@@ -54,17 +55,17 @@
                                 <li><i><img src="{{asset('img/cajas.png')}}" alt=""></i> <a href="{{ route('productos.index')}}">Productos</a></li>
                                 <li><i><img src="{{asset('img/inventario.png')}}" alt=""></i> <a href="{{route('proveedores.index')}}">Proveedores</a></li>
                                 <li><i><img src="{{asset('img/clientes (1).png')}}" alt=""></i> <a href="{{route('cliente.index')}}">Clientes</a></li>
-                                <li><i><img src="{{asset('img/vendedor.png')}}" alt=""></i> <a href="#">Vendedores</a></li>
+                                <li><i><img src="{{asset('img/vendedor.png')}}" alt=""></i> <a href="{{route('vendedores.index')}}">Vendedores</a></li>
                                 <li><i><img src="{{asset('img/compras.png')}}" alt=""></i> <a href="#">Compras</a>
                                     <ul>
-                                        <li><i class="material-icons">library_add</i><a href="{{route('compra.index')}}"> Nueva Compra</a></li>
-                                        <li><i><img src="{{asset('img/Factura.png')}}" alt=""></i> <a href="#"> Detalles Compras</a></li>
+                                        <li><i class="material-icons">library_add</i><a href="{{route('compra.create')}}"> Nueva Compra</a></li>
+                                        <li><i><img src="{{asset('img/Factura.png')}}" alt=""></i> <a href="{{route('compra.index')}}"> Detalles Compras</a></li>
                                     </ul>
                                 </li>
                                 <li><i><img src="{{asset('img/camion-de-reparto.png')}}" alt=""></i> <a href="{{route('ventas.index')}}">Ventas</a>
                                     <ul>
-                                        <li><i class="material-icons">library_add</i><a href="{{ route('ventas.index')}}"> Nueva Venta</a></li>
-                                        <li><i><img src="{{asset('img/Factura.png')}}" alt=""></i> <a href="{{route('detalleVenta.index')}}"> Detalles Ventas</a></li>
+                                        <li><i class="material-icons">library_add</i><a href="{{ route('ventas.create')}}"> Nueva Venta</a></li>
+                                        <li><i><img src="{{asset('img/Factura.png')}}" alt=""></i> <a href="{{route('ventas.index')}}"> Detalles Ventas</a></li>
                                     </ul>
                                 </li>
                                 <li id="user">                    
@@ -92,81 +93,71 @@
 
             <footer class="cabecera">
                 <ul>
-                    <li><h3>Diseñador y Desarrollado Por:</h3></li>
+                    <li><h3>Diseñado y Desarrollado Por:</h3></li>
                     <li><h4>Kevin Antonio Talavera</h4></li>
                     <li><h4>Israel Levi Espinal</h4></li>
                 </ul>
             </footer>
         </main>
-        <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.js"></script>
-        
-	@include('sweetalert::alert')
-        <script>
-                var close = document.getElementsByClassName("closebtn");
-        var i;
+        @include('sweetalert::alert')    
+    @yield('js')
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>    
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
+    //<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script src="{{asset('js/dropdown.js')}}"></script>
+    <script src="{{asset('js/datatables.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.js"></script>
+    <script>
 
-        for (i = 0; i < close.length; i++) {
-            close[i].onclick = function(){
-                var div = this.parentElement;
-                div.style.opacity = "0";
-                setTimeout(function(){ div.style.display = "none"; }, 600);
+        
+            var modal = document.getElementById("myModal");
+
+            // Get the button that opens the modal
+            var btn = document.getElementById("myBtn");
+            
+            // Get the <span> element that closes the modal
+            var span = document.getElementsByClassName("close")[0];
+            
+            // When the user clicks the button, open the modal 
+            btn.onclick = function() {
+              modal.style.display = "block";
             }
-        }
-        
-            // Get the modal
-        var modal = document.getElementById("myModal");
-
-        // Get the button that opens the modal
-        var btn = document.getElementById("myBtn");
-
-        // Get the <span> element that closes the modal
-        var span = document.getElementsByClassName("close")[0];
-
-        // When the user clicks on the button, open the modal
-        btn.onclick = function() {
-            modal.style.display = "block";
-        }
-
-        // When the user clicks on <span> (x), close the modal
-        span.onclick = function() {
-            modal.style.display = "none";
-        }
-
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
-            if (event.target == modal) {
+            
+            // When the user clicks on <span> (x), close the modal
+            span.onclick = function() {
+              modal.style.display = "none";
+            }
+            
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function(event) {
+              if (event.target == modal) {
                 modal.style.display = "none";
-            }
-        }    
-        
-        $document.ready(function(){
-            $('#btnagregar').click(function(){
-                agregar();
-            });
-    
-            var cont=0;
-            function agregar(){
-                cont++;
-                var fila='<tr id="fila'+cont+'">
-                        <td>'+cont+'</td>
-                        <td>sdf</td>
-                        <td>sdf</td>
-                        <td>sdf</td>
-                        <td>sdf</td>
-                        <td>dsf</td>
-                        <td>
-                        <button type="submit" class="button-danger">
-                            <i class="fa fa-trash"></i>
-                        </button></td>
-                </tr>';
-                $('#produc').append(fila);
+              }
             }
 
+            $('#myModal').on('show', function () {
+                $('#codigo').focus();
+             });
+             
+            $('input[type="search"]').addClass('input-contenedor');
 
+             $(document).ready( function () {
+                $('#productos').DataTable({
+                    "paging":   false,
+                    "ordering": false,
+                    "info":     false,
+                    "language": {
+                        "lengthMenu": "Display _MENU_ records per page",
+                        "zeroRecords": "Registro No Encontrado",
+                        "info": "Showing page _PAGE_ of _PAGES_",
+                        "infoEmpty": "No records available",
+                        "infoFiltered": "(filtered from _MAX_ total records)",
+                        "search":"Buscar: "
+                    }
+                });
+            } );
     </script>
-
-	@yield('js')
     </body>
 
 </html>

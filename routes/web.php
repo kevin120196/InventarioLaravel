@@ -10,7 +10,9 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/admin', 'HomeController@index')->name('home');
+
+
+Route::get('/admin', 'HomeController@index')->name('admin');
 //Auth::Routes();
 Route::get('login','Auth\LoginController@showLoginForm')->name('login');
 Route::post('login','Auth\LoginController@login')->name('login');
@@ -19,8 +21,6 @@ Route::get('logout','Auth\LoginController@logout')->name('logout');
 Route::post('logout','Auth\LoginController@logout')->name('logout');
 Route::get('register','Auth\RegisterController@showRegistrationForm')->name('register');
 Route::post('register','Auth\RegisterController@register')->name('register');
-
-Route::get('/admin', 'HomeController@index')->name('home');
 //Auth::Routes();
 Route::get('login','Auth\LoginController@showLoginForm')->name('login');
 Route::post('login','Auth\LoginController@login')->name('login');
@@ -83,6 +83,11 @@ Route::group(['prefix'=>'admin'],function(){
         'as'=>'admin.productos.destroy'
     ]);
 
+    Route::resource('vendedores','VendedorController');
+    Route::get('admin/vendedores/{id}/destroy',[
+        'uses'=>'VendedorController@destroy',
+        'as'=>'admin.vendedores.destroy'
+    ]);
     Route::resource('cliente','ClienteController');
     Route::get('admin/cliente/{id}/destroy',[
         'uses'=>'ClienteController@destroy',
@@ -90,7 +95,21 @@ Route::group(['prefix'=>'admin'],function(){
     ]);
 
     Route::resource('ventas','FacturaVentaController');
-    Route::resource('compra','FacturaCompraController');
+    Route::get('admin/venta/{id}/report',[
+        'uses'=>'FacturaVentaController@report',
+        'as'=>'admin.ventas.report'
+    ]);
+    Route::get('admin/venta/details',[
+        'uses'=>'FacturaVentaController@details',
+        'as'=>'admin.venta.details'
+    ]);
+
+
+    Route::resource('compra','FacturaCompraController');   
+    Route::get('compra/{id}', 'FacturaCompraController@getProductos')->name('compr');
+        
+
+    //Route::post('prueba{id}','FacturaCompraController@getProducto')->name('prueba');
     Route::get('admin/compra/{id}/report',[
         'uses'=>'FacturaCompraController@report',
         'as'=>'admin.compra.report'

@@ -10,6 +10,10 @@ use RealRashid\SweetAlert\Facades\Alert;
 class CategoriaController extends Controller
 {
     //
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     public function index(){
         $categoria=Categoria::orderBy('id','ASC')->paginate(3);

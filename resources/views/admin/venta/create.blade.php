@@ -1,7 +1,7 @@
 @extends('admin.template.template')
 @section('title','Crear Venta')
 @section('contenido')
-    {!!Form::open(['route'=>'ventas.store','Method'=>'POST'],['class'=>'formulario'])!!}
+    {!!Form::open(['route'=>'ventas.store','Method'=>'POST' ,'class'=>'formulario'])!!}
         <div class="cabeceraForm">
             <h1>Nueva Venta<h1>
         </div>
@@ -38,8 +38,8 @@
             </div>
             
             <div class="input-contenedor input-30 input-100">
-                <i class="icon"><img src="{{asset('img/caja.png')}}" alt=""></i>
-                {!! Form::select('marca_id',$producto,null, ['class'=>'selectproduc','id'=>"marca_id"]) !!}
+                <i class="icon"><a id="myBtn" data-toggle="modal" data-target="#myModal"><img src="{{asset('img/caja.png')}}" alt="Usted puede realizar una Busqueda"></a></i>
+                {!! Form::select('producto_id',$producto,null, ['class'=>'selectproduc','id'=>"producto_id"]) !!}
             </div>
             
 
@@ -54,11 +54,11 @@
             </div>
             <a onclick="agregar()" id="btnagregar" class="button-primary"><i class="fa fa-plus"></i> </a>
         </div>
-        <div class="main-container">
-            <table id="venta" class="productos">
+        <div class="main-container" style="overflow: hidden">
+            <table id="venta" class="productos" style="margin-left: 10px">
                 <thead>
                     <tr>
-                        <th>Producto</th>
+                        <th>Descripcion</th>
                         <th>Cantidad</th>
                         <th>Descuento</th>
                         <th>precio</th>
@@ -74,90 +74,88 @@
                     </tr>
                 </tfoot>
             </table>
-            <button type="submit" class="button-primary"><i class="fa fa-save"></i> Guardar</button>
-  
+            <div class="container">
+                <button type="submit" class="button-primary"><i class="fa fa-save"></i> Guardar</button>
+            </div> 
     </div>
+
+
+          
+
+@include('admin.venta.details')    
     {!!Form::close()!!}
-                 
+
 @endsection
-<script >
+    <script >
 
-        var totalgeneral;
-        var totalgeneral1;
-        function agregar(){
-        var fecha = $('#fecha').val();
-        var estado_factura= $('#estado_factura option:selected').text();
-        var estado_factura1= $('#estado_factura option:selected').val();
-        var tipo= $('#tipo_factura_id option:selected').text();
-        var tipo1=$('#tipo_factura_id option:selected').val();
-        var cliente= $('#cliente_id option:selected').text();
-        var cliente1= $('#cliente_id option:selected').val();
-        var descuento= $('#descuento_id option:selected').text();
-        var descuento1= $('#descuento_id option:selected').val();
-        var vendedores= $('#vendedores_id option:selected').text();
-        var vendedores1= $('#vendedores_id option:selected').val();
-        var producto= $('#marca_id option:selected').text();
-        var producto1= $('#marca_id option:selected').val();
-        var cantidad= $('#cantidad').val();
-        var precio= $('#precio').val();
-        var descuent=precio*descuento;
-        var preciot=cantidad*precio;
-        totalgeneral=0;
-        totalgeneral1=0;
-      /*precio descontado*/  var total=preciot-descuent;
+            var totalgeneral;
+            var totalgeneral1;
+            function agregar(){
+            var fecha = $('#fecha').val();
+            var estado_factura= $('#estado_factura option:selected').text();
+            var estado_factura1= $('#estado_factura option:selected').val();
+            var tipo= $('#tipo_factura_id option:selected').text();
+            var tipo1=$('#tipo_factura_id option:selected').val();
+            var cliente= $('#cliente_id option:selected').text();
+            var cliente1= $('#cliente_id option:selected').val();
+            var descuento= $('#descuento_id option:selected').text();
+            var descuento1= $('#descuento_id option:selected').val();
+            var vendedores= $('#vendedores_id option:selected').text();
+            var vendedores1= $('#vendedores_id option:selected').val();
+            var producto= $('#producto_id option:selected').text();
+            var producto1= $('#producto_id option:selected').val();
+            var cantidad= $('#cantidad').val();
+            var precio= $('#precio').val();
+            var descuent=precio*descuento;
+            var preciot=cantidad*precio;
+            totalgeneral=0;
+            totalgeneral1=0;
+        /*precio descontado*/  var total=preciot-descuent;
 
-        $("#venta > tbody").append("<tr><td><input type='hidden' name='marca_id[]' value="+producto1+">"+producto+"</td><td><input type='hidden' name='cantidad[]' value="+cantidad+">"+cantidad+"</td><td><input type='hidden' name='factura_descuento_id[]' value="+descuento1+">"+descuento+"</td><td><input type='hidden' name='precio[]' value="+precio+">"+precio+"</td><td><input type='hidden' name='total[]' value="+total+">"+total+"</td><td><a class='button-danger btnEliminar'><i class='fa fa-remove'></i></a></td></tr>");
-        
-        
-        
-        //Eliminar fila
-        $('#venta').on('click','.btnEliminar', function(){
+            $("#venta > tbody").append("<tr><td><input type='hidden' name='marca_id[]' value="+producto1+">"+producto+"</td><td><input type='hidden' name='cantidad[]' value="+cantidad+">"+cantidad+"</td><td><input type='hidden' name='factura_descuento_id[]' value="+descuento1+">"+descuento+"</td><td><input type='hidden' name='precio[]' value="+precio+">"+precio+"</td><td><input type='hidden' name='total[]' value="+total+">"+total+"</td><td><a class='button-danger btnEliminar'><i class='fa fa-remove'></i></a></td></tr>");
             
-            var columnacon = $(this).closest('tr').find("td:eq(4)").text()
-            var valor=parseFloat(totalgeneral);
-            var valor2=parseFloat(columnacon);
-            totalgeneral = parseFloat(valor - valor2).toFixed(2,1);
-            totalgeneral1= parseFloat(valor - valor2).toFixed(2,1);
-            $("#total").text(totalgeneral);
-            $("#totalgeneral").text(totalgeneral1);
-            console.log(Math.ceil(totalgeneral).toFixed(2));
-            $(this).closest('tr').remove();
-
-
             
-        });
-
-        $('#venta > tbody > tr').each(function (index,tr){
             
-            var columnacon=$(this).find("td:eq(4)").text();
-            totalgeneral += parseFloat(columnacon);
-            totalgeneral1 += parseFloat(columnacon);
-            $("#total").text(totalgeneral.toFixed());
-            $("#totalgeneral").text(totalgeneral1.toFixed(2));
-            console.log(totalgeneral);           
-            if (producto1 == $(this).find('input:eq(0)').val() ) {
-                //  block of code to be executed if the condition is true
-                var columnaFila=$(this).find("td:eq(1)").text();
+            //Eliminar fila
+            $('#venta').on('click','.btnEliminar', function(){
                 
-                console.log(columnaFila);
-              } else {
-                //  block of code to be executed if the condition is false
+                var columnacon = $(this).closest('tr').find("td:eq(4)").text()
+                var valor=parseFloat(totalgeneral);
+                var valor2=parseFloat(columnacon);
+                totalgeneral = parseFloat(valor - valor2).toFixed(2,1);
+                totalgeneral1= parseFloat(valor - valor2).toFixed(2,1);
+                $("#total").text(totalgeneral);
+                $("#totalgeneral").text(totalgeneral1);
+                console.log(Math.ceil(totalgeneral).toFixed(2));
+                $(this).closest('tr').remove();
+
+
                 
-              }
-            
+            });
+
+            $('#venta > tbody > tr').each(function (index,tr){
                 
-            
-              $("#venta > tbody").append("<input type='hidden' name='totalgeneral' id='totalgeneral' value="+totalgeneral+">")
+                var columnacon=$(this).find("td:eq(4)").text();
+                totalgeneral += parseFloat(columnacon);
+                totalgeneral1 += parseFloat(columnacon);
+                $("#total").text(totalgeneral.toFixed());
+                $("#totalgeneral").text(totalgeneral1.toFixed(2));
+                console.log(totalgeneral);           
+                if (producto1 == $(this).find('input:eq(0)').val() ) {
+                    //  block of code to be executed if the condition is true
+                    var columnaFila=$(this).find("td:eq(1)").text();
+                    
+                    console.log(columnaFila);
+                } else {
+                    //  block of code to be executed if the condition is false
+                    
+                }
+                
+                    
+                
+                $("#venta > tbody").append("<input type='hidden' name='totalgeneral' id='totalgeneral' value="+totalgeneral+">")
+                
+            });    
+    }
 
-            
-            
-        });
-
-
-
- 
-   }
-
-   
-
-</script>
+    </script>

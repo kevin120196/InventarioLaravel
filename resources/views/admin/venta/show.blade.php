@@ -1,7 +1,7 @@
 @extends('admin.template.template')
 @section('title','Crear Compra')
 @section('contenido')
-    {!!Form::open(['route'=>'ventas.index','Method'=>'POST'],['class'=>'formulario'])!!}
+    {!!Form::open(['route'=>'ventas.index','Method'=>'POST','class'=>'formulario'])!!}
         <div class="cabeceraForm">
             <h1>Factura Venta<h1>
         </div>
@@ -27,28 +27,29 @@
             </div>
 
             <div class="input-contenedor input-100">
-                        
-                    {!! Form::text('clientes_id', $venta->clientes->nombre, ['placeholder'=>'Proveedores','id'=>"estado_factura",'readOnly'])!!}
+                <i class="icon"><img src="{{asset('img/clientes.png')}}" alt=""></i>        
+                {!! Form::text('clientes_id', $venta->clientes->nombre, ['placeholder'=>'Proveedores','id'=>"estado_factura",'readOnly'])!!}
             </div>
 
             
 
         </div>
-        <div class="main-container">
-            <table id="venta" class="detalleVenta">
+        <div class="main-container" style="overflow: hidden">
+            <table id="venta" class="detalleVenta" style="margin-left: 10px">
                 <thead>
                     <tr>
-                        <th>Producto</th>
+                        <th>Descripcion</th>
                         <th>Cantidad</th>
                         <th>precio</th>
-                        <th>SubTotal</th>
                         <th>Descuento</th>
+                        <th>SubTotal</th>
+                       
                     </tr>
                 </thead>
                 <tbody>
                         @foreach ($detalle as $detalles)
                         <tr>
-                            <td>{{$detalles->marca_id}}</td>
+                            <td>{{$detalles->descripcion}}</td>
                             <td>{{$detalles->cantidad}}</td>
                             <td>{{$detalles->precio}}</td>
                             <td>{{$venta->descuentos_clientes->descuento_cliente}}</td>
@@ -64,9 +65,11 @@
                     </tr>
                 </tfoot>
             </table>
-            <a href="{{route('ventas.index')}}" class="button-primary">
-                <i class="fa fa-undo"></i>
-            </a>
+            <div class="container">
+                    <a href="{{route('ventas.index')}}" class="button-primary">
+                            <i class="fa fa-undo"></i>
+                    </a>
+            </div>
     </div>
     {!!Form::close()!!}
 @endsection

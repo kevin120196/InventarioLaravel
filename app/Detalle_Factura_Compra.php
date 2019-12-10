@@ -14,7 +14,7 @@ class Detalle_Factura_Compra extends Model
     }
 
     public function producto(){
-        return $this->belongsTo('App\Productos','factura_producto_compra','facturas_compras_id','productos_id_productos');
+        return $this->belongsToMany('App\Producto','factura_producto_compra','facturas_compras_id','productos_id_productos');
     }
 
 }

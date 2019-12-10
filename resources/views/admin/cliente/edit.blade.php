@@ -1,5 +1,5 @@
 @extends('admin.template.template')
-@section('title','Crear Proveedor')
+@section('title','Editar Cliente')
 @section('contenido')
     {!!Form::open(['route'=>['cliente.update',$cliente],'method'=>'PUT','class'=>'formulario'])!!}
         <div class="cabeceraForm">

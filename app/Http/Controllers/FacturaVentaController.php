@@ -13,20 +13,35 @@ use App\Categoria;
 use App\Marca;
 use App\Producto;
 use DB;
+use PDF;
 use RealRashid\SweetAlert\Facades\Alert;
 class FacturaVentaController extends Controller
 {
     //
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
-    public function index(){
-        $venta= Factura_Venta::orderBy('id','DESC')->paginate(5);
+    public function index(Request $request){
+        $productos=Producto::orderBy('id','ASC')->paginate(5);
+        $venta= Factura_Venta::orderBy('id','DESC')
+        ->codigo($request->codigo)
+        ->fecha($request->fecha)
+        ->estado($request->estado)
+        ->paginate(5);
         $venta->each(function($venta){
             $venta->clientes;
             $venta->descuentos_clientes;
             $venta->vendedores;
             $venta->productos;
         });
-        return view('admin.venta.index')->with('venta',$venta);
+        return view('admin.venta.index')->with('venta',$venta)->with('productos',$productos);
+    }
+
+    public function details(Request $request){
+
+        return view('admin.venta.details');
     }
 
     public function show($id){
@@ -35,23 +50,58 @@ class FacturaVentaController extends Controller
             $venta->clientes;
             $venta->descuentos_clientes;
             $venta->vendedores;
-            $venta->productos;
+            $venta->producto;
             $venta->tipos_factura;
         });
-        $detalle=Detalle_Factura_Venta::orderBy('id','ASC')->where('venta_id','=',$id)->get();
+        //$detalle=Detalle_Factura_Venta::orderBy('id','ASC')->where('venta_id','=',$id)->get();
+        $detalle=DB::table('factura_producto_venta as fac')
+        ->join('productos as p', 'fac.producto_id','=','p.id')
+        ->join('facturas_ventas as f','fac.venta_id','=','f.id')
+        ->select('p.descripcion','fac.cantidad','fac.precio','fac.total')
+        ->where('fac.venta_id','=',$id)
+        ->get();
+        
         return view('admin.venta.show')->with('venta',$venta)->with('detalle',$detalle);
     }
 
-    public function create(){
-
+    public function create(Request $request){
+        $productos=Producto::orderBy('id','ASC')
+        ->codigo($request->codigo)
+        ->paginate(10);
+        $productos->each(function($productos){
+            $productos->categoria;
+            $productos->marca;
+            $productos->proveedor;
+        });
         $categoria=Categoria::orderBy('nombre_categoria','ASC')->pluck('nombre_categoria','id')->prepend('Seleccione una categoria');
-        $producto=Producto::orderBy('marca_id','ASC')->pluck('marca_id','id')->prepend('Producto');
+        $producto=Producto::orderBy('descripcion','ASC')->pluck('descripcion','id')->prepend('Producto');
         $vendedor=Vendedor::orderBy('nombre_vendedor','ASC')->pluck('nombre_vendedor','id')->prepend('Vendedor');
         $descuento=Descuento_Cliente::orderBy('descuento_cliente','ASC')->pluck('descuento_cliente','id')->prepend('Descuento');
         $cliente=Cliente::orderBy('nombre','ASC')->pluck('nombre','id')->prepend('Nombre Cliente');
         $Tipo=Tipo_Factura::orderBy('tipo_factura_nombre','ASC')->pluck('tipo_factura_nombre','id')->prepend('Tipo Factura');
         return view('admin.venta.create')->with('Tipo',$Tipo)->with('cliente',$cliente)->with('descuento',$descuento)->with('vendedor',$vendedor)
-        ->with('categoria',$categoria)->with('producto',$producto);
+        ->with('categoria',$categoria)->with('producto',$producto)->with('productos',$productos);
+    }
+
+    public function report($id){
+        $facturaventa=Factura_venta::find($id);
+        $facturaventa->each(function($facturaventa){
+            $facturaventa->clientes;
+            $facturaventa->descuentos_clientes;
+            $facturaventa->vendedores;
+            $facturaventa->productos;
+            $facturaventa->tipos_factura;
+        });
+        $detalle=DB::table('factura_producto_venta as fac')
+        ->join('productos as p', 'fac.producto_id','=','p.id')
+        ->join('facturas_ventas as f','fac.venta_id','=','f.id')
+        ->select('p.descripcion','fac.cantidad','fac.precio','fac.total')
+        ->where('fac.venta_id','=',$id)
+        ->get();
+/*        $pdf=PDF::loadView('admin.venta.report',['facturaventa'=>$facturaventa,'detalle'=>$detalle]);
+        $fileName='factura Nº '.$facturaventa->id;
+        return $pdf->stream($fileName.'.pdf');*/
+       return view('admin.venta.report')->with('facturaventa',$facturaventa)->with('detalle',$detalle);
     }
 
     public function store(Request $request){
@@ -78,13 +128,13 @@ class FacturaVentaController extends Controller
                     $detalle->precio=$request->precio[$i];
                     $detalle->total=$request->total[$i];
                     $detalle->venta_id=$venta->id;
-                    $detalle->marca_id=$request->marca_id[$i];
+                    $detalle->producto_id=$request->marca_id[$i];
                     
                 $detalle->save();
                 }
                 
                 DB::commit();
-                Alert::success('Exito!','La venta '.$venta->id .' ha sido realizada de forma Correcta!!');
+              Alert::success('Exito!','La venta '.$venta->id .' ha sido realizada de forma Correcta!!');
   
                 return redirect()->route('ventas.index');
                 
@@ -93,5 +143,7 @@ class FacturaVentaController extends Controller
             dd($th);
             DB::rollBack();
         }
+
+        
     }
 }

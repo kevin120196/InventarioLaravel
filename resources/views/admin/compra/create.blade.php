@@ -1,7 +1,7 @@
 @extends('admin.template.template')
 @section('title','Crear Compra')
 @section('contenido')
-    {!!Form::open(['route'=>'compra.store','Method'=>'POST'],['class'=>'formulario'])!!}
+    {!!Form::open(['route'=>'compra.store','Method'=>'POST','class'=>'formulario'])!!}
         <div class="cabeceraForm">
             <h1>Nueva Compra<h1>
         </div>
@@ -27,8 +27,8 @@
             </div>
 
             <div class="input-contenedor input-100">
-                <i class="icon"><img src="{{asset('img/caja.png')}}" alt=""></i>
-                {!! Form::select('productos_id_productos',$productos,null, ['class'=>'selectproduc','id'=>"productos_id_productos"]) !!}
+                <i class="icon"><a id="myBtn" data-toggle="modal" data-target="#myModal"><img src="{{asset('img/caja.png')}}" alt="Usted puede realizar una Busqueda"></a></i>
+                {!! Form::select('productos_id_productos',$producto,['placeholder'=>'Selecciona'], ['id'=>"productos_id_productos",'class'=>'selectproduc']) !!}
             </div>
             
 
@@ -43,11 +43,11 @@
             </div>
             <a onclick="agregar()" id="btnagregar" class="button-primary"><i class="fa fa-plus"></i> </a>
         </div>
-        <div class="main-container">
-            <table id="venta" class="detallefact">
+        <div class="main-container" style="overflow: hidden">
+            <table id="venta" class="detallefact" style="margin-left: 10px">
                 <thead>
                     <tr>
-                        <th>Producto</th>
+                        <th>Descripcion</th>
                         <th>Cantidad</th>
                         <th>precio</th>
                         <th>Total</th>
@@ -62,13 +62,16 @@
                     </tr>
                 </tfoot>
             </table>
-            <button type="submit" class="button-primary"><i class="fa fa-save"></i> Guardar</button>
-  
+        <div class="container">
+        <button type="submit" class="button-primary"><i class="fa fa-save"></i> Guardar</button>
+        </div>  
     </div>
+    
+@include('admin.venta.details')    
     {!!Form::close()!!}
 @endsection
-<script >
-
+<script>
+        
         var totalgeneral;
         var totalgeneral1;
         function agregar(){
@@ -91,14 +94,15 @@
         $("#venta > tbody").append("<tr><td><input type='hidden' name='productos_id_productos[]' value="+producto1+">"+producto+"</td><td><input type='hidden' name='cantidad[]' value="+cantidad+">"+cantidad+"</td><td><input type='hidden' name='precio[]' value="+precio+">"+precio+"</td><td><input type='hidden' name='total[]' value="+total+">"+total+"</td><td><a class='button-danger btnEliminar'><i class='fa fa-remove'></i></a></td></tr>");
 
       
+
         //Eliminar fila
         $('#venta').on('click','.btnEliminar', function(){
             
             var columnacon = $(this).closest('tr').find("td:eq(3)").text();
             var valor=parseFloat(totalgeneral);
             var valor2=parseFloat(columnacon);
-            totalgeneral= parseFloat(valor - valor2).toFixed(2,1);
-            totalgeneral1= parseFloat(valor - valor2).toFixed(2,1);
+            totalgeneral= parseFloat(valor - valor2).toFixed(1,0);
+            totalgeneral1= parseFloat(valor - valor2).toFixed(1,0);
             $("#total").text(totalgeneral);
             $("#totalgeneral").text(totalgeneral1);
             console.log(totalgeneral);
@@ -127,14 +131,15 @@
                 
                 
               }
-            
+           
+              
         });
         $("#venta > tbody").append("<input type='hidden' name='totalgeneral' id='totalgeneral' value="+totalgeneral+">")
+    }
 
+
+    
+    
+</script>
 
  
-   }
-
-   
-
-</script>

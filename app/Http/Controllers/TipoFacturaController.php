@@ -6,6 +6,12 @@ use Illuminate\Http\Request;
 
 class TipoFacturaController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index(){
         $tipo_factura=Tipo_Factura::orderBy('id','ASC')->paginate(3);
         return view('admin.tipo_factura.index')->with('tipo_factura',$tipo_factura);

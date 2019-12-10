@@ -10,6 +10,10 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class ClienteController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index(){
         $cliente=Cliente::orderBy('id','ASC')->paginate(10);
         $cliente->each(function($cliente){

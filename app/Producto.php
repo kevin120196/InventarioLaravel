@@ -38,5 +38,14 @@ class Producto extends Model
     public function scopeEstante($query,$estante){
         return $query->where('numero_rack','LIKE',"%$estante%");
     }
+
+    public function scopeAplicacion($query,$aplicacion){
+        return $query->where('aplicacion','LIKE',"%$aplicacion%");
+    }
+
+
+    public static function productos($id){
+        return Producto::where('proveedor_id','=',$id)->get();
+    }
 }
 

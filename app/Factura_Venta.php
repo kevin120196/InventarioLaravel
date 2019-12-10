@@ -27,8 +27,23 @@ class Factura_Venta extends Model
     }
     
 
+    public function productos(){
+        return $this->belongsTo('App\Producto');
+    }
+
     public function detalleVenta(){
         return $this->belongsToMany('App\Detalle_Factura_Venta','factura_producto_venta')->withPivot('facturas_ventas_id','id');
     }
 
+    public function scopeCodigo($query,$codigo){
+        return $query->where('id','LIKE',"%$codigo%");
+    }
+
+    public function scopeFecha($query,$fecha){
+        return $query->where('fecha_factura','LIKE',"%$fecha%");
+    }
+
+    public function scopeEstado($query,$estado){
+        return $query->where('estado_factura','LIKE',"%$estado%");
+    }
 }

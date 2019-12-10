@@ -8,7 +8,7 @@ class Vendedor extends Model
 {
     //
     protected $table="vendedores";
-    protected $fillable=['nombre_vendedor','direccion','telefono_vendedor','correo_electronio'];
+    protected $fillable=['nombre_vendedor','cedula_vendedor','direccion','telefono_vendedor','correo_electronico'];
 
     public function proformas() {
         return $this->hasMany('App\Proforma');     

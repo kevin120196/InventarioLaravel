@@ -7,6 +7,10 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class DescuentoClienteController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index(){
         $descuento_cliente=Descuento_Cliente::orderBy('id','ASC')->paginate(3);
         return view('admin.descuentos.index')->with('descuento_cliente',$descuento_cliente);

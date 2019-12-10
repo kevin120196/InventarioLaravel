@@ -11,6 +11,10 @@ use RealRashid\SweetAlert\Facades\Alert;
 class ProductosController extends Controller
 {
     //
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     public function index(Request $request){
         $productos=Producto::codigo($request->codigo)->orderBy('id','ASC')

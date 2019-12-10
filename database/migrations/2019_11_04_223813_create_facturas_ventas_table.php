@@ -40,25 +40,25 @@ class CreateFacturasVentasTable extends Migration
             $table->double('precio');
             $table->double('total');
             //claves foraneas
-            $table->integer('facturas_ventas_id')->unsigned();
+            $table->integer('ventas_id')->unsigned();
             //$table->integer('facturas_ventas_estados_id')->unsigned();
             //$table->integer('facturas_ventas_tipos_id')->unsigned();
             //$table->integer('facturas_ventas_clientes_id')->unsigned();
             //$table->integer('facturas_ventas_descuentos_id')->unsigned();
             //$table->integer('facturas_ventas_vendedores_id')->unsigned();
             //$table->integer('productos_producto_id')->unsigned();
-            $table->integer('productos_marcas_id')->unsigned();
+            $table->integer('productos_id')->unsigned();
             //$table->integer('productos_categoria_id')->unsigned();
             //$table->integer('productos_proveedores_id')->unsigned();
             //referncias claves foraneas
-            $table->foreign('facturas_ventas_id')->references('id')->on('facturas_ventas')->onDelete('cascade');
+            $table->foreign('ventas_id')->references('id')->on('facturas_ventas')->onDelete('cascade');
             //$table->foreign('facturas_ventas_estados_id')->references('id')->on('facturas_ventas')->onDelete('cascade');
             //$table->foreign('facturas_ventas_tipos_id')->references('id')->on('facturas_ventas')->onDelete('cascade');
             //$table->foreign('facturas_ventas_clientes_id')->references('id')->on('facturas_ventas')->onDelete('cascade');
             //$table->foreign('facturas_ventas_descuentos_id')->references('id')->on('facturas_ventas')->onDelete('cascade');
             //$table->foreign('facturas_ventas_vendedores_id')->references('id')->on('facturas_ventas')->onDelete('cascade');
             //$table->foreign('productos_producto_id')->references('id')->on('productos')->onDelete('cascade');
-            $table->foreign('productos_marcas_id')->references('id')->on('productos')->onDelete('cascade');
+            $table->foreign('productos_id')->references('id')->on('productos')->onDelete('cascade');
             //$table->foreign('productos_categoria_id')->references('id')->on('productos')->onDelete('cascade');
             //$table->foreign('productos_proveedores_id')->references('id')->on('productos')->onDelete('cascade');
             //

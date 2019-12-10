@@ -1,7 +1,7 @@
 @extends('admin.template.template')
 @section('title','Detalle Compra')
 @section('contenido')
-{!!Form::open(['route'=>'compra.index','Method'=>'POST'],['class'=>'formulario'])!!}
+{!!Form::open(['route'=>'compra.index','Method'=>'POST','class'=>'formulario'])!!}
         <div class="cabeceraForm">
             <h1>Factura Compra<h1>
         </div>
@@ -30,11 +30,11 @@
             
 
         </div>
-        <div class="main-container">
-            <table id="venta" class="detallefact">
+        <div class="main-container" style="overflow: hidden">
+            <table id="venta" class="detallefact" style="margin-left: 10px">
                 <thead>
                     <tr>
-                        <th>Producto</th>
+                        <th>Descripcion</th>
                         <th>Cantidad</th>
                         <th>precio</th>
                         <th>SubTotal</th>
@@ -43,7 +43,7 @@
                 <tbody>
                     @foreach ($detalleFact as $detalle)
                         <tr>
-                            <td>{{$detalle->productos_id_productos}}</td>
+                            <td>{{$detalle->descripcion}}</td>
                             <td>{{$detalle->cantidad}}</td>
                             <td>{{$detalle->precio}}</td>
                             <td>{{$detalle->total}}</td>
@@ -58,9 +58,11 @@
                     </tr>
                 </tfoot>
             </table>
-            <a href="{{route('compra.index')}}" class="button-primary">
-                <i class="fa fa-undo"></i>
-            </a>
+            <div class="container">
+                <a href="{{route('compra.index')}}" class="button-primary">
+                        <i class="fa fa-undo"></i>
+                </a>
+            </div>
     </div>
     {!!Form::close()!!}    
 @endsection

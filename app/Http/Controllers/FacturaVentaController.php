@@ -98,10 +98,10 @@ class FacturaVentaController extends Controller
         ->select('p.descripcion','fac.cantidad','fac.precio','fac.total')
         ->where('fac.venta_id','=',$id)
         ->get();
-/*        $pdf=PDF::loadView('admin.venta.report',['facturaventa'=>$facturaventa,'detalle'=>$detalle]);
+        $pdf=PDF::loadView('admin.venta.report',['facturaventa'=>$facturaventa,'detalle'=>$detalle]);
         $fileName='factura Nº '.$facturaventa->id;
-        return $pdf->stream($fileName.'.pdf');*/
-       return view('admin.venta.report')->with('facturaventa',$facturaventa)->with('detalle',$detalle);
+        return $pdf->stream($fileName.'.pdf');
+//       return view('admin.venta.report')->with('facturaventa',$facturaventa)->with('detalle',$detalle);
     }
 
     public function store(Request $request){

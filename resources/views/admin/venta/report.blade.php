@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/bootstrap-grid.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <style>
 
@@ -40,25 +40,27 @@
                 color: #757575;
             }
             
-            input[type="text"]:read-only{
-                text-transform: capitalize;   
+            label{
+                text-transform: capitalize;
+                   
             }
-            input[type="email"],
-            input[type="text"],
-            input[type="password"],
-            .button-primary,
-            .button-danger,
-            .button-show,
-            .button-warning
-            {
-                font-size: 20px;
-                width: 80%;
-                margin: auto;
-                margin-left: 1px;
-                padding: 10px;
-                border: none;
-                outline: none;
+
+            .label1{
+                margin-left: 10em;
             }
+            .label2{
+                margin-left: 6.1em;
+            }
+            .label3{
+                margin-left: 6em;
+            }
+            .label4{
+                margin-left: 7em;
+            }
+            .label5{
+                margin-left: 11em;
+            }
+            
             
             .cabeceraForm{
                 margin-top: 0px;
@@ -126,7 +128,7 @@
                 border: 1px solid whitesmoke;
                 text-align: center;
                 margin: 7px -7px;
-                border-collapse: collapse;
+                border-collapse: separate;
                 
                 }
                 
@@ -137,13 +139,15 @@
                 }
                 
                 th,td{
-                padding: 20px;
+                padding: 15px;
+                text-transform: capitalize;
                 font-family: 'Montserrat', sans-serif;
                 }
                 
                 thead th{
                 background-color: #1a2537;
-                border-bottom: solid 5px #dddddd;
+                border-bottom: solid 4px whitesmoke;
+                border-top: solid 4px whitesmoke;
                 color: white;
                 }
                 
@@ -164,74 +168,80 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="container">
-            <div class="formulario" style="padding: 1em; margin-top:1px;width: 100%;height: 500px;
-    display: inline-grid;">
-                    <div class="cabeceraForm">
-                            <h1>Factura Venta<h1>
+   
+        <form style="box-shadow: 1px 4px 10px 1px black">
+                <div class="cabeceraForm">
+                    <h1>Factura de Venta</h1>
+                    <h3>Repuestos El Triunfo</h3>
+                </div>
+                <div class="col-md-12">
+                <b></b>
+                        <div class="form-group col-6">
+                                <label for=""><b>Vendedor: </b></label>
+                                <label for="" class="label1"><?php echo $facturaventa->vendedores->nombre_vendedor?></label>
                         </div>
-                        <div class="contenedor">
-                            <div class="input-contenedor input-50 input-100">
-                                <i class="icon"><img src="img/compras (2).png" alt=""></i>
-                                {!! Form::text('vendedores_id', $facturaventa->vendedores->nombre_vendedor, ['placeholder'=>'Proveedores','id'=>"estado_factura",'readOnly'])!!}
-                            </div>
-                
-                            <div class="input-contenedor input-50 input-100">
-                                <i class="fa fa-calendar icon" aria-hidden="true"></i>
-                                {!! Form::text('fecha_factura', $facturaventa->fecha_factura, ['placeholder'=>'Fecha','id'=>"fecha",'readOnly'])!!}
-                            </div>
-                
-                            <div class="input-contenedor input-50 input-100">
-                                    <i class="icon"><img src="img/factura (1).png" alt=""></i>                
-                                    {!! Form::text('estado_factura', $facturaventa->estado_factura, ['placeholder'=>'Estado Factura','id'=>"estado_factura",'readOnly'])!!}
-                            </div>
-                
-                            <div class="input-contenedor input-50 input-100">
-                                <i class="icon"><img src="img/factur.png" alt=""></i>
-                                {!! Form::text('tipo_factura_id', $facturaventa->tipos_factura->tipo_factura_nombre, ['placeholder'=>'Estado Factura','id'=>"estado_factura",'readOnly'])!!}
-                            </div>
-                
-                            <div class="input-contenedor input-100">
-                                <i class="icon"><img src="img/clientes.png" alt=""></i>        
-                                {!! Form::text('clientes_id', $facturaventa->clientes->nombre, ['placeholder'=>'Proveedores','id'=>"estado_factura",'readOnly'])!!}
-                            </div>     
+                        <div class="form-group col-6">
+                            <label for=""><b>Fecha Facturación: </b></label>    
+                            <label for="" class="label2"><?php echo $facturaventa->fecha_factura?></label>
+                        </div>
+        
+                        <div class="form-group col-6">
+                                <label for=""><b>Estado de Factura: </b></label>    
+                                <label for="" class="label3"><?php echo $facturaventa->estado_factura?></label>
+                        </div>
+        
+                        <div class="form-group col-6">
+                                <label for=""><b>Tipo de Factura: </b></label>    
+                                <label for="" class="label4"><?php echo $facturaventa->tipos_factura->tipo_factura_nombre?></label>
+                        </div>
+        
+                        <div class="form-group col-6">
+                                <label for=""><b>Cliente: </b></label>    
+                                <label for="" class="label5"><?php echo $facturaventa->clientes->nombre?></label>
+                        </div>
+
+                        <br>
+                        <div class="form-group col-6">
+                                <label for=""><b>Firma de Vendedor: </b></label>    
+                                <label for="" class="label2">____________________________</label>
                         </div>
                 </div>
-
-
-                <div class="main-container" style="overflow: hidden; margin-left: 1px">
-                        <table>
-                            <thead>
+            </form>
+        
+        
+            <div class="main-container" style="overflow: hidden; margin-left: 1px">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Producto</th>
+                                <th>Cantidad</th>
+                                <th>precio</th>
+                                <th>Descuento</th>
+                                <th>SubTotal</th>
+                               
+                            </tr>
+                        </thead>
+                        <tbody>
+                                @foreach ($detalle as $detalles)
                                 <tr>
-                                    <th>Producto</th>
-                                    <th>Cantidad</th>
-                                    <th>precio</th>
-                                    <th>Descuento</th>
-                                    <th>SubTotal</th>
-                                   
+                                    <td>{{$detalles->descripcion}}</td>
+                                    <td>{{$detalles->cantidad}}</td>
+                                    <td>{{$detalles->precio}}</td>
+                                    <td>{{$facturaventa->descuentos_clientes->descuento_cliente}}</td>
+                                    <td>{{$detalles->total}}</td>
+                                    
                                 </tr>
-                            </thead>
-                            <tbody>
-                                    @foreach ($detalle as $detalles)
-                                    <tr>
-                                        <td>{{$detalles->descripcion}}</td>
-                                        <td>{{$detalles->cantidad}}</td>
-                                        <td>{{$detalles->precio}}</td>
-                                        <td>{{$facturaventa->descuentos_clientes->descuento_cliente}}</td>
-                                        <td>{{$detalles->total}}</td>
-                                        
-                                    </tr>
-                                   
-                                @endforeach
-                            </tbody>
-                            <tfoot style="background: #aaa">
-                                <tr>
-                                    <th><b>Total:</b> {{$facturaventa->totalgeneral}}</th>
-                                </tr>
-                            </tfoot>
-                        </table>
-                    </div>
-    </div>
-
+                               
+                            @endforeach
+                        </tbody>
+                        <tfoot style="background: #aaa">
+                            <tr>
+                                <th><b>Total:</b> {{$facturaventa->totalgeneral}}</th>                            
+                            </tr>
+                            
+                        </tfoot>
+                    </table>
+                </div>
+        
 </body>
 </html>

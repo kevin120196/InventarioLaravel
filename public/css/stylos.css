@@ -83,7 +83,7 @@ main{
     border-bottom: 10px solid #fff;
     position: absolute;
     margin-top: -10px;
-    margin-left: 20px;
+    margin-left: 20px; 
 
 }
 
@@ -458,7 +458,8 @@ input[type="password"],
 .button-primary,
 .button-danger,
 .button-show,
-.button-warning
+.button-warning,
+.button-detail
 {
     font-size: 20px;
     width: 80%;
@@ -605,7 +606,7 @@ p{
     color: white;
   }
   
-  .modal-body {padding: 2px 16px;}
+  .modal-body {padding: 0px 16px;}
   
   .modal-footer {
     padding: 2px 16px;
@@ -635,7 +636,7 @@ p{
 
 
 .button-primary:hover{
-    background: transparent;
+    background: white;
     border: 3px solid #00796B;
     color: #00796B;
 }
@@ -647,8 +648,8 @@ p{
     font-family: sans-serif;
     font-weight: bold;
     font-size: 1.25em;
-    margin: 3px;
-    padding: 10px 0px;
+    margin: 2px;
+    padding: 4px 0px;
     text-align: center;
     width: 50px;
     text-decoration: none;
@@ -659,10 +660,36 @@ p{
 
 
 .button-warning:hover{
-    background: transparent;
+    background: white;
     border: 3px solid #FFA000;
     color: #FFA000;
 }
+
+.button-detail{
+    background: #033060;
+    color: #fff;
+    display: inline-block;
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 1.25em;
+    margin: 2px;
+    padding: 4px 0px;
+    text-align: center;
+    width: 50px;
+    text-decoration: none;
+    border-radius: 5px;
+    box-shadow:2px 5px 5px black;
+    transition:all 0.5s;
+}
+
+
+.button-detail:hover{
+    background: white;
+    border: 3px solid #033060;
+    color: #033060;
+}
+
+
 
 .button-danger{
     background: #D32F2F;
@@ -671,8 +698,8 @@ p{
     font-family: sans-serif;
     font-weight: bold;
     font-size: 1.25em;
-    margin: 3px;
-    padding: 10px 0px;
+    margin: 2px;
+    padding: 4px 0px;
     text-align: center;
     width: 50px;
     text-decoration: none;
@@ -683,7 +710,7 @@ p{
 
 
 .button-danger:hover{
-    background: transparent;
+    background: white;
     border: 3px solid #D32F2F;
     color: #D32F2F;
 }
@@ -695,8 +722,8 @@ p{
     font-family: sans-serif;
     font-weight: bold;
     font-size: 1.25em;
-    margin: 3px;
-    padding: 10px 0px;
+    margin: 2px;
+    padding: 4px 0px;
     text-align: center;
     width: 50px;
     text-decoration: none;
@@ -707,7 +734,7 @@ p{
 
 
 .button-show:hover{
-    background: transparent;
+    background: white;
     border: 3px solid #388E3C;
     color: #388E3C;
 }
@@ -1136,6 +1163,121 @@ tr:hover td{
         margin-left: 37px;
     }
 
+
+
+    .Venta td:before{
+        content: '';
+        font-weight: bold;
+        position: relative;
+        font-family: sans-serif;
+        top: 7%;
+        left: -100px;
+        transform: translateY(-50%);
+    }
+
+    .Venta td:nth-of-type(1)::before{
+        content: 'Nº Factura:';
+        margin-right: 37px;
+    }
+
+    .Venta td:nth-of-type(2)::before{
+        content: 'Fecha de Facturación:';
+        margin-right: -49px;
+    }
+
+    .Venta td:nth-of-type(3)::before{
+        content: 'Estado de Factura:';
+        margin-right: -25px;
+    }
+
+    .Venta td:nth-of-type(4)::before{
+        content: 'Tipo de Factura:';
+        margin-right: -5px;
+    }
+
+    .Venta td:nth-of-type(5)::before{
+        content: 'Cliente:';
+        margin-right: 62px;
+    }
+
+    .Venta td:nth-of-type(6)::before{
+        content: 'Descuento:';
+        margin-right: 33px;
+    }
+
+    .Venta td:nth-of-type(7)::before{
+        content: 'Vendedor:';
+        margin-right: 40px;
+    }
+    
+    .Venta td:nth-of-type(8)::before{
+        content: 'Total:';
+        margin-right: 75px;
+    }
+
+    .Venta td:nth-of-type(9)::before{
+        content: 'Acciones:';
+        margin-right: 21px;
+    }
+
+    .Venta th:nth-of-type(1)::before{
+        content: '';
+    }
+
+
+    .Compras td:before{
+        content: '';
+        font-weight: bold;
+        position: relative;
+        font-family: sans-serif;
+        top: 7%;
+        left: -100px;
+        transform: translateY(-50%);
+    }
+
+    .Compras td:nth-of-type(1)::before{
+        content: 'Nº Factura:';
+        margin-right: 37px;
+    }
+
+    .Compras td:nth-of-type(2)::before{
+        content: 'Fecha de Facturación:';
+        margin-right: -49px;
+    }
+
+    .Compras td:nth-of-type(3)::before{
+        content: 'Estado de Factura:';
+        margin-right: -25px;
+    }
+
+    .Compras td:nth-of-type(4)::before{
+        content: 'Tipo de Factura:';
+        margin-right: -5px;
+    }
+
+    .Compras td:nth-of-type(5)::before{
+        content: 'Proveedor:';
+        margin-right: 37px;
+    }
+    
+    .Compras td:nth-of-type(6)::before{
+        content: 'Total:';
+        margin-right: 78px;
+    }
+
+    .Compras td:nth-of-type(7)::before{
+        content: 'Acciones:';
+        margin-right: 25px;
+    }
+
+    .Compras th:nth-of-type(1)::before{
+        content: '';
+    }
+
+
+
+
+
     .detallefact td:before{
         content: '';
         font-weight: bold;
@@ -1250,12 +1392,12 @@ tr:hover td{
 
     
     input[type="button"],
-    .button-danger,.button-warning, .button-show{
+    .button-detail,.button-danger,.button-warning, .button-show{
         border: none;
         padding: 0;
         min-width: 0;
         color: #606774;
-        background: none;
+        background: white;
         overflow: visible;
         box-shadow: none;
     }

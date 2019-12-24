@@ -18,4 +18,14 @@ class Proveedor extends Model
         return $this->hasMany('App\Productos');     
     }
 
+    public function scopeNombre($query,$nombre){
+        return $query->where('nombre_proveedor','LIKE',"%$nombre%");
+    }
+    public function scopeDireccion($query,$direccion){
+        return $query->where('direccion_proveedor','LIKE',"%$direccion%");
+    }
+    public function scopeEmail($query,$correo_electronico){
+        return $query->where('correo_electronico_proveedor','LIKE',"%$correo_electronico%");
+    }
+
 }

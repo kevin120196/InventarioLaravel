@@ -291,7 +291,7 @@ table.dataTable td {
   float: left;
   text-align: left;
   width: 50%;
-  height: 20%;
+  height: 70px;
 }
 
 .dataTables_wrapper .dataTables_filter input {

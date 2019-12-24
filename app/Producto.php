@@ -31,8 +31,8 @@ class Producto extends Model
         return $query->where('codigo_alterno','LIKE',"%$codigo%");
     }
 
-    public function scopeMarcas($query,$marca){
-        return $query->where('marca_id','LIKE',"%$marca%");
+    public function scopeDescripcion($query,$descripcion){
+        return $query->where('descripcion','LIKE',"%$descripcion%");
     }
 
     public function scopeEstante($query,$estante){

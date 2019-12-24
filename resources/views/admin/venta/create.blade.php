@@ -1,6 +1,17 @@
 @extends('admin.template.template')
 @section('title','Crear Venta')
 @section('contenido')
+@if ($errors->any())
+    <div class="alert danger">
+        
+    <span class="closebtn">&times;</span>
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li style="list-style: none">{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
     {!!Form::open(['route'=>'ventas.store','Method'=>'POST' ,'class'=>'formulario'])!!}
         <div class="cabeceraForm">
             <h1>Nueva Venta<h1>
@@ -39,7 +50,7 @@
             
             <div class="input-contenedor input-30 input-100">
                 <i class="icon"><a id="myBtn" data-toggle="modal" data-target="#myModal"><img src="{{asset('img/caja.png')}}" alt="Usted puede realizar una Busqueda"></a></i>
-                {!! Form::select('producto_id',$producto,null, ['class'=>'selectproduc','id'=>"producto_id"]) !!}
+                {!! Form::select('productos_id',$producto,null, ['class'=>'selectproduc','id'=>"productos_id"]) !!}
             </div>
             
 
@@ -102,8 +113,8 @@
             var descuento1= $('#descuento_id option:selected').val();
             var vendedores= $('#vendedores_id option:selected').text();
             var vendedores1= $('#vendedores_id option:selected').val();
-            var producto= $('#producto_id option:selected').text();
-            var producto1= $('#producto_id option:selected').val();
+            var producto= $('#productos_id option:selected').text();
+            var producto1= $('#productos_id option:selected').val();
             var cantidad= $('#cantidad').val();
             var precio= $('#precio').val();
             var descuent=precio*descuento;
@@ -112,7 +123,7 @@
             totalgeneral1=0;
         /*precio descontado*/  var total=preciot-descuent;
 
-            $("#venta > tbody").append("<tr><td><input type='hidden' name='marca_id[]' value="+producto1+">"+producto+"</td><td><input type='hidden' name='cantidad[]' value="+cantidad+">"+cantidad+"</td><td><input type='hidden' name='factura_descuento_id[]' value="+descuento1+">"+descuento+"</td><td><input type='hidden' name='precio[]' value="+precio+">"+precio+"</td><td><input type='hidden' name='total[]' value="+total+">"+total+"</td><td><a class='button-danger btnEliminar'><i class='fa fa-remove'></i></a></td></tr>");
+            $("#venta > tbody").append("<tr><td><input type='hidden' name='productos_id[]' value="+producto1+">"+producto+"</td><td><input type='hidden' name='cantidad[]' value="+cantidad+">"+cantidad+"</td><td><input type='hidden' name='factura_descuento_id[]' value="+descuento1+">"+descuento+"</td><td><input type='hidden' name='precio[]' value="+precio+">"+precio+"</td><td><input type='hidden' name='total[]' value="+total+">"+total+"</td><td><a class='button-danger btnEliminar'><i class='fa fa-remove'></i></a></td></tr>");
             
             
             

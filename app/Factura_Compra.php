@@ -34,4 +34,11 @@ class Factura_Compra extends Model
     public function scopeFecha($query,$fecha){
         return $query->where('fecha_compra','LIKE',"%$fecha%");
     }
+    public function scopeEstado($query,$estado){
+        return $query->where('estado_factura','LIKE',"%$estado%");
+    }
+
+    public function scopeIntervalo($query,$inicio,$fin){
+        return $query->whereBetween('fecha_compra',[$inicio,$fin]);
+    }
 }

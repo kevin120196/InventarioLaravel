@@ -21,4 +21,14 @@ class Cliente extends Model
     public function proformas() {
         return $this->belongsTo('App\Proforma');     
     }
+
+    public function scopeNombre($query,$nombre){
+        return $query->where('nombre','LIKE',"%$nombre%");
+    }
+    public function scopeDireccion($query,$direccion){
+        return $query->where('direccion','LIKE',"%$direccion%");
+    }
+    public function scopeEmail($query,$correo_electronico){
+        return $query->where('correo_electronico','LIKE',"%$correo_electronico%");
+    }
 }

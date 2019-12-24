@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 use App\Proveedor;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
-
+use Illuminate\Http\proveedorRequest;
+use PDF;
+use Carbon\Carbon;
 class ProveedorController extends Controller
 {
     //
@@ -13,13 +15,21 @@ class ProveedorController extends Controller
         $this->middleware('auth');
     }
 
-    public function index(){
-        $proveedor=Proveedor::orderBy('id','ASC')->paginate(10);
+    public function index(Request $request){
+        $proveedor=Proveedor::orderBy('id','ASC')
+        ->nombre($request->nombre)
+        ->direccion($request->direccion)
+        ->email($request->correo_electronico)
+        ->paginate(10);
         return view('admin.proveedor.index')->with('proveedor',$proveedor);
     }
 
-    public function show($id)
-    {
+    public function show(){
+        $proveedor=Proveedor::orderBy('id','ASC')
+        ->paginate(10);
+        $pdf=PDF::loadView('admin.proveedor.show',['proveedor'=>$proveedor]);
+        $fileName='reporte_proveedores '. Carbon::now();
+        return $pdf->stream($fileName.'.pdf');
     }
 
     public function create(){
@@ -27,7 +37,7 @@ class ProveedorController extends Controller
     }
 
 
-    public function store(Request $request){
+    public function store(proveedorRequest $request){
         $proveedor = new Proveedor($request->all());
         $proveedor->save();
         Alert::success('Exito!','El proveedor ' .$proveedor->nombre_proveedor. ' ha sido registrado Correctamente');
@@ -40,7 +50,7 @@ class ProveedorController extends Controller
         return view('admin.proveedor.edit')->with('proveedor',$proveedor);
     }
 
-    public function update(Request $request,$id){
+    public function update(proveedorRequest $request,$id){
         $proveedor=Proveedor::find($id);
         $proveedor->fill($request->all());
         $proveedor->save();

@@ -1,6 +1,17 @@
 @extends('admin.template.template')
 @section('title','Crear Cliente')
 @section('contenido')
+@if ($errors->any())
+    <div class="alert danger">
+        
+    <span class="closebtn">&times;</span>
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li style="list-style: none">{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
     {!!Form::open(['route'=>'cliente.store','method'=>'POST','class'=>'formulario'])!!}
         <div class="cabeceraForm">
             <h1>Crear Cliente<h1>

@@ -28,8 +28,8 @@
     </div>
 
     <div class="input-contenedor input-100">
-                <i class="fa fa-user-plus icon"></i>
-                {!! Form::select('user_type',['Gerente'=>'Gerente','Venta'=>'Venta','Bodega'=>'Bodega'],null, ['placeholder'=>'Tipo de Usuario','required'])!!}
+            <i class="fa fa-user-plus icon"></i>
+            {!! Form::select('user_type',['Gerente'=>'Gerente','Venta'=>'Venta','Bodega'=>'Bodega'],null, ['placeholder'=>'Tipo de Usuario','required'])!!}
     </div>
 
     <div class="input-contenedor input-100">

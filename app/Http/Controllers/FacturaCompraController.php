@@ -11,6 +11,7 @@ use App\Producto;
 use Illuminate\Http\Request;
 use DB;
 use PDF;
+use Carbon\Carbon;
 use RealRashid\SweetAlert\Facades\Alert;
 class FacturaCompraController extends Controller
 {
@@ -21,15 +22,30 @@ class FacturaCompraController extends Controller
     }
     public function index(Request $request){
         
-        $facturacompra=Factura_Compra::codigo($request->codigo)->orderBy('id','ASC')
-        ->fecha($request->fecha)
-        ->paginate(3);
+
+        if($request->inicio && $request->fin != null){
+            $facturacompra=Factura_Compra::codigo($request->codigo)->orderBy('id','ASC')
+            ->estado($request->estado)
+            ->fecha($request->fecha)
+            ->intervalo($request->inicio,$request->fin)
+            ->paginate(3);
+        }else{
+            $facturacompra=Factura_Compra::codigo($request->codigo)->orderBy('id','ASC')
+            ->estado($request->estado)
+            ->fecha($request->fecha)
+            ->paginate(3);
+        }
+
+
         $facturacompra->each(function($facturacompra){
             $facturacompra->producto;
             $facturacompra->proveedores;
             $facturacompra->tipoFactura;
         });
-        return view('admin.compra.index')->with('facturacompra',$facturacompra);
+
+            return view('admin.compra.index')->with('facturacompra',$facturacompra);
+
+
         
     }
 
@@ -56,15 +72,12 @@ class FacturaCompraController extends Controller
         return view('admin.compra.show')->with('facturacompra',$facturacompra)->with('detalleFact',$detalleFact);
     }
 
-    public function getProductos(Request $request,$id){
-        
-        if($request->ajax()){
-            $producto=Producto::productos($id);
-            return response()->json($producto);
-        }
-            
+    public function getProductos(Request $request){
+        $producto=DB::table('productos')
+        ->where('proveedores_id',$request->proveedores_id)
+        ->pluck('descripcion','id');
+        return response()->json($producto);
     }
-
     public function create(){
         $productos=Producto::orderBy('id','ASC')
         ->paginate(10);
@@ -82,10 +95,38 @@ class FacturaCompraController extends Controller
 
     public function report($id){
         $facturacompra=Factura_compra::find($id);
-        $detalleFact=Detalle_Factura_Compra::orderBy('id','ASC')->where('facturas_compras_id','=',$id)->get();  
-        $pdf=PDF::loadView('admin.compra.show',['facturacompra'=>$facturacompra,'detalleFact'=>$detalleFact])->setPaper('a4','portrait');
+        $facturacompra->each(function($facturacompra){
+            $facturacompra->producto;
+            $facturacompra->proveedores;
+            $facturacompra->tipoFactura;
+        });
+        $detalleFact=DB::table('factura_producto_compra as fac')
+        ->join('productos as p', 'fac.productos_id_productos','=','p.id')
+        ->join('facturas_compras as f','fac.facturas_compras_id','=','f.id')
+        ->select('p.descripcion','fac.cantidad','fac.precio','fac.total')
+        ->where('fac.facturas_compras_id','=',$id)
+        ->get();
+        $pdf=PDF::loadView('admin.compra.report',['facturacompra'=>$facturacompra,'detalleFact'=>$detalleFact]);
         $fileName=$facturacompra->productos_id_productos;
         return $pdf->stream($fileName.'.pdf');
+        //return view('admin.compra.report')->with('facturacompra',$facturacompra)->with('detalleFact',$detalleFact);
+    }
+
+    public function reports(Request $request){
+        $facturacompra=Factura_Compra::orderBy('id','ASC')
+        ->get();
+
+        $facturacompra->each(function($facturacompra){
+            $facturacompra->producto;
+            $facturacompra->proveedores;
+            $facturacompra->tipoFactura;
+        });
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf=PDF::loadView('admin.compra.reports',['facturacompra'=>$facturacompra]);
+        $fileName='reportes_compra' .Carbon::Now();
+        return $pdf->stream($fileName.'.pdf');
+
+        //        return view('admin.compra.reports')->with('facturacompra',$facturacompra);
     }
 
 
@@ -119,7 +160,26 @@ class FacturaCompraController extends Controller
     
         } catch (\Throwable $th) {
             //throw $th;
+            dd($th);
             DB::rollBack();
         }
+    }
+
+    public function destroy($id)
+    {
+     $venta=Factura_Compra::findOrFail($id);
+        $venta->estado_factura='Anulada';
+        $venta->update();
+        Alert::error('Exito!','La Factura '.$venta->id .' ha sido anulada de forma Correcta!!');
+        return redirect()->route('compra.index');
+    }
+
+    public function devol($id)
+    {
+     $venta=Factura_Compra::findOrFail($id);
+        $venta->estado_factura='devolución';
+        $venta->update();
+        Alert::error('Exito!','La Factura '.$venta->id .' ha pasado a ser una devolución de forma Correcta!!');
+        return redirect()->route('compra.index');
     }
 }

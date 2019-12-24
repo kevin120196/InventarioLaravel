@@ -1,6 +1,17 @@
 @extends('admin.template.template')
 @section('title','Actualizar Marca')
 @section('contenido')
+@if ($errors->any())
+    <div class="alert danger">
+        
+    <span class="closebtn">&times;</span>
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li style="list-style: none">{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
     {!!Form::open(['route'=>['marcas.update',$marca],'method'=>'PUT','class'=>'formulario'])!!}
         <div class="cabeceraForm">
             <h1>Actualizar Marca<h1>

@@ -1,6 +1,17 @@
 @extends('admin.template.template')
 @section('title','Crear Productos')
 @section('contenido')
+@if ($errors->any())
+    <div class="alert danger">
+        
+    <span class="closebtn">&times;</span>
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li style="list-style: none">{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
     <div class="row">
         
         {!!Form::open(['route'=>['productos.update',$producto],'method'=>'PUT','class'=>'formulario'])!!}

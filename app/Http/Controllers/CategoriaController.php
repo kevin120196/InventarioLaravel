@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Categoria;
 use RealRashid\SweetAlert\Facades\Alert;
-
+use App\Http\Requests\categoriaRequest;
 
 class CategoriaController extends Controller
 {
@@ -26,7 +26,7 @@ class CategoriaController extends Controller
 
     }
 
-    public function store(Request $reques){
+    public function store(categoriaRequest $reques){
         $categoria=new Categoria($reques->all());
         $categoria->save();
         Alert::success('Exito!','La categoria ' . $categoria->nombre_categoria . ' ha sido creada con exito' );

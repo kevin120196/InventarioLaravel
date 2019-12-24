@@ -17,7 +17,7 @@ class CreateFacturasVentasTable extends Migration
             $table->increments('id');
             $table->date('fecha_factura');
             //$table->enum('tipos_factura',['Credito','Contado']);
-            $table->enum('estado_factura',['Cancelada','Pendiente','Anulada']);
+            $table->enum('estado_factura',['Pagada','Pendiente','Anulada','Devolución']);
             //claves foraneas
             //$table->integer('estado_id')->unsigned();
             $table->integer('tipos_factura_id')->unsigned();
@@ -31,6 +31,7 @@ class CreateFacturasVentasTable extends Migration
             $table->foreign('descuentos_clientes_id')->references('id')->on('descuentos_clientes')->onDelete('cascade');
             $table->foreign('vendedores_id')->references('id')->on('vendedores')->onDelete('cascade');
             //
+            $table->double('totalgeneral');
             $table->timestamps();
         });
 
@@ -62,7 +63,6 @@ class CreateFacturasVentasTable extends Migration
             //$table->foreign('productos_categoria_id')->references('id')->on('productos')->onDelete('cascade');
             //$table->foreign('productos_proveedores_id')->references('id')->on('productos')->onDelete('cascade');
             //
-            $table->double('totalgeneral');
             $table->timestamps();
 
         });

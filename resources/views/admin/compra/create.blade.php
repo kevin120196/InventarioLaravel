@@ -1,6 +1,17 @@
 @extends('admin.template.template')
 @section('title','Crear Compra')
 @section('contenido')
+@if ($errors->any())
+    <div class="alert danger">
+        
+    <span class="closebtn">&times;</span>
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li style="list-style: none">{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
     {!!Form::open(['route'=>'compra.store','Method'=>'POST','class'=>'formulario'])!!}
         <div class="cabeceraForm">
             <h1>Nueva Compra<h1>
@@ -28,7 +39,7 @@
 
             <div class="input-contenedor input-100">
                 <i class="icon"><a id="myBtn" data-toggle="modal" data-target="#myModal"><img src="{{asset('img/caja.png')}}" alt="Usted puede realizar una Busqueda"></a></i>
-                {!! Form::select('productos_id_productos',$producto,['placeholder'=>'Selecciona'], ['id'=>"productos_id_productos",'class'=>'selectproduc']) !!}
+                {!! Form::select('productos_id_productos',$producto,['placeholder'=>'Selecciona'],['id'=>"productos_id_productos",'class'=>'selectproduc']) !!}
             </div>
             
 
@@ -136,10 +147,6 @@
         });
         $("#venta > tbody").append("<input type='hidden' name='totalgeneral' id='totalgeneral' value="+totalgeneral+">")
     }
-
-
-    
-    
 </script>
 
  

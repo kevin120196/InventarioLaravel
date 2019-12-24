@@ -5,17 +5,22 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Cliente;
 use App\Descuento_Cliente;
-
+use PDF;
+use App\Http\Requests\clienteRequest;
 use RealRashid\SweetAlert\Facades\Alert;
-
+use Carbon\Carbon;
 class ClienteController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
     }
-    public function index(){
-        $cliente=Cliente::orderBy('id','ASC')->paginate(10);
+    public function index(Request $request){
+        $cliente=Cliente::orderBy('id','ASC')
+        ->nombre($request->nombre)
+        ->direccion($request->direccion)
+        ->email($request->correo_electronico)
+        ->paginate(10);
         $cliente->each(function($cliente){
             $cliente->descuento;
         });
@@ -29,12 +34,23 @@ class ClienteController extends Controller
     }
 
 
-    public function store(Request $request){
+    public function store(clienteRequest $request){
         $cliente = new Cliente($request->all());
         $cliente->save();
         Alert::success('Exito!','El cliente ' .$cliente->nombre. ' ha sido registrado Correctamente');
         return redirect()->route('cliente.index');
 
+    }
+
+    public function show(){
+        $cliente=Cliente::orderBy('id','ASC')
+        ->paginate(10);
+        $cliente->each(function($cliente){
+            $cliente->descuento;
+        });
+        $pdf=PDF::loadView('admin.cliente.show',['cliente'=>$cliente]);
+        $fileName='reporte_clientes '. Carbon::now();
+        return $pdf->stream($fileName.'.pdf');
     }
 
     public function edit($id){
@@ -43,7 +59,7 @@ class ClienteController extends Controller
         return view('admin.cliente.edit')->with('cliente',$cliente)->with('descuentos',$descuentos);
     }
 
-    public function update(Request $request,$id){
+    public function update(clienteRequest $request,$id){
         $cliente=Cliente::find($id);
         $cliente->fill($request->all());
         $cliente->save();

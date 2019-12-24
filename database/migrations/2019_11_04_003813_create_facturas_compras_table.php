@@ -17,7 +17,7 @@ class CreateFacturasComprasTable extends Migration
             $table->increments('id');
             $table->date('fecha_compra');
             //$table->enum('tipos_factura',['Credito','Contado']);
-            $table->enum('estado_factura',['Cancelada','Pendiente','Anulada']);            
+            $table->enum('estado_factura',['Pagada','Pendiente','Anulada','Devolución']);            
             //claves foraneas
             $table->integer('tipo_factura_id')->unsigned();
             $table->integer('proveedores_id')->unsigned();

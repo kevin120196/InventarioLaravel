@@ -15,6 +15,7 @@ use App\Producto;
 use DB;
 use PDF;
 use RealRashid\SweetAlert\Facades\Alert;
+use Carbon\Carbon;
 class FacturaVentaController extends Controller
 {
     //
@@ -24,12 +25,24 @@ class FacturaVentaController extends Controller
     }
 
     public function index(Request $request){
-        $productos=Producto::orderBy('id','ASC')->paginate(5);
-        $venta= Factura_Venta::orderBy('id','DESC')
-        ->codigo($request->codigo)
-        ->fecha($request->fecha)
-        ->estado($request->estado)
-        ->paginate(5);
+        if($request->inicio && $request->fin != null){
+            $productos=Producto::orderBy('id','ASC')->paginate(5);
+            $venta= Factura_Venta::orderBy('id','DESC')
+            ->codigo($request->codigo)
+            ->fecha($request->fecha)
+            ->estado($request->estado)
+            ->intervalo($request->inicio,$request->fin)
+            ->paginate(5);            
+        }else{
+            $productos=Producto::orderBy('id','ASC')->paginate(5);
+            $venta= Factura_Venta::orderBy('id','DESC')
+            ->codigo($request->codigo)
+            ->fecha($request->fecha)
+            ->estado($request->estado)
+            ->paginate(5);
+            
+        }
+
         $venta->each(function($venta){
             $venta->clientes;
             $venta->descuentos_clientes;
@@ -104,19 +117,35 @@ class FacturaVentaController extends Controller
 //       return view('admin.venta.report')->with('facturaventa',$facturaventa)->with('detalle',$detalle);
     }
 
+    public function reports(){
+        $venta= Factura_Venta::orderBy('id','DESC')
+        ->get();
+        $venta->each(function($venta){
+            $venta->clientes;
+            $venta->descuentos_clientes;
+            $venta->vendedores;
+            $venta->productos;
+        });
+        $pdf=PDF::loadView('admin.venta.reports',['venta'=>$venta]);
+        $fileName='reportes_venta' .Carbon::Now();
+        return $pdf->stream($fileName.'.pdf');
+        //return view('admin.compra.report')->with('facturacompra',$facturacompra)->with('detalleFact',$detalleFact);
+    }
+
     public function store(Request $request){
         $venta=new Factura_Venta();
         
         DB::beginTransaction();
         try {
-                $venta->totalgeneral=$request->totalgeneral;
+            //dd($request->all());
                 $venta->fecha_factura=$request->fecha_factura;
                 $venta->tipos_factura_id=$request->tipos_factura_id;
                 $venta->estado_factura=$request->estado_factura;
                 $venta->clientes_id=$request->clientes_id;
                 $venta->descuentos_clientes_id=$request->descuentos_clientes_id;
                 $venta->vendedores_id=$request->vendedores_id;        
-                $contador= count(request()->marca_id);
+                $venta->totalgeneral=$request->totalgeneral;
+                $contador= count(request()->productos_id);
                 $venta->save();
                 //dd($request->producto_cantidad_id[0]);
                 
@@ -127,8 +156,8 @@ class FacturaVentaController extends Controller
                     $detalle->cantidad=$request->cantidad[$i];
                     $detalle->precio=$request->precio[$i];
                     $detalle->total=$request->total[$i];
-                    $detalle->venta_id=$venta->id;
-                    $detalle->producto_id=$request->marca_id[$i];
+                    $detalle->ventas_id=$venta->id;
+                    $detalle->productos_id=$request->productos_id[$i];
                     
                 $detalle->save();
                 }
@@ -145,5 +174,23 @@ class FacturaVentaController extends Controller
         }
 
         
+    }
+
+    public function destroy($id)
+    {
+     $venta=Factura_Venta::findOrFail($id);
+        $venta->estado_factura='Anulada';
+        $venta->update();
+        Alert::error('Exito!','La Factura '.$venta->id .' ha sido anulada de forma Correcta!!');
+        return redirect()->route('ventas.index');
+    }
+
+    public function devol($id)
+    {
+     $venta=Factura_Venta::findOrFail($id);
+        $venta->estado_factura='devolución';
+        $venta->update();
+        Alert::error('Exito!','La Factura '.$venta->id .' ha pasado a ser una devolución de forma Correcta!!');
+        return redirect()->route('ventas.index');
     }
 }

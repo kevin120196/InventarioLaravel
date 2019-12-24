@@ -9,8 +9,8 @@
                                 </div>
 
                                 <div style="border: none; width:100%;" class="input-contenedor input-100">
-                                    <a class="button-primary" href="#">Realizar Venta</a>
-                                    <a class="button-primary" href="#">Realizar Compra</a>
+                                    <a class="button-primary" href="{{route('ventas.create')}}">Realizar Venta</a>
+                                    <a class="button-primary" href="{{route('compra.create')}}">Realizar Compra</a>
                                 </div>
                             </div>
                         </form>

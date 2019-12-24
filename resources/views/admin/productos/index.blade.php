@@ -10,18 +10,18 @@
             <div class="row">
                 <div class="col-md-12 col-lg-12">
                     <div class="input-contenedor input-30 input-100" style="border: none;">
-                        <a href="{{route('productos.create')}}" class="button-primary">Nuevo Productos</a>
+                        <a href="{{route('productos.create')}}" class="button-primary">Nuevo Producto</a>
                     </div>
                     {!! Form::open(['id'=>'inputcodigo','route'=>'productos.index','method'=>'GET']) !!}
                     <div class="input-contenedor input-30 input-100 buscar-input">
-                        <i class="fa fa-search icon"></i> <input type="text" name="codigo" id="codigo" placeholder="Codigo">
+                        <i class="fa fa-search icon"></i> <input type="text" name="codigo" id="codigo" placeholder="Código">
                     </div>
 
                     {!! Form::close() !!}
 
                     {!! Form::open(['id'=>'inputbuscar','route'=>'productos.index','method'=>'GET','style'=>'display:none']) !!}
                     <div class="input-contenedor input-30 input-100 buscar-input" >
-                        <i class="fa fa-search icon"></i> <input type="text" name="marca" id="marca" placeholder="Marca">
+                        <i class="fa fa-search icon"></i> <input type="text" name="descripcion" id="descripcion" placeholder="Descripción">
                     </div>
 
                     {!! Form::close() !!}
@@ -34,9 +34,9 @@
                     {!! Form::close() !!}
                     <div class="input-contenedor input-30 input-100" style="padding: 13px; margin: 20px auto;">
                         
-                        <input type="radio" style="margin-left: 1em" name="radio" value="1" id=""  onchange="mostrar(this.value);"> codigo
-                        <input type="radio" style="margin-left: 2em" name="radio" value="2" id="" onchange="mostrar(this.value);"> Marca
-                        <input type="radio" style="margin-left: 1em" name="radio" value="3" id="" onchange="mostrar(this.value);"> Estante
+                        <input type="radio" style="margin-left: 1em" name="radio" value="1" id=""  onchange="mostrar(this.value);"> Código
+                        <input type="radio" style="margin-left: 2em" name="radio" value="2" id="" onchange="mostrar(this.value);"> Descripción
+                        <input type="radio" style="margin-left: 5em" name="radio" value="3" id="" onchange="mostrar(this.value);"> Estante
                     </div>
                 </div>
 
@@ -46,8 +46,8 @@
                     <table class="productos">
                         <thead>
                             <tr>
-                                <th>Codigo Original</th>
-                                <th>Codigo Alterno</th>
+                                <th>Código Original</th>
+                                <th>Código Alterno</th>
                                 <th>Existencia</th>
                                 <th>Precio compra</th>
                                 <th>Precio Venta</th>
@@ -80,11 +80,11 @@
                                     <td>
                                         <a href="{{route('productos.edit',$producto->id)}}" class="button-warning"><i class="fa fa-edit"></i></a>
                                         <a href="{{route('admin.productos.destroy',$producto->id)}}" class="button-danger" onclick="return confirm('¿Seguro que deseas eliminar este registro?')"><i class="fa fa-trash"></i></a>
-                                        <a id="myBtn" class="button-show" data-toggle="modal" data-target="#myModal"><i class="fa fa-eye"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach
                         </tbody>
+               
                     </table>
                     {!!$productos->render()!!}
             </div>

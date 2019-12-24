@@ -46,4 +46,9 @@ class Factura_Venta extends Model
     public function scopeEstado($query,$estado){
         return $query->where('estado_factura','LIKE',"%$estado%");
     }
+
+    
+    public function scopeIntervalo($query,$inicio,$fin){
+        return $query->whereBetween('fecha_factura',[$inicio,$fin]);
+    }
 }

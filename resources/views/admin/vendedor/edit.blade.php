@@ -1,6 +1,17 @@
 @extends('admin.template.template')
 @section('title','Editar Vendedor')
 @section('contenido')
+@if ($errors->any())
+    <div class="alert danger">
+        
+    <span class="closebtn">&times;</span>
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li style="list-style: none">{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
     {!!Form::open(['route'=>['vendedores.update',$vendedor],'method'=>'PUT','class'=>'formulario'])!!}
         <div class="cabeceraForm">
             <h1>Editar Vendedor<h1>

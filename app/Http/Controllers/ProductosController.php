@@ -7,6 +7,8 @@ use App\Categoria;
 use App\Producto;
 use App\Marca;
 use App\Proveedor;
+use PDF;
+use Carbon\Carbon;
 use RealRashid\SweetAlert\Facades\Alert;
 class ProductosController extends Controller
 {
@@ -18,7 +20,7 @@ class ProductosController extends Controller
 
     public function index(Request $request){
         $productos=Producto::codigo($request->codigo)->orderBy('id','ASC')
-        ->marcas($request->marca)
+        ->descripcion($request->descripcion)
         ->estante($request->estante)
         ->paginate(10);
         $productos->each(function($productos){
@@ -29,6 +31,20 @@ class ProductosController extends Controller
         return view('admin.productos.index')->with('productos',$productos);
          
     }
+
+    public function show(){
+        $productos=Producto::orderBy('id','ASC')
+        ->paginate(10);
+        $productos->each(function($productos){
+            $productos->categoria;
+            $productos->marca;
+            $productos->proveedor;
+        });
+        $pdf=PDF::loadView('admin.productos.show',['productos'=>$productos])->setPaper('A4', 'landscape');;
+        $fileName='reporte_productos '. Carbon::now();
+        return $pdf->stream($fileName.'.pdf');
+    }
+
 
 
     public function create(){

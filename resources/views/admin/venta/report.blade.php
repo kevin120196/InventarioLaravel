@@ -139,7 +139,7 @@
                 }
                 
                 th,td{
-                padding: 15px;
+                padding: 9px;
                 text-transform: capitalize;
                 font-family: 'Montserrat', sans-serif;
                 }

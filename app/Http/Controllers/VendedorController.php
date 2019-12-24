@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Vendedor;
 use Illuminate\Http\Request;
+use Illuminate\Http\vendedoresRequest;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class VendedorController extends Controller
@@ -12,8 +13,12 @@ class VendedorController extends Controller
     {
         $this->middleware('auth');
     }
-    public function index(){
-        $vendedor=Vendedor::orderBy('id','ASC')->paginate(3);
+    public function index(Request $request){
+        $vendedor=Vendedor::orderBy('id','ASC')
+        ->nombre($request->nombre)
+        ->direccion($request->direccion)
+        ->email($request->correo_electronico)
+        ->paginate(3);
         return view('admin.vendedor.index')->with('vendedor',$vendedor);
         
     }
@@ -23,7 +28,7 @@ class VendedorController extends Controller
     }
 
 
-    public function store(Request $request){
+    public function store(vendedoresRequest $request){
         $vendedores = new Vendedor($request->all());
         $vendedores->save();
         Alert::success('Exito!','El Vendedor ' .$vendedores->nombre_vendedor. ' ha sido registrado Correctamente');
@@ -36,7 +41,7 @@ class VendedorController extends Controller
         return view('admin.vendedor.edit')->with('vendedor',$vendedor);
     }
 
-    public function update(Request $request,$id){
+    public function update(vendedoresRequest $request,$id){
         $vendedor=Vendedor::find($id);
         $vendedor->fill($request->all());
         $vendedor->save();

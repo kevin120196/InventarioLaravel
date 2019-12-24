@@ -26,4 +26,12 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function Gerente(){
+        return $this->user_type === 'Gerente';
+    }
+
+    public function Vendedor(){
+        return $this->user_type === 'Venta';
+    }
 }

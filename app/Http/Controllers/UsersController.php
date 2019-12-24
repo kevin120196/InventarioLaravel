@@ -47,6 +47,7 @@ class UsersController extends Controller
     {
         //
         $user=new User($request->all());
+        $user->password=bcrypt($request->password);
         $user->save();
         Alert::success('Exito!', 'El usuario ' .$user->name. ' ha sido registrado de forma exitosa');
         return redirect()->route('usuarios.index');

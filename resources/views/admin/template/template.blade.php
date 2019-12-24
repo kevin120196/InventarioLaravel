@@ -45,44 +45,12 @@
             <div class="content-all">
                     <input type="checkbox" name="" id="check">          
 
-                    <nav class="menu">
-                            <ul>
-                                <li><i class="fa fa-home"></i> Inicio</li>
-                                <li><i class="fa fa-users"></i> <a href="{{route('usuarios.index')}}">Usuario</a></li>
-
-                                <li><i><img src="{{asset('img/categoria.png')}}" alt=""></i> <a href="{{ route('categorias.index')}}">Categorias</a></li>
-                                <li><i><img src="{{asset('img/repuesto.png')}}" alt=""></i> <a href="{{ route('marcas.index')}}">Marcas</a></li>
-                                <li><i><img src="{{asset('img/cajas.png')}}" alt=""></i> <a href="{{ route('productos.index')}}">Productos</a></li>
-                                <li><i><img src="{{asset('img/inventario.png')}}" alt=""></i> <a href="{{route('proveedores.index')}}">Proveedores</a></li>
-                                <li><i><img src="{{asset('img/clientes (1).png')}}" alt=""></i> <a href="{{route('cliente.index')}}">Clientes</a></li>
-                                <li><i><img src="{{asset('img/vendedor.png')}}" alt=""></i> <a href="{{route('vendedores.index')}}">Vendedores</a></li>
-                                <li><i><img src="{{asset('img/compras.png')}}" alt=""></i> <a href="#">Compras</a>
-                                    <ul>
-                                        <li><i class="material-icons">library_add</i><a href="{{route('compra.create')}}"> Nueva Compra</a></li>
-                                        <li><i><img src="{{asset('img/Factura.png')}}" alt=""></i> <a href="{{route('compra.index')}}"> Detalles Compras</a></li>
-                                    </ul>
-                                </li>
-                                <li><i><img src="{{asset('img/camion-de-reparto.png')}}" alt=""></i> <a href="{{route('ventas.index')}}">Ventas</a>
-                                    <ul>
-                                        <li><i class="material-icons">library_add</i><a href="{{ route('ventas.create')}}"> Nueva Venta</a></li>
-                                        <li><i><img src="{{asset('img/Factura.png')}}" alt=""></i> <a href="{{route('ventas.index')}}"> Detalles Ventas</a></li>
-                                    </ul>
-                                </li>
-                                <li id="user">                    
-                                        <i class="fa fa-user"></i>  {{Auth::user()->name}}
-                                            <span class="fa fa-arrow-down"></span>
-                                    <ul>
-                                        <hr>
-                                        <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"> <i class="fa fa-sign-out"></i> Cerrar Sesion</a>
-
-                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
-                                        </li>
-                                        <li><i class="fa fa-cog"></i> Configuracion</li>
-                                    </ul>
-                                </li>
-                            </ul>
-
-                        </nav>
+                    @if (Auth::user()->Gerente())
+                        @include('admin.template.menuGerente')
+                    @else
+                        @include('admin.template.menuVendedor')
+                    @endif
+                    
                 <article>
                     <div class="container">
                         @yield('contenido')    
@@ -108,6 +76,7 @@
     <script src="{{asset('js/dropdown.js')}}"></script>
     <script src="{{asset('js/datatables.js')}}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.js"></script>
+    
     <script>
 
         
@@ -156,7 +125,28 @@
                         "search":"Buscar: "
                     }
                 });
-            } );
+            });
+    </script>
+
+    <script>
+            var close = document.getElementsByClassName("closebtn");
+            var i;
+            
+            // Loop through all close buttons
+            for (i = 0; i < close.length; i++) {
+              // When someone clicks on a close button
+              close[i].onclick = function(){
+            
+                // Get the parent of <span class="closebtn"> (<div class="alert">)
+                var div = this.parentElement;
+            
+                // Set the opacity of div to 0 (transparent)
+                div.style.opacity = "0";
+            
+                // Hide the div after 600ms (the same amount of milliseconds it takes to fade out)
+                setTimeout(function(){ div.style.display = "none"; }, 600);
+              }
+            }
     </script>
     </body>
 

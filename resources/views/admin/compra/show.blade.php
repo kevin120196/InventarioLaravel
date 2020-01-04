@@ -1,5 +1,5 @@
 @extends('admin.template.template')
-@section('title','Detalle Compra')
+@section('title','Factura de Compra N°: '.$facturacompra->id)
 @section('contenido')
 {!!Form::open(['route'=>'compra.index','Method'=>'POST','class'=>'formulario'])!!}
         <div class="cabeceraForm">
@@ -59,9 +59,16 @@
                 </tfoot>
             </table>
             <div class="container">
-                <a href="{{route('compra.index')}}" class="button-primary">
+                @if (Auth::user()->Vendedor())
+                <a href="{{route('compras.index')}}" class="button-primary">
                         <i class="fa fa-undo"></i>
                 </a>
+                @endif
+                @if (Auth::user()->Gerente())
+                    <a href="{{route('compra.index')}}" class="button-primary">
+                            <i class="fa fa-undo"></i>
+                    </a>
+                @endif
             </div>
     </div>
     {!!Form::close()!!}    

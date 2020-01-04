@@ -6,6 +6,7 @@
             <h1>Crear Cliente<h1>
         </div>
         <div class="contenedor">
+            {!! csrf_field() !!}
             <div class="input-contenedor input-60 input-100">
                 <i class="fa fa-user icon" aria-hidden="true"></i>
                 {!! Form::text('nombre', $cliente->nombre, ['placeholder'=>'Nombre Cliente'])!!}

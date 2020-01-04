@@ -163,9 +163,17 @@
                 color: #606774;
                 font-weight: bold;
                 }
+
+                .etiqueta{
+                    font-size: 12px;
+                }
+
+                .label6{
+                    margin-left: 13.5em;
+                }
                 
     </style>
-    <title>Document</title>
+    <title>Factura de Compra <?php echo $facturacompra->id?></title>
 </head>
 <body>
    
@@ -176,6 +184,10 @@
                 </div>
                 <div class="col-md-12">
                 <b></b>
+                        <div class="form-group col-6">
+                            <label for=""><b>Nº: </b></label>
+                            <label for="" class="label6"><?php echo $facturacompra->id?></label>
+                        </div>
                         <div class="form-group col-6">
                                 <label for=""><b>Proveedor: </b></label>
                                 <label for="" class="label1"><?php echo $facturacompra->proveedores->nombre_proveedor?></label>
@@ -228,6 +240,8 @@
                         </tr>
                     </tfoot>
                 </table>
+                <label for="" class=""><b class="etiqueta">Impreso por: {{Auth::user()->name}} </b></label><br>
+                <label for="" class=""><b class="etiqueta">Elaborado: <?php echo $dia ?></b></label>
         </div>
 </body>
 </html>

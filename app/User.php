@@ -34,4 +34,9 @@ class User extends Authenticatable
     public function Vendedor(){
         return $this->user_type === 'Venta';
     }
+
+    public function scopeName($query,$name){
+        return $query->where('name','LIKE',"%$name%");
+    }
+
 }

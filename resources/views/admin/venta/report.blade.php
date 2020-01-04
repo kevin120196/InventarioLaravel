@@ -60,6 +60,10 @@
             .label5{
                 margin-left: 11em;
             }
+
+            .label6{
+                margin-left: 13.5em;
+            }
             
             
             .cabeceraForm{
@@ -163,9 +167,12 @@
                 color: #606774;
                 font-weight: bold;
                 }
+                .etiqueta{
+                    font-size: 12px;
+                }
                 
     </style>
-    <title>Document</title>
+    <title>Factura de Venta N°: <?php echo $facturaventa->id?></title>
 </head>
 <body>
    
@@ -176,6 +183,10 @@
                 </div>
                 <div class="col-md-12">
                 <b></b>
+                        <div class="form-group col-6">
+                            <label for=""><b>Nº: </b></label>
+                            <label for="" class="label6"><?php echo $facturaventa->id?></label>
+                        </div>
                         <div class="form-group col-6">
                                 <label for=""><b>Vendedor: </b></label>
                                 <label for="" class="label1"><?php echo $facturaventa->vendedores->nombre_vendedor?></label>
@@ -199,8 +210,6 @@
                                 <label for=""><b>Cliente: </b></label>    
                                 <label for="" class="label5"><?php echo $facturaventa->clientes->nombre?></label>
                         </div>
-
-                        <br>
                         <div class="form-group col-6">
                                 <label for=""><b>Firma de Vendedor: </b></label>    
                                 <label for="" class="label2">____________________________</label>
@@ -209,7 +218,7 @@
             </form>
         
         
-            <div class="main-container" style="overflow: hidden; margin-left: 1px">
+            <div class="main-container" style="overflow: hidden; margin-left: 1px;margin-top: 1px">
                     <table>
                         <thead>
                             <tr>
@@ -217,6 +226,7 @@
                                 <th>Cantidad</th>
                                 <th>precio</th>
                                 <th>Descuento</th>
+                                <th>IVA</th>
                                 <th>SubTotal</th>
                                
                             </tr>
@@ -228,8 +238,8 @@
                                     <td>{{$detalles->cantidad}}</td>
                                     <td>{{$detalles->precio}}</td>
                                     <td>{{$facturaventa->descuentos_clientes->descuento_cliente}}</td>
+                                    <td>{{$detalles->iva}}</td>
                                     <td>{{$detalles->total}}</td>
-                                    
                                 </tr>
                                
                             @endforeach
@@ -242,6 +252,8 @@
                         </tfoot>
                     </table>
                 </div>
-        
+                <label for="" class=""><b class="etiqueta">Impreso por: {{Auth::user()->name}} </b></label><br>
+                <label for="" class=""><b class="etiqueta">Elaborado el: <?php echo $dia ?></b></label>
+    
 </body>
 </html>

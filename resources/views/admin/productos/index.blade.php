@@ -9,8 +9,9 @@
 
             <div class="row">
                 <div class="col-md-12 col-lg-12">
+                    @if (Auth::user()->Gerente())
                     <div class="input-contenedor input-30 input-100" style="border: none;">
-                        <a href="{{route('productos.create')}}" class="button-primary">Nuevo Producto</a>
+                        <a href="{{route('productos.create')}}" target="_blank" class="button-primary">Nuevo Producto</a>
                     </div>
                     {!! Form::open(['id'=>'inputcodigo','route'=>'productos.index','method'=>'GET']) !!}
                     <div class="input-contenedor input-30 input-100 buscar-input">
@@ -38,6 +39,38 @@
                         <input type="radio" style="margin-left: 2em" name="radio" value="2" id="" onchange="mostrar(this.value);"> Descripción
                         <input type="radio" style="margin-left: 5em" name="radio" value="3" id="" onchange="mostrar(this.value);"> Estante
                     </div>
+                    @endif
+                    @if (Auth::user()->Vendedor())
+                    <div class="input-contenedor input-30 input-100" style="border: none;">
+                        <a href="{{route('productos.create')}}" target="_blank" class="button-primary">Nuevo Producto</a>
+                    </div>
+                    {!! Form::open(['id'=>'inputcodigo','route'=>'productos.index','method'=>'GET']) !!}
+                    <div class="input-contenedor input-30 input-100 buscar-input">
+                        <i class="fa fa-search icon"></i> <input type="text" name="codigo" id="codigo" placeholder="Código">
+                    </div>
+
+                    {!! Form::close() !!}
+
+                    {!! Form::open(['id'=>'inputbuscar','route'=>'productos.index','method'=>'GET','style'=>'display:none']) !!}
+                    <div class="input-contenedor input-30 input-100 buscar-input" >
+                        <i class="fa fa-search icon"></i> <input type="text" name="descripcion" id="descripcion" placeholder="Descripción">
+                    </div>
+
+                    {!! Form::close() !!}
+
+                    {!! Form::open(['id'=>'inputestante','route'=>'productos.index','method'=>'GET','style'=>'display:none']) !!}
+                    <div class="input-contenedor input-30 input-100 buscar-input" >
+                        <i class="fa fa-search icon"></i> <input type="text" name="estante" id="estante" placeholder="Estante">
+                    </div>
+
+                    {!! Form::close() !!}
+                    <div class="input-contenedor input-30 input-100" style="padding: 13px; margin: 20px auto;">
+                        
+                        <input type="radio" style="margin-left: 1em" name="radio" value="1" id=""  onchange="mostrar(this.value);"> Código
+                        <input type="radio" style="margin-left: 2em" name="radio" value="2" id="" onchange="mostrar(this.value);"> Descripción
+                        <input type="radio" style="margin-left: 5em" name="radio" value="3" id="" onchange="mostrar(this.value);"> Estante
+                    </div>
+                    @endif
                 </div>
 
             </div>
@@ -76,11 +109,18 @@
                                     <td>{{$producto->marca->nombre_marca}}</td>
                                     <td>{{$producto->categoria->nombre_categoria}}</td>
                                     <td>{{$producto->proveedor->nombre_proveedor}}</td>
-                                    
+                                    @if (Auth::user()->Vendedor())
                                     <td>
                                         <a href="{{route('productos.edit',$producto->id)}}" class="button-warning"><i class="fa fa-edit"></i></a>
                                         <a href="{{route('admin.productos.destroy',$producto->id)}}" class="button-danger" onclick="return confirm('¿Seguro que deseas eliminar este registro?')"><i class="fa fa-trash"></i></a>
                                     </td>
+                                    @endif
+                                    @if (Auth::user()->Gerente())
+                                    <td>
+                                        <a href="{{route('productos.edit',$producto->id)}}" class="button-warning"><i class="fa fa-edit"></i></a>
+                                        <a href="{{route('admin.productos.destroy',$producto->id)}}" class="button-danger" onclick="return confirm('¿Seguro que deseas eliminar este registro?')"><i class="fa fa-trash"></i></a>
+                                    </td>
+                                    @endif
                                 </tr>
                                 @endforeach
                         </tbody>

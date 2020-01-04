@@ -9,8 +9,9 @@
 
             <div class="row">
                 <div class="col-md-12 col-lg-12">
+                    @if (Auth::user()->Gerente())
                     <div class="input-contenedor input-30 input-100" style="border: none;">
-                        <a href="{{route('ventas.create')}}" class="button-primary">Nueva Venta</a>
+                        <a href="{{route('ventas.create')}}" target="_blank" class="button-primary">Nueva Venta</a>
                     </div>
                     {!! Form::open(['id'=>'inputcodigo','route'=>'ventas.index','method'=>'GET']) !!}
                     <div class="input-contenedor input-30 input-100 buscar-input">
@@ -53,6 +54,54 @@
                         <input type="radio" style="margin-left: 1em" name="radio" value="3" id="" onchange="mostrar(this.value);"> Estado
                         <input type="radio" style="margin-left: 1em" name="radio" value="4" id=""  onchange="mostrar(this.value);"> Intervalos de Fecha
                     </div>
+                    @endif
+
+                    @if (Auth::user()->Vendedor())
+                    <div class="input-contenedor input-30 input-100" style="border: none;">
+                        <a href="{{route('venta.create')}}" target="_blank" class="button-primary">Nueva Venta</a>
+                    </div>
+                    {!! Form::open(['id'=>'inputcodigo','route'=>'venta.index','method'=>'GET']) !!}
+                    <div class="input-contenedor input-30 input-100 buscar-input">
+                        <i class="fa fa-search icon"></i> 
+                        {!! Form::number('codigo', null, ['placeholder'=>'N° Factura']) !!}
+                    </div>
+                    {!! Form::close() !!}
+
+                    {!! Form::open(['id'=>'inputbuscar','route'=>'venta.index','method'=>'GET','style'=>'display:none']) !!}
+                    <div class="input-contenedor input-30 input-100 buscar-input" >
+                        <i class="fa fa-search icon"></i>
+                        
+                        {!! Form::text('fecha', null, ['placeholder'=>'Fecha de Facturación']) !!}
+                    </div>
+
+                    {!! Form::close() !!}
+
+                    {!! Form::open(['id'=>'inputestante','route'=>'venta.index','method'=>'GET','style'=>'display:none']) !!}
+                    <div class="input-contenedor input-30 input-100 buscar-input" >
+                        <i class="fa fa-search icon"></i> <input type="text" name="estado" id="estado" placeholder="Estados Factura">
+                    </div>
+
+                    {!! Form::close() !!}
+                    {!! Form::open(['id'=>'inputinvervalos','route'=>'venta.index','method'=>'GET','style'=>'display:none','target'=>'_blank']) !!}
+                    <div class="input-contenedor input-30 input-100 buscar-input" >
+                        <i class="fa fa-search icon"></i> 
+                        <input type="date" name="inicio" id="inicio" placeholder="Inicio">
+                        
+                    {!! Form::open(['id'=>'inputinvervalos1','route'=>'venta.index','method'=>'GET','style'=>'display:none','target'=>'_blank']) !!}
+                        
+                    <i class="fa fa-search icon"></i> 
+                        <input type="date" name="fin" id="fin" placeholder="Fin">
+                        <button type="submit" class="button-show" style="width: 100%"><i class="fa fa-search"></i></button>
+                        {!! Form::close() !!}
+                    </div>
+                    {!! Form::close() !!}
+                    <div class="input-contenedor input-30 input-100" style="padding: 13px; margin: 20px auto;">
+                        <input type="radio" style="margin-left: 1em" name="radio" value="1" id=""  onchange="mostrar(this.value);"> Código
+                        <input type="radio" style="margin-left: 2em" name="radio" value="2" id="" onchange="mostrar(this.value);"> Fecha
+                        <input type="radio" style="margin-left: 1em" name="radio" value="3" id="" onchange="mostrar(this.value);"> Estado
+                        <input type="radio" style="margin-left: 1em" name="radio" value="4" id=""  onchange="mostrar(this.value);"> Intervalos de Fecha
+                    </div>
+                    @endif
                 </div>
 
                 <div class="main-container">
@@ -82,11 +131,16 @@
                                     <td>{{$ventas->vendedores->nombre_vendedor}}</td>
                                     <td>{{$ventas->totalgeneral}}</td>
                                     <td>
-                                        <a href="{{route('ventas.show',$ventas->id)}}" class="button-detail"><i class="fa fa-list"></i></a>
-                                        <a href="{{route('admin.ventas.report',$ventas->id)}}" class="button-show"><i class="fa fa-print"></i></a>
                                         @if (Auth::user()->Gerente())
-                                        <a href="{{route('admin.ventas.destroy',$ventas->id)}}" class="button-danger" onclick="return confirm('¿Seguro que deseas Anular la Factura?')"><i class="fa fa-window-close"></i></a>
-                                        <a href="{{route('admin.ventas.devol',$ventas->id)}}" class="button-warning" onclick="return confirm('¿Seguro que deseas pasar a devolucion la Factura?')"><i class="fa fa-undo"></i></a>
+                                        <a target="_blank" href="{{route('ventas.show',$ventas->id)}}" class="button-detail"><i class="fa fa-list"></i></a>
+                                        <a target="_blank" href="{{route('admin.ventas.report',$ventas->id)}}" class="button-show"><i class="fa fa-print"></i></a>
+                                        <a target="_blank" href="{{route('admin.ventas.destroy',$ventas->id)}}" class="button-danger" onclick="return confirm('¿Seguro que deseas Anular la Factura?')"><i class="fa fa-window-close"></i></a>
+                                        <a target="_blank" href="{{route('admin.ventas.devol',$ventas->id)}}" class="button-warning" onclick="return confirm('¿Seguro que deseas pasar a devolucion la Factura?')"><i class="fa fa-undo"></i></a>
+                                        @endif
+
+                                        @if (Auth::user()->Vendedor())
+                                        <a target="_blank" href="{{route('venta.show',$ventas->id)}}" class="button-detail"><i class="fa fa-list"></i></a>
+                                        <a target="_blank" href="{{route('admin.venta.report',$ventas->id)}}" class="button-show"><i class="fa fa-print"></i></a>
                                         @endif
                                     </td>
                                 </tr>

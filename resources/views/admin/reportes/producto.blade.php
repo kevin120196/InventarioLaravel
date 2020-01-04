@@ -9,6 +9,38 @@
 
             <div class="row">
                 <div class="col-md-12 col-lg-12">
+                    @if (Auth::user()->Gerente())
+                    <div class="input-contenedor input-30 input-100" style="border: none;">
+                        <a href="{{route('admin.reportes.reportsProducto')}}" target="_blank" class="button-primary"><i class="fa fa-print"></i> Reporte General</a>
+                    </div>
+                    {!! Form::open(['id'=>'inputcodigo','route'=>'admin.reportes.reportsProducto','method'=>'GET','target'=>'_blank']) !!}
+                    <div class="input-contenedor input-30 input-100 buscar-input">
+                        <i class="fa fa-search icon"></i> <input type="text" name="codigo" id="codigo" placeholder="Codigo">
+                    </div>
+
+                    {!! Form::close() !!}
+
+                    {!! Form::open(['id'=>'inputbuscar','route'=>'admin.reportes.reportsProducto','method'=>'GET','target'=>'_blank','style'=>'display:none']) !!}
+                    <div class="input-contenedor input-30 input-100 buscar-input">
+                        <i class="fa fa-search icon"></i> <input type="text" name="descripcion" id="descripcion" placeholder="Descripción">
+                    </div>
+
+                    {!! Form::close() !!}
+
+                    {!! Form::open(['id'=>'inputestante','route'=>'admin.reportes.reportsProducto','method'=>'GET','target'=>'_blank','style'=>'display:none']) !!}
+                    <div class="input-contenedor input-30 input-100 buscar-input" >
+                        <i class="fa fa-search icon"></i> <input type="text" name="estante" id="estante" placeholder="Estante">
+                    </div>
+
+                    {!! Form::close() !!}
+                    <div class="input-contenedor input-30 input-100" style="padding: 13px; margin: 20px auto;">
+                        
+                        <input type="radio" style="margin-left: 1em" name="radio" value="1" id=""  onchange="mostrar(this.value);"> Código
+                        <input type="radio" style="margin-left: 2em" name="radio" value="2" id="" onchange="mostrar(this.value);"> Descripción
+                        <input type="radio" style="margin-left: 5em" name="radio" value="3" id="" onchange="mostrar(this.value);"> Estante
+                    </div>
+                    @endif
+                    @if (Auth::user()->Vendedor())
                     <div class="input-contenedor input-30 input-100" style="border: none;">
                         <a href="{{route('admin.reporte.reportsProducto')}}" target="_blank" class="button-primary"><i class="fa fa-print"></i> Reporte General</a>
                     </div>
@@ -38,6 +70,7 @@
                         <input type="radio" style="margin-left: 2em" name="radio" value="2" id="" onchange="mostrar(this.value);"> Descripción
                         <input type="radio" style="margin-left: 5em" name="radio" value="3" id="" onchange="mostrar(this.value);"> Estante
                     </div>
+                    @endif
                 </div>
 
             </div>

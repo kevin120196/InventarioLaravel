@@ -1,5 +1,5 @@
 @extends('admin.template.template')
-@section('title','Crear Compra')
+@section('title','Factura Nº: ' .$venta->id)
 @section('contenido')
     {!!Form::open(['route'=>'ventas.index','Method'=>'POST','class'=>'formulario'])!!}
         <div class="cabeceraForm">
@@ -42,6 +42,7 @@
                         <th>Cantidad</th>
                         <th>precio</th>
                         <th>Descuento</th>
+                        <th>IVA</th>
                         <th>SubTotal</th>
                        
                     </tr>
@@ -53,6 +54,7 @@
                             <td>{{$detalles->cantidad}}</td>
                             <td>{{$detalles->precio}}</td>
                             <td>{{$venta->descuentos_clientes->descuento_cliente}}</td>
+                            <td>{{$detalles->iva}}</td>
                             <td>{{$detalles->total}}</td>
                             
                         </tr>
@@ -66,9 +68,17 @@
                 </tfoot>
             </table>
             <div class="container">
+                
+                @if (Auth::user()->Gerente())
                     <a href="{{route('ventas.index')}}" class="button-primary">
                             <i class="fa fa-undo"></i>
                     </a>
+                @endif
+                @if (Auth::user()->Vendedor())
+                    <a href="{{route('venta.index')}}" class="button-primary">
+                            <i class="fa fa-undo"></i>
+                    </a>
+                @endif
             </div>
     </div>
     {!!Form::close()!!}

@@ -10,11 +10,8 @@
 
                     <div class="row">
                         <div class="col-md-12 col-lg-12">
-                            <div class="input-contenedor input-40 input-100" style="border: none;">
+                            <div class="input-contenedor input-100" style="border: none;">
                                 <a href="{{route('categorias.create')}}" class="button-primary">Nueva Categoria</a>
-                            </div>
-                            <div class="input-contenedor input-50 input-100 buscar-input">
-                                <i class="fa fa-search icon"></i> <input type="text" name="" placeholder="Buscar" id="">
                             </div>
                         </div>
                     </div>

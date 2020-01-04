@@ -68,10 +68,10 @@ class FacturaVentaController extends Controller
         });
         //$detalle=Detalle_Factura_Venta::orderBy('id','ASC')->where('venta_id','=',$id)->get();
         $detalle=DB::table('factura_producto_venta as fac')
-        ->join('productos as p', 'fac.producto_id','=','p.id')
-        ->join('facturas_ventas as f','fac.venta_id','=','f.id')
-        ->select('p.descripcion','fac.cantidad','fac.precio','fac.total')
-        ->where('fac.venta_id','=',$id)
+        ->join('productos as p', 'fac.productos_id','=','p.id')
+        ->join('facturas_ventas as f','fac.ventas_id','=','f.id')
+        ->select('p.descripcion','fac.cantidad','fac.precio','fac.total','fac.iva')
+        ->where('fac.ventas_id','=',$id)
         ->get();
         
         return view('admin.venta.show')->with('venta',$venta)->with('detalle',$detalle);
@@ -106,12 +106,15 @@ class FacturaVentaController extends Controller
             $facturaventa->tipos_factura;
         });
         $detalle=DB::table('factura_producto_venta as fac')
-        ->join('productos as p', 'fac.producto_id','=','p.id')
-        ->join('facturas_ventas as f','fac.venta_id','=','f.id')
-        ->select('p.descripcion','fac.cantidad','fac.precio','fac.total')
-        ->where('fac.venta_id','=',$id)
+        ->join('productos as p', 'fac.productos_id','=','p.id')
+        ->join('facturas_ventas as f','fac.ventas_id','=','f.id')
+        ->select('p.descripcion','fac.cantidad','fac.precio','fac.total','fac.iva')
+        ->where('fac.ventas_id','=',$id)
         ->get();
-        $pdf=PDF::loadView('admin.venta.report',['facturaventa'=>$facturaventa,'detalle'=>$detalle]);
+        $timestamp = Carbon::now('-6:00');
+        $dia = Carbon::createFromFormat('Y-m-d H:i:s', $timestamp, 'America/Managua');
+        $dia->setTimezone('America/Managua');
+        $pdf=PDF::loadView('admin.venta.report',['facturaventa'=>$facturaventa,'detalle'=>$detalle,'dia'=>$dia]);
         $fileName='factura Nº '.$facturaventa->id;
         return $pdf->stream($fileName.'.pdf');
 //       return view('admin.venta.report')->with('facturaventa',$facturaventa)->with('detalle',$detalle);
@@ -155,6 +158,7 @@ class FacturaVentaController extends Controller
                     $detalle=new Detalle_Factura_Venta();
                     $detalle->cantidad=$request->cantidad[$i];
                     $detalle->precio=$request->precio[$i];
+                    $detalle->iva=$request->iva[$i];
                     $detalle->total=$request->total[$i];
                     $detalle->ventas_id=$venta->id;
                     $detalle->productos_id=$request->productos_id[$i];

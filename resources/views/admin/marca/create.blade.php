@@ -16,11 +16,13 @@
         <div class="cabeceraForm">
             <h1>Crear Marca<h1>
         </div>
-        <div class="input-contenedor input-100">
-            <i class="fa fa-pencil icon"></i>
-            {!! Form::text('nombre_marca', null, ['placeholder'=>'Nombre Marca'])!!}
+        <div class="contenedor">
+            {!! csrf_field() !!}
+            <div class="input-contenedor input-100">
+                <i class="fa fa-pencil icon"></i>
+                {!! Form::text('nombre_marca', null, ['placeholder'=>'Nombre Marca'])!!}
+            </div>
+            <button type="submit" class="button-primary"><i class="fa fa-save"></i> Guardar</button>    
         </div>
-        
-        <button type="submit" class="button-primary"><i class="fa fa-save"></i> Guardar</button>
     {!!Form::close()!!}
 @endsection

@@ -40,6 +40,7 @@ class CreateFacturasVentasTable extends Migration
             $table->double('cantidad');
             $table->double('precio');
             $table->double('total');
+            $table->double('iva');
             //claves foraneas
             $table->integer('ventas_id')->unsigned();
             //$table->integer('facturas_ventas_estados_id')->unsigned();

@@ -18,10 +18,12 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        $user=User::orderBy('id','ASC')->paginate(10);
+        $user=User::orderBy('id','ASC')
+        ->name($request->name)
+        ->paginate(10);
         return view('admin.usuario.index')->with('user',$user);
     }
 

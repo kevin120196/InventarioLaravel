@@ -9,8 +9,14 @@
                                 </div>
 
                                 <div style="border: none; width:100%;" class="input-contenedor input-100">
+                                    @if (Auth::user()->Gerente())
                                     <a class="button-primary" href="{{route('ventas.create')}}">Realizar Venta</a>
                                     <a class="button-primary" href="{{route('compra.create')}}">Realizar Compra</a>
+                                    @endif
+                                    @if (Auth::user()->Vendedor())
+                                    <a class="button-primary" href="{{route('venta.create')}}">Realizar Venta</a>
+                                    <a class="button-primary" href="{{route('compras.create')}}">Realizar Compra</a>
+                                    @endif
                                 </div>
                             </div>
                         </form>

@@ -9,6 +9,7 @@
 
             <div class="row">
                 <div class="col-md-12 col-lg-12">
+                    @if (Auth::user()->Vendedor())
                     <div class="input-contenedor input-30 input-100" style="border: none;">
                         <a href="{{route('admin.reporte.reportsVenta')}}" target="_blank" class="button-primary"><i class="fa fa-print"></i> Reporte General</a>
                     </div>
@@ -54,6 +55,54 @@
                         <input type="radio" style="margin-left: 1em" name="radio" value="3" id="" onchange="mostrar(this.value);"> Estado
                         <input type="radio" style="margin-left: 1em" name="radio" value="4" id=""  onchange="mostrar(this.value);"> Intervalos de Fecha
                     </div>
+                    @endif
+                    @if (Auth::user()->Gerente())
+                    <div class="input-contenedor input-30 input-100" style="border: none;">
+                        <a href="{{route('admin.reportes.reportsVenta')}}" target="_blank" class="button-primary"><i class="fa fa-print"></i> Reporte General</a>
+                    </div>
+                    {!! Form::open(['id'=>'inputcodigo','route'=>'admin.reportes.reportsVenta','method'=>'GET','target'=>'_blank']) !!}
+                    <div class="input-contenedor input-30 input-100 buscar-input">
+                        <i class="fa fa-search icon"></i> 
+                        {!! Form::number('codigo', null, ['placeholder'=>'N° Factura']) !!}
+                    </div>
+                    {!! Form::close() !!}
+
+                    {!! Form::open(['id'=>'inputbuscar','route'=>'admin.reportes.reportsVenta','method'=>'GET','target'=>'_blank','style'=>'display:none']) !!}
+                    <div class="input-contenedor input-30 input-100 buscar-input" >
+                        <i class="fa fa-search icon"></i>
+                        
+                        {!! Form::text('fecha', null, ['placeholder'=>'Fecha de Facturación']) !!}
+                    </div>
+
+                    {!! Form::close() !!}
+
+                    {!! Form::open(['id'=>'inputestante','route'=>'admin.reportes.reportsVenta','method'=>'GET','target'=>'_blank','style'=>'display:none']) !!}
+                    <div class="input-contenedor input-30 input-100 buscar-input" >
+                        <i class="fa fa-search icon"></i> <input type="text" name="estado" id="estado" placeholder="Estados Factura">
+                    </div>
+
+                    {!! Form::close() !!}
+                    {!! Form::open(['id'=>'inputinvervalos','route'=>'admin.reportes.reportsVenta','method'=>'GET','style'=>'display:none','target'=>'_blank']) !!}
+                    <div class="input-contenedor input-30 input-100 buscar-input" >
+                        <i class="fa fa-search icon"></i> 
+                        <input type="date" name="inicio" id="inicio" placeholder="Inicio">
+                        
+                    {!! Form::open(['id'=>'inputinvervalos1','route'=>'admin.reportes.reportsVenta','method'=>'GET','style'=>'display:none','target'=>'_blank']) !!}
+                        
+                    <i class="fa fa-search icon"></i> 
+                        <input type="date" name="fin" id="fin" placeholder="Fin">
+                        <button type="submit" class="button-show" style="width: 100%"><i class="fa fa-search"></i></button>
+                        {!! Form::close() !!}
+                    </div>
+                    {!! Form::close() !!}
+                    <div class="input-contenedor input-30 input-100" style="padding: 13px; margin: 20px auto;">
+                        
+                        <input type="radio" style="margin-left: 1em" name="radio" value="1" id=""  onchange="mostrar(this.value);"> Código
+                        <input type="radio" style="margin-left: 2em" name="radio" value="2" id="" onchange="mostrar(this.value);"> Fecha
+                        <input type="radio" style="margin-left: 1em" name="radio" value="3" id="" onchange="mostrar(this.value);"> Estado
+                        <input type="radio" style="margin-left: 1em" name="radio" value="4" id=""  onchange="mostrar(this.value);"> Intervalos de Fecha
+                    </div>
+                    @endif
                 </div>
 
                 <div class="main-container">

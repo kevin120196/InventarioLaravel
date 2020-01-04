@@ -16,6 +16,7 @@ class ProductosController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+                
     }
 
     public function index(Request $request){
@@ -92,7 +93,10 @@ class ProductosController extends Controller
         $producto->fill($request->all());
         $producto->save();
         Alert::success('Exito!','El producto '.$producto->marca->nombre_marca .' ha sido actualizado');
+        
+
         return redirect()->route('productos.index');
+    
     }
 
     public function destroy($id){

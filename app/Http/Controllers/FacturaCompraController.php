@@ -20,6 +20,7 @@ class FacturaCompraController extends Controller
     {
         $this->middleware('auth');
     }
+
     public function index(Request $request){
         
 
@@ -106,7 +107,10 @@ class FacturaCompraController extends Controller
         ->select('p.descripcion','fac.cantidad','fac.precio','fac.total')
         ->where('fac.facturas_compras_id','=',$id)
         ->get();
-        $pdf=PDF::loadView('admin.compra.report',['facturacompra'=>$facturacompra,'detalleFact'=>$detalleFact]);
+        $timestamp = Carbon::now('-6:00');
+        $dia = Carbon::createFromFormat('Y-m-d H:i:s', $timestamp, 'America/Managua');
+        $dia->setTimezone('America/Managua');
+        $pdf=PDF::loadView('admin.compra.report',['dia'=>$dia,'facturacompra'=>$facturacompra,'detalleFact'=>$detalleFact]);
         $fileName=$facturacompra->productos_id_productos;
         return $pdf->stream($fileName.'.pdf');
         //return view('admin.compra.report')->with('facturacompra',$facturacompra)->with('detalleFact',$detalleFact);
@@ -156,7 +160,14 @@ class FacturaCompraController extends Controller
             DB::commit();
             Alert::success('Exito!','La compra '.$compra->id .' ha sido realizada de forma Correcta!!');
 
-            return redirect()->route('compra.index');
+            if (\Auth::user()->type()=='Gerente'){
+                return redirect()->route('compra.index');
+            
+            }else{
+                return redirect()->route('compras.index');
+            }
+
+            
     
         } catch (\Throwable $th) {
             //throw $th;

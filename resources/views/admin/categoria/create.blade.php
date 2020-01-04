@@ -16,11 +16,14 @@
         <div class="cabeceraForm">
             <h1>Crear Categoria<h1>
         </div>
-        <div class="input-contenedor input-100">
-            <i class="fa fa-pencil icon"></i>
-            {!! Form::text('nombre_categoria', null, ['placeholder'=>'Nombre Categoria'])!!}
+        <div class="contenedor">
+            {!! csrf_field() !!}
+            <div class="input-contenedor input-100">
+                <i class="fa fa-pencil icon"></i>
+                {!! Form::text('nombre_categoria', null, ['placeholder'=>'Nombre Categoria'])!!}
+            </div>
+            
+            <button type="submit" class="button-primary"><i class="fa fa-save"></i> Guardar</button>    
         </div>
-        
-        <button type="submit" class="button-primary"><i class="fa fa-save"></i> Guardar</button>
     {!!Form::close()!!}
 @endsection

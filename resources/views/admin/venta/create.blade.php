@@ -1,7 +1,7 @@
 @extends('admin.template.template')
 @section('title','Crear Venta')
 @section('contenido')
-@if ($errors->any())
+    @if ($errors->any())
     <div class="alert danger">
         
     <span class="closebtn">&times;</span>
@@ -63,6 +63,12 @@
                 <i class="fa fa-money icon"></i>
                 {!! Form::text('precio', null, ['placeholder'=>'Precio','id'=>"precio"]) !!}
             </div>
+            <div class="input-contenedor input-100">
+                <i class="icon">IVA</i> 
+                <input class="desactivado" type="text" name="iva" id="iva" placeholder="IVA" value="0.15">
+                <p style="margin-top: 13px"> <b>Habilitar</b> <input id="button2" type="checkbox" checked="checked" value="Click to enable check boxes"/></p>
+
+            </div>
             <a onclick="agregar()" id="btnagregar" class="button-primary"><i class="fa fa-plus"></i> </a>
         </div>
         <div class="main-container" style="overflow: hidden">
@@ -73,6 +79,7 @@
                         <th>Cantidad</th>
                         <th>Descuento</th>
                         <th>precio</th>
+                        <th>IVA</th>
                         <th>Total</th>
                         <th>Accion</th>
                     </tr>
@@ -81,7 +88,7 @@
                 </tbody>
                 <tfoot style="background: #aaa">
                     <tr>
-                        <td><div id="total"></div></td>
+                        <td><b>Total:</b><div id="total"></div></td>
                     </tr>
                 </tfoot>
             </table>
@@ -97,6 +104,7 @@
     {!!Form::close()!!}
 
 @endsection
+    <script src="https://code.jquery.com/jquery-git.js"></script>
     <script >
 
             var totalgeneral;
@@ -117,56 +125,65 @@
             var producto1= $('#productos_id option:selected').val();
             var cantidad= $('#cantidad').val();
             var precio= $('#precio').val();
+            var iva=$('#iva').val();
             var descuent=precio*descuento;
             var preciot=cantidad*precio;
             totalgeneral=0;
             totalgeneral1=0;
-        /*precio descontado*/  var total=preciot-descuent;
-
-            $("#venta > tbody").append("<tr><td><input type='hidden' name='productos_id[]' value="+producto1+">"+producto+"</td><td><input type='hidden' name='cantidad[]' value="+cantidad+">"+cantidad+"</td><td><input type='hidden' name='factura_descuento_id[]' value="+descuento1+">"+descuento+"</td><td><input type='hidden' name='precio[]' value="+precio+">"+precio+"</td><td><input type='hidden' name='total[]' value="+total+">"+total+"</td><td><a class='button-danger btnEliminar'><i class='fa fa-remove'></i></a></td></tr>");
+            var subtotal1=preciot-descuent;
+            var subtotal=subtotal1*iva;
+        /*precio descontado*/
+            var total=subtotal+subtotal1;
+           
+            $("#venta > tbody").append("<tr><td><input type='hidden' name='productos_id[]' value="+producto1+">"+producto+"</td><td><input type='hidden' name='cantidad[]' value="+cantidad+">"+cantidad+"</td><td><input type='hidden' name='factura_descuento_id[]' value="+descuento1+">"+descuento+"</td><td><input type='hidden' name='precio[]' value="+precio+">"+precio+"</td><td><input type='hidden' name='iva[]' value="+iva+">"+iva+"</td><td><input type='hidden' name='total[]' value="+total+">"+total+"</td><td><a class='button-danger btnEliminar'><i class='fa fa-remove'></i></a></td></tr>");
             
-            
-            
-            //Eliminar fila
-            $('#venta').on('click','.btnEliminar', function(){
-                
-                var columnacon = $(this).closest('tr').find("td:eq(4)").text()
-                var valor=parseFloat(totalgeneral);
-                var valor2=parseFloat(columnacon);
-                totalgeneral = parseFloat(valor - valor2).toFixed(2,1);
-                totalgeneral1= parseFloat(valor - valor2).toFixed(2,1);
-                $("#total").text(totalgeneral);
-                $("#totalgeneral").text(totalgeneral1);
-                console.log(Math.ceil(totalgeneral).toFixed(2));
-                $(this).closest('tr').remove();
-
-
-                
-            });
-
+            //Agregar fila
             $('#venta > tbody > tr').each(function (index,tr){
                 
-                var columnacon=$(this).find("td:eq(4)").text();
+                var columnacon=$(this).find("td:eq(5)").text();
+                console.log(columnacon);
                 totalgeneral += parseFloat(columnacon);
                 totalgeneral1 += parseFloat(columnacon);
-                $("#total").text(totalgeneral.toFixed());
+                $("#total").text(totalgeneral.toFixed(2));
                 $("#totalgeneral").text(totalgeneral1.toFixed(2));
-                console.log(totalgeneral);           
                 if (producto1 == $(this).find('input:eq(0)').val() ) {
                     //  block of code to be executed if the condition is true
                     var columnaFila=$(this).find("td:eq(1)").text();
                     
-                    console.log(columnaFila);
                 } else {
                     //  block of code to be executed if the condition is false
                     
                 }
-                
-                    
-                
                 $("#venta > tbody").append("<input type='hidden' name='totalgeneral' id='totalgeneral' value="+totalgeneral+">")
+            });
+            
+            //Eliminar fila
+            $('#venta').on('click','.btnEliminar', function(){
+                
+                var columnacon = $(this).closest('tr').find("td:eq(5)").text()
+                var valor=parseFloat(totalgeneral);
+                var valor2=parseFloat(columnacon);
+                totalgeneral = parseFloat(valor - valor2);
+                totalgeneral1= parseFloat(valor - valor2);
+                $("#total").text(totalgeneral);
+                $("#totalgeneral").text(totalgeneral1);
+                $(this).closest('tr').remove();
+
+
                 
             });    
     }
-
+    $(document).ready(function(){ 
+        $('input[type="checkbox"]').click(function(){
+            if($(this).prop("checked") == true){
+                $('.desactivado').prop("disabled", false);
+                
+            }
+            else if($(this).prop("checked") == false){
+                $('.desactivado').prop("disabled", true);
+                $( "input:disabled" ).val(0)
+            }
+        });
+        
+      });
     </script>

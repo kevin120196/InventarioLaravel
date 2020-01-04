@@ -33,7 +33,6 @@
 
                                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
                                         </li>
-                                        <li class="enlace1"><a href="#"><i class="fa fa-cog"></i> Configuracion</a></li>
                                         <hr>
                                         <li class="enlace1"><a href="#"><i class="fa fa-home"></i> Inicio</a></span></li>        
                                     </ul>
@@ -69,7 +68,7 @@
         </main>
         @include('sweetalert::alert')    
     @yield('js')
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="{{asset('js/jquery-3.4.1.js')}}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>    
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
     //<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>

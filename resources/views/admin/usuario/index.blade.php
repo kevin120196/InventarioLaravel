@@ -13,9 +13,12 @@
                             <div class="input-contenedor input-40 input-100" style="border: none;">
                                 <a href="{{route('usuarios.create')}}" class="button-primary">Nuevo Usuario</a>
                             </div>
+                            {!! Form::open(['id'=>'','route'=>'usuarios.index','method'=>'GET']) !!}
                             <div class="input-contenedor input-50 input-100 buscar-input">
-                                <i class="fa fa-search icon"></i> <input type="text" name="" placeholder="Buscar" id="">
+                                <i class="fa fa-search icon"></i> <input type="text" name="name" placeholder="Buscar" id="name">
                             </div>
+                            {!! Form::close() !!}
+
                         </div>
                     </div>
                     <div class="main-container">

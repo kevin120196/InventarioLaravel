@@ -21,6 +21,7 @@
         </div>
 
         <div class="contenedor">
+            {!! csrf_field() !!}
             <div class="input-contenedor input-50 input-100">
                 <i class=" fa fa-barcode icon"></i>
                 {!! Form::text('codigo_original', null, ['placeholder'=>'Codigo original']) !!}

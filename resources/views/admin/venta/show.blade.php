@@ -1,11 +1,15 @@
 @extends('admin.template.template')
-@section('title','Factura Nº: ' .$venta->id)
+@section('title','Factura Nº: ' .$venta->codigo_factura)
 @section('contenido')
     {!!Form::open(['route'=>'ventas.index','Method'=>'POST','class'=>'formulario'])!!}
         <div class="cabeceraForm">
             <h1>Factura Venta<h1>
         </div>
         <div class="contenedor">
+            <div class="input-contenedor input-100">
+                <i class="icon">N°</i>
+                {!! Form::text('vendedores_id', $venta->codigo_factura, ['placeholder'=>'Proveedores','id'=>"estado_factura",'readOnly'])!!}
+            </div>
             <div class="input-contenedor input-50 input-100">
                 <i class="icon"><img src="{{asset('img/compras (2).png')}}" alt=""></i>
                 {!! Form::text('vendedores_id', $venta->vendedores->nombre_vendedor, ['placeholder'=>'Proveedores','id'=>"estado_factura",'readOnly'])!!}
@@ -52,10 +56,10 @@
                         <tr>
                             <td>{{$detalles->descripcion}}</td>
                             <td>{{$detalles->cantidad}}</td>
-                            <td>{{$detalles->precio}}</td>
-                            <td>{{$venta->descuentos_clientes->descuento_cliente}}</td>
+                            <td>C${{$detalles->precio}}</td>
+                            <td>%{{$venta->descuentos_clientes->descuento_cliente}}</td>
                             <td>{{$detalles->iva}}</td>
-                            <td>{{$detalles->total}}</td>
+                            <td>C${{$detalles->subtotal}}</td>
                             
                         </tr>
                        
@@ -63,7 +67,7 @@
                 </tbody>
                 <tfoot style="background: #aaa">
                     <tr>
-                        <th><b>Total:</b> {{$venta->totalgeneral}}</th>
+                        <th><b>Total:</b> C${{$venta->total}}</th>
                     </tr>
                 </tfoot>
             </table>
@@ -75,7 +79,7 @@
                     </a>
                 @endif
                 @if (Auth::user()->Vendedor())
-                    <a href="{{route('venta.index')}}" class="button-primary">
+                    <a href="{{route('ventas.index')}}" class="button-primary">
                             <i class="fa fa-undo"></i>
                     </a>
                 @endif

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use App\Vendedor;
 use Illuminate\Http\Request;
-use Illuminate\Http\vendedoresRequest;
+use App\Http\Requests\vendedorRequest;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class VendedorController extends Controller
@@ -28,7 +28,7 @@ class VendedorController extends Controller
     }
 
 
-    public function store(vendedoresRequest $request){
+    public function store(vendedorRequest $request){
         $vendedores = new Vendedor($request->all());
         $vendedores->save();
         Alert::success('Exito!','El Vendedor ' .$vendedores->nombre_vendedor. ' ha sido registrado Correctamente');
@@ -41,7 +41,7 @@ class VendedorController extends Controller
         return view('admin.vendedor.edit')->with('vendedor',$vendedor);
     }
 
-    public function update(vendedoresRequest $request,$id){
+    public function update(vendedorRequest $request,$id){
         $vendedor=Vendedor::find($id);
         $vendedor->fill($request->all());
         $vendedor->save();
@@ -53,6 +53,6 @@ class VendedorController extends Controller
         $vendedor=Vendedor::find($id);
         $vendedor->delete();
         Alert::error('Eliminado!','El vendedor ' .$vendedor->nombre. 'ha sido eliminado');
-        return redirect()->route('cliente.index');
+        return redirect()->route('vendedores.index');
     }
 }

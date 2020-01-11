@@ -7,7 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <style>
 
-
+            body{
+                font-family: 'Montserrat', sans-serif;
+                
+            }
             .input-contenedor{
                 margin-bottom: 15px;
                 border: 1px solid #aaa;
@@ -52,7 +55,7 @@
                 margin-left: 6.1em;
             }
             .label3{
-                margin-left: 6em;
+                margin-left: 6.1em;
             }
             .label4{
                 margin-left: 7.3em;
@@ -165,15 +168,15 @@
                 }
 
                 .etiqueta{
-                    font-size: 12px;
+                    font-size: 14px;
                 }
 
                 .label6{
-                    margin-left: 13.5em;
+                    margin-left: 13.9em;
                 }
                 
     </style>
-    <title>Factura de Compra <?php echo $facturacompra->id?></title>
+    <title>Factura de Compra <?php echo $facturacompra->codigo_factura?></title>
 </head>
 <body>
    
@@ -182,11 +185,11 @@
                     <h1>Orden de Compra</h1>
                     <h3>Repuestos El Triunfo</h3>
                 </div>
+                <br>
                 <div class="col-md-12">
-                <b></b>
                         <div class="form-group col-6">
                             <label for=""><b>Nº: </b></label>
-                            <label for="" class="label6"><?php echo $facturacompra->id?></label>
+                            <label for="" class="label6"><?php echo $facturacompra->codigo_factura?></label>
                         </div>
                         <div class="form-group col-6">
                                 <label for=""><b>Proveedor: </b></label>
@@ -206,12 +209,10 @@
                                 <label for=""><b>Tipo de Factura: </b></label>
                                 <label for="" class="label4"><?php echo $facturacompra->tipoFactura->tipo_factura_nombre?></label>    
                         </div>
-
-
+                        <br>
                 </div>
             </form>
-        
-        
+            
             <div class="main-container" style="overflow: hidden">
                 <table id="venta" class="detallefact" style="margin-left: 10px">
                     <thead>
@@ -227,8 +228,8 @@
                             <tr>
                                 <td>{{$detalle->descripcion}}</td>
                                 <td>{{$detalle->cantidad}}</td>
-                                <td>{{$detalle->precio}}</td>
-                                <td>{{$detalle->total}}</td>
+                                <td>C${{$detalle->precio}}</td>
+                                <td>C${{$detalle->subtotal}}</td>
                             </tr>
                            
                         @endforeach
@@ -236,10 +237,11 @@
                     <tfoot style="background: #aaa">
                         
                         <tr>
-                            <th><b>Total: </b>{{$facturacompra->totalgeneral}}</th>
+                            <th><b>Total: </b>C${{$facturacompra->total}}</th>
                         </tr>
                     </tfoot>
                 </table>
+                <br>
                 <label for="" class=""><b class="etiqueta">Impreso por: {{Auth::user()->name}} </b></label><br>
                 <label for="" class=""><b class="etiqueta">Elaborado: <?php echo $dia ?></b></label>
         </div>

@@ -58,16 +58,16 @@
 
                     @if (Auth::user()->Vendedor())
                     <div class="input-contenedor input-30 input-100" style="border: none;">
-                        <a href="{{route('venta.create')}}" target="_blank" class="button-primary">Nueva Venta</a>
+                        <a href="{{route('ventas.create')}}" target="_blank" class="button-primary">Nueva Venta</a>
                     </div>
-                    {!! Form::open(['id'=>'inputcodigo','route'=>'venta.index','method'=>'GET']) !!}
+                    {!! Form::open(['id'=>'inputcodigo','route'=>'ventas.index','method'=>'GET']) !!}
                     <div class="input-contenedor input-30 input-100 buscar-input">
                         <i class="fa fa-search icon"></i> 
                         {!! Form::number('codigo', null, ['placeholder'=>'N° Factura']) !!}
                     </div>
                     {!! Form::close() !!}
 
-                    {!! Form::open(['id'=>'inputbuscar','route'=>'venta.index','method'=>'GET','style'=>'display:none']) !!}
+                    {!! Form::open(['id'=>'inputbuscar','route'=>'ventas.index','method'=>'GET','style'=>'display:none']) !!}
                     <div class="input-contenedor input-30 input-100 buscar-input" >
                         <i class="fa fa-search icon"></i>
                         
@@ -76,18 +76,18 @@
 
                     {!! Form::close() !!}
 
-                    {!! Form::open(['id'=>'inputestante','route'=>'venta.index','method'=>'GET','style'=>'display:none']) !!}
+                    {!! Form::open(['id'=>'inputestante','route'=>'ventas.index','method'=>'GET','style'=>'display:none']) !!}
                     <div class="input-contenedor input-30 input-100 buscar-input" >
                         <i class="fa fa-search icon"></i> <input type="text" name="estado" id="estado" placeholder="Estados Factura">
                     </div>
 
                     {!! Form::close() !!}
-                    {!! Form::open(['id'=>'inputinvervalos','route'=>'venta.index','method'=>'GET','style'=>'display:none','target'=>'_blank']) !!}
+                    {!! Form::open(['id'=>'inputinvervalos','route'=>'ventas.index','method'=>'GET','style'=>'display:none','target'=>'_blank']) !!}
                     <div class="input-contenedor input-30 input-100 buscar-input" >
                         <i class="fa fa-search icon"></i> 
                         <input type="date" name="inicio" id="inicio" placeholder="Inicio">
                         
-                    {!! Form::open(['id'=>'inputinvervalos1','route'=>'venta.index','method'=>'GET','style'=>'display:none','target'=>'_blank']) !!}
+                    {!! Form::open(['id'=>'inputinvervalos1','route'=>'ventas.index','method'=>'GET','style'=>'display:none','target'=>'_blank']) !!}
                         
                     <i class="fa fa-search icon"></i> 
                         <input type="date" name="fin" id="fin" placeholder="Fin">
@@ -122,14 +122,14 @@
                         <tbody>
                             @foreach($venta as $ventas)
                                 <tr>
-                                    <td>{{$ventas->id}}</td>
+                                    <td>{{$ventas->codigo_factura}}</td>
                                     <td>{{$ventas->fecha_factura}}</td>
                                     <td>{{$ventas->estado_factura}}</td>
                                     <td>{{$ventas->tipos_factura->tipo_factura_nombre}}</td>
                                     <td>{{$ventas->clientes->nombre}}</td>
-                                    <td>{{$ventas->descuentos_clientes->descuento_cliente}}</td>
+                                    <td>%{{$ventas->descuentos_clientes->descuento_cliente}}</td>
                                     <td>{{$ventas->vendedores->nombre_vendedor}}</td>
-                                    <td>{{$ventas->totalgeneral}}</td>
+                                    <td>C${{$ventas->total}}</td>
                                     <td>
                                         @if (Auth::user()->Gerente())
                                         <a target="_blank" href="{{route('ventas.show',$ventas->id)}}" class="button-detail"><i class="fa fa-list"></i></a>
@@ -139,8 +139,8 @@
                                         @endif
 
                                         @if (Auth::user()->Vendedor())
-                                        <a target="_blank" href="{{route('venta.show',$ventas->id)}}" class="button-detail"><i class="fa fa-list"></i></a>
-                                        <a target="_blank" href="{{route('admin.venta.report',$ventas->id)}}" class="button-show"><i class="fa fa-print"></i></a>
+                                        <a target="_blank" href="{{route('ventas.show',$ventas->id)}}" class="button-detail"><i class="fa fa-list"></i></a>
+                                        <a target="_blank" href="{{route('admin.ventas.report',$ventas->id)}}" class="button-show"><i class="fa fa-print"></i></a>
                                         @endif
                                     </td>
                                 </tr>

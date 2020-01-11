@@ -13,7 +13,7 @@ class ventaRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,6 +25,9 @@ class ventaRequest extends FormRequest
     {
         return [
             //
+            'fecha_factura'=>'required',
+            'estado_factura'=>'required',
+            'descuento'=>'required',
         ];
     }
 }

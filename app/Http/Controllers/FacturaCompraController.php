@@ -9,6 +9,7 @@ use App\Detalle_Factura_Compra;
 use App\Marca;
 use App\Producto;
 use Illuminate\Http\Request;
+use App\Http\Requests\comprasRequest;
 use DB;
 use PDF;
 use Carbon\Carbon;
@@ -25,16 +26,16 @@ class FacturaCompraController extends Controller
         
 
         if($request->inicio && $request->fin != null){
-            $facturacompra=Factura_Compra::codigo($request->codigo)->orderBy('id','ASC')
+            $facturacompra=Factura_Compra::codigo($request->codigo)->orderBy('id','DESC')
             ->estado($request->estado)
             ->fecha($request->fecha)
             ->intervalo($request->inicio,$request->fin)
-            ->paginate(3);
+            ->paginate(10);
         }else{
-            $facturacompra=Factura_Compra::codigo($request->codigo)->orderBy('id','ASC')
+            $facturacompra=Factura_Compra::codigo($request->codigo)->orderBy('id','DESC')
             ->estado($request->estado)
             ->fecha($request->fecha)
-            ->paginate(3);
+            ->paginate(10);
         }
 
 
@@ -66,7 +67,7 @@ class FacturaCompraController extends Controller
         $detalleFact=DB::table('factura_producto_compra as fac')
         ->join('productos as p', 'fac.productos_id_productos','=','p.id')
         ->join('facturas_compras as f','fac.facturas_compras_id','=','f.id')
-        ->select('p.descripcion','fac.cantidad','fac.precio','fac.total')
+        ->select('p.descripcion','fac.cantidad','fac.precio','fac.subtotal')
         ->where('fac.facturas_compras_id','=',$id)
         ->get();
 
@@ -88,8 +89,8 @@ class FacturaCompraController extends Controller
             $productos->proveedor;
         });
         
-        $proveedor=Proveedor::orderBy('nombre_proveedor','ASC')->pluck('nombre_proveedor','id')->prepend('Proveedor');
-        $producto=Producto::orderBy('descripcion','ASC')->pluck('descripcion','id')->prepend('Producto');
+        $proveedor=Proveedor::orderBy('id','ASC')->get();
+        $producto=Producto::orderBy('id','ASC')->get();
         $Tipo=Tipo_Factura::orderBy('tipo_factura_nombre','ASC')->pluck('tipo_factura_nombre','id')->prepend('Tipo Factura');
         return view('admin.compra.create')->with('Tipo',$Tipo)->with('proveedor',$proveedor)->with('producto',$producto)->with('productos',$productos);
     }
@@ -104,7 +105,7 @@ class FacturaCompraController extends Controller
         $detalleFact=DB::table('factura_producto_compra as fac')
         ->join('productos as p', 'fac.productos_id_productos','=','p.id')
         ->join('facturas_compras as f','fac.facturas_compras_id','=','f.id')
-        ->select('p.descripcion','fac.cantidad','fac.precio','fac.total')
+        ->select('p.descripcion','fac.cantidad','fac.precio','fac.subtotal')
         ->where('fac.facturas_compras_id','=',$id)
         ->get();
         $timestamp = Carbon::now('-6:00');
@@ -134,11 +135,12 @@ class FacturaCompraController extends Controller
     }
 
 
-   public function store(request $request){
+   public function store(comprasRequest $request){
         $compra= new Factura_Compra();
         DB::beginTransaction();
         try {
-            $compra->totalgeneral=$request->totalgeneral;
+            $compra->codigo_factura=$request->codigo_factura;
+            $compra->total=$request->total;
             $compra->fecha_compra=$request->fecha_compra;
             $compra->estado_factura=$request->estado_factura;
             $compra->tipo_factura_id=$request->tipo_factura_id;
@@ -152,20 +154,16 @@ class FacturaCompraController extends Controller
                 
                 $detalle->cantidad=$request->cantidad[$i];
                 $detalle->precio=$request->precio[$i];
-                $detalle->total=$request->total[$i];
+                $detalle->subtotal=$request->subtotal[$i];
                 $detalle->facturas_compras_id=$compra->id;
                 $detalle->productos_id_productos=$request->productos_id_productos[$i];
                 $detalle->save();
             }
             DB::commit();
             Alert::success('Exito!','La compra '.$compra->id .' ha sido realizada de forma Correcta!!');
-
-            if (\Auth::user()->type()=='Gerente'){
+            
                 return redirect()->route('compra.index');
             
-            }else{
-                return redirect()->route('compras.index');
-            }
 
             
     

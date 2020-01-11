@@ -5,12 +5,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="{{asset('css/stylos.css')}}" rel="stylesheet">
         <link href="{{asset('css/datatables.css')}}" rel="stylesheet">
+        <link href="{{asset('css/chosen.css')}}" rel="stylesheet">
         <link rel="stylesheet" href="{{asset('css/bootstrap-grid.css')}}">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" href="{{asset('css/font-awesome-4.7.0/css/font-awesome.min.css')}}">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.css">
 
-        <title>@yield('title','Default') | Panel de Administracion Sistema de Inventario</title>
+        <title>@yield('title','Inicio') | Panel de Administracion Sistema de Inventario</title>
     </head>
     <body>
           
@@ -74,7 +75,9 @@
     //<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
     <script src="{{asset('js/dropdown.js')}}"></script>
     <script src="{{asset('js/datatables.js')}}"></script>
+    <script src="{{asset('js/chosen.jquery.js')}}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.js"></script>
+    
     
     <script>
 

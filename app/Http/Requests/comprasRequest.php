@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class compraRequest extends FormRequest
+class comprasRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,6 +25,10 @@ class compraRequest extends FormRequest
     {
         return [
             //
+            'fecha_compra'=>'required',
+            'tipo_factura_id'=>'required',
+            'proveedores_id'=>'required',
+            'estado_factura'=>'required'
         ];
     }
 }

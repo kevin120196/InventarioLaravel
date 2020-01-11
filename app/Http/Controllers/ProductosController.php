@@ -8,6 +8,7 @@ use App\Producto;
 use App\Marca;
 use App\Proveedor;
 use PDF;
+use App\Http\Requests\productoRequest;
 use Carbon\Carbon;
 use RealRashid\SweetAlert\Facades\Alert;
 class ProductosController extends Controller
@@ -55,7 +56,7 @@ class ProductosController extends Controller
         return view('admin.productos.create')->with('categoria',$categoria)->with('marcas',$marcas)->with('proveedores',$proveedores);
     }
 
-    public function store(Request $request){
+    public function store(productoRequest $request){
         
         $producto=new Producto($request->all());
         //dd($producto->categoria);
@@ -88,7 +89,7 @@ class ProductosController extends Controller
         return view('admin.productos.edit')->with('producto',$producto)->with('categoria',$categoria)->with('marcas',$marcas)->with('proveedores',$proveedores);
     }
 
-    public function update(Request $request, $id){
+    public function update(productoRequest $request, $id){
         $producto=Producto::find($id);
         $producto->fill($request->all());
         $producto->save();

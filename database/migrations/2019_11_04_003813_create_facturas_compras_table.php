@@ -15,6 +15,7 @@ class CreateFacturasComprasTable extends Migration
     {
         Schema::create('facturas_compras', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('codigo_factura');
             $table->date('fecha_compra');
             //$table->enum('tipos_factura',['Credito','Contado']);
             $table->enum('estado_factura',['Pagada','Pendiente','Anulada','Devolución']);            
@@ -29,7 +30,7 @@ class CreateFacturasComprasTable extends Migration
             $table->foreign('proveedores_id')->references('id')->on('proveedores')->onDelete('cascade');
             //
 
-            $table->double('totalgeneral');
+            $table->double('total');
             $table->timestamps();
         });
 
@@ -37,7 +38,7 @@ class CreateFacturasComprasTable extends Migration
             $table->increments('id');
             $table->double('cantidad');
             $table->double('precio');
-            $table->double('total');
+            $table->double('subtotal');
             //claves foraneas
             $table->integer('facturas_compras_id')->unsigned();
             //$table->integer('facturas_compras_estados_id')->unsigned();

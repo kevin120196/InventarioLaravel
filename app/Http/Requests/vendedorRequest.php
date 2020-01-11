@@ -25,11 +25,11 @@ class vendedorRequest extends FormRequest
     {
         return [
             //
-            'nombre_vendedor'=>'min:40|max:100|required',
-            'direccion'=>'min:40|max:100|required',
+            'nombre_vendedor'=>'min:10|max:100|required',
+            'direccion'=>'min:10|max:100|required',
             'cedula_vendedor'=>'max:20|required|unique:vendedores',
             'numero_telefono'=>'max:15|nullable',
-            'correo_electronico_proveedor'=>'min:4|max:250|required|unique:vendedores'
+            'correo_electronico'=>'min:4|max:250|required|unique:vendedores'
 
         ];
     }

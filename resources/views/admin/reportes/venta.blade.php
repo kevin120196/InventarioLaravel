@@ -122,19 +122,18 @@
                         <tbody>
                             @foreach($venta as $ventas)
                                 <tr>
-                                    <td>{{$ventas->id}}</td>
+                                    <td>{{$ventas->codigo_factura}}</td>
                                     <td>{{$ventas->fecha_factura}}</td>
                                     <td>{{$ventas->estado_factura}}</td>
                                     <td>{{$ventas->tipos_factura->tipo_factura_nombre}}</td>
                                     <td>{{$ventas->clientes->nombre}}</td>
-                                    <td>{{$ventas->descuentos_clientes->descuento_cliente}}</td>
+                                    <td>%{{$ventas->descuentos_clientes->descuento_cliente}}</td>
                                     <td>{{$ventas->vendedores->nombre_vendedor}}</td>
-                                    <td>{{$ventas->totalgeneral}}</td>
+                                    <td>C${{$ventas->total}}</td>
                                 </tr>
                                 @endforeach
                         </tbody>
                     </table>
-                    {!!$venta->render()!!}
                 </div>
             </div>
         </div>

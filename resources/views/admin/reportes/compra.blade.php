@@ -125,7 +125,7 @@
                                     <td>{{$compras->estado_factura}}</td>
                                     <td>{{$compras->tipoFactura->tipo_factura_nombre}}</td>
                                     <td>{{$compras->proveedores->nombre_proveedor}}</td>
-                                    <td>{{$compras->totalgeneral}}</td>
+                                    <td>C${{$compras->total}}</td>
                                 </tr>
                                 @endforeach
                         </tbody>

@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Factura_Compra extends Model
 {
     protected $table="facturas_compras";
-    protected $fillable=['fecha_compra','tipo_factura_id','proveedores_id',
-    'estado_factura','totalgeneral'];
+    protected $fillable=['codigo_factura','fecha_compra','tipo_factura_id','proveedores_id',
+    'estado_factura','total'];
 
     public function proveedores() { 
         return $this->belongsTo('App\Proveedor');
@@ -28,7 +28,7 @@ class Factura_Compra extends Model
     }
 
     public function scopeCodigo($query,$codigo){
-        return $query->where('id','LIKE',"%$codigo%");
+        return $query->where('codigo_factura','LIKE',"%$codigo%");
     }
 
     public function scopeFecha($query,$fecha){

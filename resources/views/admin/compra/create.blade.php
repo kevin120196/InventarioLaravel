@@ -17,6 +17,10 @@
             <h1>Nueva Compra<h1>
         </div>
         <div class="contenedor">
+            <div class="input-contenedor input-100">
+                <i class="icon" aria-hidden="true">N°</i>
+                {!! Form::number('codigo_factura', null, ['placeholder'=>'Número de Factura','id'=>"codigo_factura"])!!}
+            </div>
             <div class="input-contenedor input-50 input-100">
                 <i class="fa fa-calendar icon" aria-hidden="true"></i>
                 {!! Form::date('fecha_compra', null, ['placeholder'=>'Fecha','id'=>"fecha"])!!}
@@ -24,7 +28,7 @@
     
             <div class="input-50 input-contenedor input-100">
                 <i class="icon"><img src="{{asset('img/factura (1).png')}}" alt=""></i>
-                {!! Form::select('estado_factura',['Cancelada'=>'Cancelada','Pendiente'=>'Pendiente','Anulada'=>'Anulada'],null, ['class'=>'selectFactura','id'=>"estado_factura",'placeholder'=>'Estado factura','required'])!!}
+                {!! Form::select('estado_factura',['Cancelada'=>'Cancelada','Pendiente'=>'Pendiente','Anulada'=>'Anulada'],null, ['class'=>'selectFactura','id'=>"estado_factura",'placeholder'=>'Estado factura'])!!}
             </div>
     
             <div class="input-contenedor input-30 input-100">
@@ -34,21 +38,35 @@
     
             <div class="input-contenedor input-70 input-100">
                 <i class="icon"><img src="{{asset('img/fabricar (2).png')}}" alt=""></i>
-                {!! Form::select('proveedores_id',$proveedor,null, ['class'=>'selectipoclien','id'=>"proveedores_id"]) !!}
+                <select id="proveedores_id" name="proveedores_id" class="selectipoclien chosen">
+                    <option value="">Proveedor</option>
+                    @foreach($proveedor as $producto)
+                        <option value="{{$producto->id}}">
+                            {{$producto->nombre_proveedor}}
+                        </option>
+                    @endforeach
+                </select>
             </div>
 
             <div class="input-contenedor input-100">
                 <i class="icon"><a id="myBtn" data-toggle="modal" data-target="#myModal"><img src="{{asset('img/caja.png')}}" alt="Usted puede realizar una Busqueda"></a></i>
-                {!! Form::select('productos_id_productos',$producto,['placeholder'=>'Selecciona'],['id'=>"productos_id_productos",'class'=>'selectproduc']) !!}
+                <select id="productos_id_productos" name="productos_id_productos" class="selectproduc chosen">
+                    <option value="">Producto</option>
+                    @foreach($productos as $producto)
+                        <option value="{{$producto->id}}">
+                            {{$producto->descripcion}}
+                        </option>
+                    @endforeach
+                </select>
             </div>
             
 
-            <div class="input-contenedor input-40 input-100">
+            <div class="input-contenedor input-50 input-100">
                 <i class="icon"><img src="{{asset('img/cantidad (4).png')}}" alt=""></i>
                 {!! Form::number('cantidad', null, ['placeholder'=>'Cantidad','id'=>"cantidad"])!!}
             </div>
     
-            <div class="input-contenedor input-40 input-100">
+            <div class="input-contenedor input-50 input-100">
                 <i class="fa fa-money icon"></i>
                 {!! Form::text('precio', null, ['placeholder'=>'Precio','id'=>"precio"]) !!}
             </div>
@@ -69,84 +87,90 @@
                 </tbody>
                 <tfoot style="background: #aaa">
                     <tr>
-                        <th><div id="total"></div></th>
+                        <th><div id="totales">Total: C$0.00</div>
+
                     </tr>
                 </tfoot>
             </table>
         <div class="container">
-        <button type="submit" class="button-primary"><i class="fa fa-save"></i> Guardar</button>
+        <button type="submit" id="guardar" style="display: none" class="button-primary"><i class="fa fa-save"></i> Guardar</button>
         </div>  
     </div>
     
 @include('admin.venta.details')    
     {!!Form::close()!!}
 @endsection
-<script>
+
+    <script src="{{asset('js/jquery-git.js')}}"></script>
+
+    <script>
+        $(document).ready(function(){ 
+    
+            $("#guardar").hide();
+            $(".chosen").chosen();    
+          });
         
-        var totalgeneral;
-        var totalgeneral1;
+        var totalgeneral=0;
+        var totalgeneral1=0;
+        var subtotal=[];
+        var cont=0;
+        var total=0;
         function agregar(){
-        var fecha = $('#fecha').val();
-        var estado_factura= $('#estado_factura option:selected').text();
-        var estado_factura1= $('#estado_factura option:selected').val();
-        var tipo= $('#tipo_factura_id option:selected').text();
-        var tipo1=$('#tipo_factura_id option:selected').val();
-        var proveedor= $('#proveedores_id option:selected').text();
-        var proveedor1= $('#proveedores_id option:selected').val();
-        var producto= $('#productos_id_productos option:selected').text();
-        var producto1= $('#productos_id_productos option:selected').val();
-        var cantidad= $('#cantidad').val();
-        var precio= $('#precio').val();
-        totalgeneral1=0;
-        totalgeneral=0;
-      /*precio descontado*/  var total=0;
-      total=precio*cantidad;
+            var fecha = $('#fecha').val();
+            var estado_factura= $('#estado_factura option:selected').text();
+            var estado_factura1= $('#estado_factura option:selected').val();
+            var tipo= $('#tipo_factura_id option:selected').text();
+            var tipo1=$('#tipo_factura_id option:selected').val();
+            var proveedor= $('#proveedores_id option:selected').text();
+            var proveedor1= $('#proveedores_id option:selected').val();    
+            var producto= $('#productos_id_productos option:selected').text();
+            var producto1= $('#productos_id_productos option:selected').val();
+            var cantidad= $('#cantidad').val();
+            var precio= $('#precio').val();
+            if(producto!="" && cantidad!="" && cantidad>0 && precio!=""){
+                
+                subtotal[cont]=(precio*cantidad);
+                total = total + subtotal[cont];
+                var fila='<tr id="fila' +cont+'"><input type="hidden" name="total" id="total" value="'+total+'"></th><td><input type="hidden" name="productos_id_productos[]" value="'+producto1+'">'+producto+'</td><td><input type="hidden" name="cantidad[]" value="'+cantidad+'">'+cantidad+'</td><td><input type="hidden" name="precio[]" value="'+precio+'">C$'+precio+'</td><td><input type="hidden" name="subtotal[]" value="'+subtotal[cont]+'">C$'+subtotal[cont]+'</td><td><a class="button-danger btnEliminar"><i class="fa fa-remove" onclick="eliminar('+cont+')"></i></a></td></tr>';
+                cont++;
+                limpiar();
+                $("#totales").html("Total: C$" + total);
+                evaluar();   
+                $('#venta').append(fila);
+            }else{
+                alert('Estimado usuario le hacen falta ingresar información por registrar para agregar al detalle');
+            }
+        //Eliminar fila
+        }
 
-        $("#venta > tbody").append("<tr><td><input type='hidden' name='productos_id_productos[]' value="+producto1+">"+producto+"</td><td><input type='hidden' name='cantidad[]' value="+cantidad+">"+cantidad+"</td><td><input type='hidden' name='precio[]' value="+precio+">"+precio+"</td><td><input type='hidden' name='total[]' value="+total+">"+total+"</td><td><a class='button-danger btnEliminar'><i class='fa fa-remove'></i></a></td></tr>");
+        function eliminar(index){
+            total=total-subtotal[index]; 
+            $("#totales").html("Total: C$" + total);   
+            $("#fila" + index).remove();
+            evaluar();        
+        }
 
+         
+    
+          function evaluar()
+          {
+            if (total>0)
+            {
+              $("#guardar").show();
+            }
+            else
+            {
+              $("#guardar").hide(); 
+            }
+           }
       
 
-        //Eliminar fila
-        $('#venta').on('click','.btnEliminar', function(){
-            
-            var columnacon = $(this).closest('tr').find("td:eq(3)").text();
-            var valor=parseFloat(totalgeneral);
-            var valor2=parseFloat(columnacon);
-            totalgeneral= parseFloat(valor - valor2).toFixed(1,0);
-            totalgeneral1= parseFloat(valor - valor2).toFixed(1,0);
-            $("#total").text(totalgeneral);
-            $("#totalgeneral").text(totalgeneral1);
-            console.log(totalgeneral);
-            $(this).closest('tr').remove();
-
-
-            
-        });
-
-        $('#venta > tbody > tr').each(function (index,tr){
-        
-            
-            var columnacon=$(this).find("td:eq(3)").text()
-            totalgeneral += parseFloat(columnacon);
-            totalgeneral1 += parseFloat(columnacon);
-            $("#total").text(totalgeneral.toFixed(2));
-            $("#totalgeneral").text(totalgeneral1.toFixed(2));
-            console.log(totalgeneral);
-    
-
-            if (producto1 == $(this).find('input:eq(0)').val() ) {
-                //  block of code to be executed if the condition is true
-                console.log('Esta en la tabla');
-              } else {
-                //  block of code to be executed if the condition is false
-                
-                
-              }
-           
-              
-        });
-        $("#venta > tbody").append("<input type='hidden' name='totalgeneral' id='totalgeneral' value="+totalgeneral+">")
-    }
-</script>
+        function limpiar(){
+          $("#cantidad").val("");
+          $("#cantidad").focus();
+          $("#precio").val("");
+        }
+  
+    </script>
 
  

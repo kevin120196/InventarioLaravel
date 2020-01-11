@@ -12,6 +12,7 @@ use App\Vendedor;
 use App\Categoria;
 use App\Marca;
 use App\Producto;
+use App\Http\Requests\ventaRequest;
 use DB;
 use PDF;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -32,14 +33,14 @@ class FacturaVentaController extends Controller
             ->fecha($request->fecha)
             ->estado($request->estado)
             ->intervalo($request->inicio,$request->fin)
-            ->paginate(5);            
+            ->paginate(10);            
         }else{
             $productos=Producto::orderBy('id','ASC')->paginate(5);
             $venta= Factura_Venta::orderBy('id','DESC')
             ->codigo($request->codigo)
             ->fecha($request->fecha)
             ->estado($request->estado)
-            ->paginate(5);
+            ->paginate(10);
             
         }
 
@@ -70,7 +71,7 @@ class FacturaVentaController extends Controller
         $detalle=DB::table('factura_producto_venta as fac')
         ->join('productos as p', 'fac.productos_id','=','p.id')
         ->join('facturas_ventas as f','fac.ventas_id','=','f.id')
-        ->select('p.descripcion','fac.cantidad','fac.precio','fac.total','fac.iva')
+        ->select('p.descripcion','fac.cantidad','fac.precio','fac.subtotal','fac.iva')
         ->where('fac.ventas_id','=',$id)
         ->get();
         
@@ -87,10 +88,10 @@ class FacturaVentaController extends Controller
             $productos->proveedor;
         });
         $categoria=Categoria::orderBy('nombre_categoria','ASC')->pluck('nombre_categoria','id')->prepend('Seleccione una categoria');
-        $producto=Producto::orderBy('descripcion','ASC')->pluck('descripcion','id')->prepend('Producto');
-        $vendedor=Vendedor::orderBy('nombre_vendedor','ASC')->pluck('nombre_vendedor','id')->prepend('Vendedor');
-        $descuento=Descuento_Cliente::orderBy('descuento_cliente','ASC')->pluck('descuento_cliente','id')->prepend('Descuento');
-        $cliente=Cliente::orderBy('nombre','ASC')->pluck('nombre','id')->prepend('Nombre Cliente');
+        $producto=Producto::orderBy('id','ASC')->get();
+        $vendedor=Vendedor::orderBy('id','ASC')->get();
+        $descuento=Descuento_Cliente::orderBy('id','ASC')->get();
+        $cliente=Cliente::orderBy('id','ASC')->get();
         $Tipo=Tipo_Factura::orderBy('tipo_factura_nombre','ASC')->pluck('tipo_factura_nombre','id')->prepend('Tipo Factura');
         return view('admin.venta.create')->with('Tipo',$Tipo)->with('cliente',$cliente)->with('descuento',$descuento)->with('vendedor',$vendedor)
         ->with('categoria',$categoria)->with('producto',$producto)->with('productos',$productos);
@@ -108,7 +109,7 @@ class FacturaVentaController extends Controller
         $detalle=DB::table('factura_producto_venta as fac')
         ->join('productos as p', 'fac.productos_id','=','p.id')
         ->join('facturas_ventas as f','fac.ventas_id','=','f.id')
-        ->select('p.descripcion','fac.cantidad','fac.precio','fac.total','fac.iva')
+        ->select('p.descripcion','fac.cantidad','fac.precio','fac.subtotal','fac.iva')
         ->where('fac.ventas_id','=',$id)
         ->get();
         $timestamp = Carbon::now('-6:00');
@@ -135,19 +136,19 @@ class FacturaVentaController extends Controller
         //return view('admin.compra.report')->with('facturacompra',$facturacompra)->with('detalleFact',$detalleFact);
     }
 
-    public function store(Request $request){
+    public function store(ventaRequest $request){
         $venta=new Factura_Venta();
         
         DB::beginTransaction();
         try {
-            //dd($request->all());
+                $venta->codigo_factura=$request->codigo_factura;
                 $venta->fecha_factura=$request->fecha_factura;
                 $venta->tipos_factura_id=$request->tipos_factura_id;
                 $venta->estado_factura=$request->estado_factura;
                 $venta->clientes_id=$request->clientes_id;
                 $venta->descuentos_clientes_id=$request->descuentos_clientes_id;
                 $venta->vendedores_id=$request->vendedores_id;        
-                $venta->totalgeneral=$request->totalgeneral;
+                $venta->total=$request->total;
                 $contador= count(request()->productos_id);
                 $venta->save();
                 //dd($request->producto_cantidad_id[0]);
@@ -159,7 +160,7 @@ class FacturaVentaController extends Controller
                     $detalle->cantidad=$request->cantidad[$i];
                     $detalle->precio=$request->precio[$i];
                     $detalle->iva=$request->iva[$i];
-                    $detalle->total=$request->total[$i];
+                    $detalle->subtotal=$request->subtotal[$i];
                     $detalle->ventas_id=$venta->id;
                     $detalle->productos_id=$request->productos_id[$i];
                     

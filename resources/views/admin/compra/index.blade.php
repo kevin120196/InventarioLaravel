@@ -57,16 +57,16 @@
                     @endif
                     @if (Auth::user()->Vendedor())
                     <div class="input-contenedor input-30 input-100" style="border: none;">
-                        <a target="_blank" href="{{route('compras.create')}}" target="_blank" class="button-primary">Nueva Compra</a>
+                        <a target="_blank" href="{{route('compra.create')}}" target="_blank" class="button-primary">Nueva Compra</a>
                     </div>
-                    {!! Form::open(['id'=>'inputcodigo','route'=>'compras.index','method'=>'GET']) !!}
+                    {!! Form::open(['id'=>'inputcodigo','route'=>'compra.index','method'=>'GET']) !!}
                     <div class="input-contenedor input-30 input-100 buscar-input">
                         <i class="fa fa-search icon"></i> 
                         {!! Form::number('codigo', null, ['placeholder'=>'N° Factura']) !!}
                     </div>
                     {!! Form::close() !!}
 
-                    {!! Form::open(['id'=>'inputbuscar','route'=>'compras.index','method'=>'GET','style'=>'display:none']) !!}
+                    {!! Form::open(['id'=>'inputbuscar','route'=>'compra.index','method'=>'GET','style'=>'display:none']) !!}
                     <div class="input-contenedor input-30 input-100 buscar-input" >
                         <i class="fa fa-search icon"></i>
                         
@@ -75,18 +75,18 @@
 
                     {!! Form::close() !!}
 
-                    {!! Form::open(['id'=>'inputestante','route'=>'compras.index','method'=>'GET','style'=>'display:none']) !!}
+                    {!! Form::open(['id'=>'inputestante','route'=>'compra.index','method'=>'GET','style'=>'display:none']) !!}
                     <div class="input-contenedor input-30 input-100 buscar-input" >
                         <i class="fa fa-search icon"></i> <input type="text" name="estado" id="estado" placeholder="Estados Factura">
                     </div>
 
                     {!! Form::close() !!}
-                    {!! Form::open(['id'=>'inputinvervalos','route'=>'compras.index','method'=>'GET','style'=>'display:none','target'=>'_blank']) !!}
+                    {!! Form::open(['id'=>'inputinvervalos','route'=>'compra.index','method'=>'GET','style'=>'display:none','target'=>'_blank']) !!}
                     <div class="input-contenedor input-30 input-100 buscar-input" >
                         <i class="fa fa-search icon"></i> 
                         <input type="date" name="inicio" id="inicio" placeholder="Inicio">
                         
-                    {!! Form::open(['id'=>'inputinvervalos1','route'=>'compras.index','method'=>'GET','style'=>'display:none','target'=>'_blank']) !!}
+                    {!! Form::open(['id'=>'inputinvervalos1','route'=>'compra.index','method'=>'GET','style'=>'display:none','target'=>'_blank']) !!}
                         
                     <i class="fa fa-search icon"></i> 
                         <input type="date" name="fin" id="fin" placeholder="Fin">
@@ -119,12 +119,12 @@
                         <tbody>
                             @foreach($facturacompra as $compras)
                                 <tr>
-                                    <td>{{$compras->id}}</td>
+                                    <td>{{$compras->codigo_factura}}</td>
                                     <td>{{$compras->fecha_compra}}</td>
                                     <td>{{$compras->estado_factura}}</td>
                                     <td>{{$compras->tipoFactura->tipo_factura_nombre}}</td>
                                     <td>{{$compras->proveedores->nombre_proveedor}}</td>
-                                    <td>{{$compras->totalgeneral}}</td>
+                                    <td>C${{$compras->total}}</td>
                                     <td>
                                         @if (Auth::user()->Gerente())
                                         <a href="{{route('compra.show',$compras->id)}}" target="_blank" class="button-detail"><i class="fa fa-list"></i></a>
@@ -133,8 +133,8 @@
                                         <a href="{{route('admin.compra.devol',$compras->id)}}" class="button-warning" onclick="return confirm('¿Seguro que deseas pasar a devolucion la Factura?')"><i class="fa fa-undo"></i></a>
                                         @endif
                                         @if (Auth::user()->Vendedor())
-                                        <a href="{{route('compras.show',$compras->id)}}" target="_blank" class="button-detail"><i class="fa fa-list"></i></a>
-                                        <a href="{{route('admin.compras.report',$compras->id)}}" target="_blank" class="button-show"><i class="fa fa-print"></i></a>
+                                        <a href="{{route('compra.show',$compras->id)}}" target="_blank" class="button-detail"><i class="fa fa-list"></i></a>
+                                        <a href="{{route('admin.compra.report',$compras->id)}}" target="_blank" class="button-show"><i class="fa fa-print"></i></a>
                                         
                                         @endif
                           

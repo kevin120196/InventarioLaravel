@@ -443,6 +443,10 @@ input[type="text"]:read-only{
     text-transform: capitalize;   
 }
 
+input[type="number"]:disabled{
+    background-color: transparent;
+}
+
 input[type="search"]{
     font-size: 18px;
     width: 200px;
@@ -810,6 +814,14 @@ th,td{
     text-transform: capitalize;
 }
 
+.Compras th,td{
+    padding: 4px 20px 1px 42px;
+}
+
+.Ventas th,td{
+    padding: 10px 1px 10px 9px;
+}
+
 thead th{
     background-color: #1a2537;
     border-bottom: solid 5px #dddddd;
@@ -1013,6 +1025,14 @@ tr:hover td{
         display: none;
     }
 
+    .selectdescuen {
+        width: 86.8%;
+    }
+
+    .selectipofactura {
+        width: 86.8%;
+    }
+
     table{
         border: 6px solid whitesmoke;
         height: auto;
@@ -1035,10 +1055,16 @@ tr:hover td{
     .input-90{
         width: 90%;
     }
-    
+
+    .input-70{
+        width: 70%;
+    }
+
     .input-100{
         width: 100%;
     }
+
+
 
 
     .descuento td:before{
@@ -1410,6 +1436,9 @@ tr:hover td{
         content: 'Acción:';
         margin-right: 44px;
     }
+    .contenedor{
+        width: 100%;
+    }
 
     
     input[type="button"],
@@ -1434,10 +1463,7 @@ tr:hover td{
         width: 90%;
     }
     
-    .input-100{
-        width: 100%;
-    }
-
+    
     .buscar-input{
         margin: 0;
     }
@@ -1476,9 +1502,6 @@ tr:hover td{
         width: 60%;
     }
     
-    .input-70{
-        width: 70%;
-    }
     
     .input-80{
         width: 80%;
@@ -1521,9 +1544,6 @@ tr:hover td{
         width: 60%;
     }
     
-    .input-70{
-        width: 70%;
-    }
     
     .input-80{
         width: 80%;
@@ -1588,9 +1608,6 @@ tr:hover td{
         width: 60%;
     }
     
-    .input-70{
-        width: 70%;
-    }
     
     .input-80{
         width: 80%;
@@ -1627,9 +1644,6 @@ tr:hover td{
         width: 60%;
     }
     
-    .input-70{
-        width: 70%;
-    }
     
     .input-80{
         width: 80%;
@@ -1699,6 +1713,9 @@ tr:hover td{
     .input-90{
         width: 90%;
     }
+
+    
+
 
     
 

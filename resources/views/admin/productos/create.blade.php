@@ -39,12 +39,12 @@
     
             <div class="input-contenedor input-50 input-100">
                 <i class="fa fa-money icon"></i>
-                {!! Form::text('precio_compra', null, ['placeholder'=>'Precio Compra']) !!}
+                {!! Form::number('precio_compra', null, ['placeholder'=>'Precio Compra']) !!}
             </div>
     
             <div class="input-contenedor input-50 input-100">
                 <i class="material-icons icon">attach_money </i>
-                {!! Form::text('precio_venta', null, ['placeholder'=>'Precio Venta']) !!}
+                {!! Form::number('precio_venta', null, ['placeholder'=>'Precio Venta']) !!}
             </div>
             <div class="input-contenedor input-50 input-100">
                 <i class="fa fa-user-plus icon"></i>

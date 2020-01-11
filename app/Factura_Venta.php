@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Factura_Venta extends Model
 {
     protected $table="facturas_ventas";
-    protected $fillable=['fecha_factura','tipos_factura','estado_factura','clientes_id',
-    'descuentos_clientes_id','vendedores_id','totalgeneral'];
+    protected $fillable=['codigo_factura','fecha_factura','tipos_factura','estado_factura','clientes_id',
+    'descuentos_clientes_id','vendedores_id','total'];
 
 
     public function clientes () {
@@ -36,7 +36,7 @@ class Factura_Venta extends Model
     }
 
     public function scopeCodigo($query,$codigo){
-        return $query->where('id','LIKE',"%$codigo%");
+        return $query->where('codigo_factura','LIKE',"%$codigo%");
     }
 
     public function scopeFecha($query,$fecha){

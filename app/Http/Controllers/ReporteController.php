@@ -36,7 +36,7 @@ class ReporteController extends Controller
         $productos=Producto::codigo($request->codigo)->orderBy('id','ASC')
         ->descripcion($request->descripcion)
         ->estante($request->estante)
-        ->paginate(10);
+        ->get();
         $productos->each(function($productos){
             $productos->categoria;
             $productos->marca;
@@ -46,7 +46,7 @@ class ReporteController extends Controller
     }
 
     public function venta(Request $request){
-        $productos=Producto::orderBy('id','ASC')->paginate(5);
+        $productos=Producto::orderBy('id','ASC')->get();
         $venta= Factura_Venta::orderBy('id','DESC')
         ->codigo($request->codigo)
         ->fecha($request->fecha)
@@ -99,7 +99,7 @@ class ReporteController extends Controller
         ->codigo($request->codigo)  
         ->descripcion($request->descripcion)
         ->estante($request->estante)
-        ->paginate(10);
+        ->get();
         $productos->each(function($productos){
             $productos->categoria;
             $productos->marca;

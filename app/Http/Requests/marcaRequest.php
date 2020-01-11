@@ -25,6 +25,7 @@ class marcaRequest extends FormRequest
     {
         return [
             //
+            'marca'=>'max:50|required|unique:marcas'
         ];
     }
 }

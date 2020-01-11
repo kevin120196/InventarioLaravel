@@ -15,6 +15,7 @@ class CreateFacturasVentasTable extends Migration
     {
         Schema::create('facturas_ventas', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('codigo_factura');
             $table->date('fecha_factura');
             //$table->enum('tipos_factura',['Credito','Contado']);
             $table->enum('estado_factura',['Pagada','Pendiente','Anulada','Devolución']);
@@ -31,7 +32,7 @@ class CreateFacturasVentasTable extends Migration
             $table->foreign('descuentos_clientes_id')->references('id')->on('descuentos_clientes')->onDelete('cascade');
             $table->foreign('vendedores_id')->references('id')->on('vendedores')->onDelete('cascade');
             //
-            $table->double('totalgeneral');
+            $table->double('total');
             $table->timestamps();
         });
 
@@ -39,7 +40,7 @@ class CreateFacturasVentasTable extends Migration
             $table->increments('id');
             $table->double('cantidad');
             $table->double('precio');
-            $table->double('total');
+            $table->double('subtotal');
             $table->double('iva');
             //claves foraneas
             $table->integer('ventas_id')->unsigned();

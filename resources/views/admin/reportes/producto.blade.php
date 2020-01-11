@@ -113,7 +113,6 @@
                                 @endforeach
                         </tbody>
                     </table>
-                    {!!$productos->render()!!}
             </div>
         </div>
     </div>

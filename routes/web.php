@@ -194,26 +194,17 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
 
 
         //compras
-        Route::resource('compras','FacturaCompraController');   
-        Route::get('admin/compras/{id}/report',[
+        Route::resource('compra','FacturaCompraController');   
+        Route::get('admin/compra/{id}/report',[
             'uses'=>'FacturaCompraController@report',
-            'as'=>'admin.compras.report'
-        ]);
-
-        Route::get('admin/compra/{id}/destroy',[
-            'uses'=>'FacturaCompraController@destroy',
-            'as'=>'admin.compra.destroy'
-        ]);
-
-        Route::get('admin/compra/{id}/devol',[
-            'uses'=>'FacturaCompraController@devol',
-            'as'=>'admin.compra.devol'
+            'as'=>'admin.compra.report'
         ]);
 
         Route::get('admin/compra/reports',[
             'uses'=>'FacturaCompraController@reports',
             'as'=>'admin.compra.reports'
         ]);
+        
         Route::resource('detalleVenta','DetalleFacturaVentaController');
 
 
@@ -250,14 +241,14 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
         ]);
 
         //ventas
-        Route::resource('venta','FacturaVentaController');
-        Route::get('admin/venta/{id}/report',[
+        Route::resource('ventas','FacturaVentaController');
+        Route::get('admin/ventas/{id}/report',[
             'uses'=>'FacturaVentaController@report',
-            'as'=>'admin.venta.report'
+            'as'=>'admin.ventas.report'
         ]);
-        Route::get('admin/venta/details',[
+        Route::get('admin/ventas/details',[
             'uses'=>'FacturaVentaController@details',
-            'as'=>'admin.venta.details'
+            'as'=>'admin.ventas.details'
         ]);
 
 //fin de ventas

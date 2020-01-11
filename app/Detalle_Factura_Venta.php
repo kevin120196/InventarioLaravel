@@ -8,7 +8,7 @@ class Detalle_Factura_Venta extends Model
 {
     //
     protected $table="factura_producto_venta";
-    protected $fillable=['cantidad','precio','total','iva','venta_id','productos_id'];
+    protected $fillable=['cantidad','precio','subtotal','iva','venta_id','productos_id'];
     
     public function facturaVenta(){
         return $this->belongsToMany('App\Factura_Venta','factura_producto_venta','venta_id','marca_id');

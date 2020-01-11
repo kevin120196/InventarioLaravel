@@ -7,7 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <style>
 
-
+        body{
+            font-family: 'Montserrat', sans-serif;
+        }
             .input-contenedor{
                 margin-bottom: 15px;
                 border: 1px solid #aaa;
@@ -42,27 +44,27 @@
             
             label{
                 text-transform: capitalize;
-                   
+                margin-top: 4px;
             }
 
             .label1{
-                margin-left: 10em;
+                margin-left: 9.8em;
             }
             .label2{
-                margin-left: 6.1em;
+                margin-left: 5.5em;
             }
             .label3{
-                margin-left: 6em;
+                margin-left: 5.60em;
             }
             .label4{
-                margin-left: 7em;
+                margin-left: 6.72em;
             }
             .label5{
                 margin-left: 11em;
             }
 
             .label6{
-                margin-left: 13.5em;
+                margin-left: 13.2em;
             }
             
             
@@ -168,11 +170,11 @@
                 font-weight: bold;
                 }
                 .etiqueta{
-                    font-size: 12px;
+                    font-size: 14px;
                 }
                 
     </style>
-    <title>Factura de Venta N°: <?php echo $facturaventa->id?></title>
+    <title>Factura de Venta N°: <?php echo $facturaventa->codigo_factura?></title>
 </head>
 <body>
    
@@ -181,11 +183,11 @@
                     <h1>Factura de Venta</h1>
                     <h3>Repuestos El Triunfo</h3>
                 </div>
+                <br>
                 <div class="col-md-12">
-                <b></b>
                         <div class="form-group col-6">
                             <label for=""><b>Nº: </b></label>
-                            <label for="" class="label6"><?php echo $facturaventa->id?></label>
+                            <label for="" class="label6"><?php echo $facturaventa->codigo_factura?></label>
                         </div>
                         <div class="form-group col-6">
                                 <label for=""><b>Vendedor: </b></label>
@@ -210,14 +212,11 @@
                                 <label for=""><b>Cliente: </b></label>    
                                 <label for="" class="label5"><?php echo $facturaventa->clientes->nombre?></label>
                         </div>
-                        <div class="form-group col-6">
-                                <label for=""><b>Firma de Vendedor: </b></label>    
-                                <label for="" class="label2">____________________________</label>
-                        </div>
+                        <br>
                 </div>
             </form>
         
-        
+
             <div class="main-container" style="overflow: hidden; margin-left: 1px;margin-top: 1px">
                     <table>
                         <thead>
@@ -236,24 +235,35 @@
                                 <tr>
                                     <td>{{$detalles->descripcion}}</td>
                                     <td>{{$detalles->cantidad}}</td>
-                                    <td>{{$detalles->precio}}</td>
-                                    <td>{{$facturaventa->descuentos_clientes->descuento_cliente}}</td>
+                                    <td>C${{$detalles->precio}}</td>
+                                    <td>%{{$facturaventa->descuentos_clientes->descuento_cliente}}</td>
                                     <td>{{$detalles->iva}}</td>
-                                    <td>{{$detalles->total}}</td>
+                                    <td>C${{$detalles->subtotal}}</td>
                                 </tr>
                                
                             @endforeach
                         </tbody>
                         <tfoot style="background: #aaa">
                             <tr>
-                                <th><b>Total:</b> {{$facturaventa->totalgeneral}}</th>                            
+                                <th><b>Total:</b> C${{$facturaventa->total}}</th>                            
+                            </tr>
+                            <tr>
+                                <th><b>IVA:</b> 15%</th>                            
                             </tr>
                             
                         </tfoot>
                     </table>
                 </div>
+                <br>
                 <label for="" class=""><b class="etiqueta">Impreso por: {{Auth::user()->name}} </b></label><br>
                 <label for="" class=""><b class="etiqueta">Elaborado el: <?php echo $dia ?></b></label>
-    
+                <br>
+                <br>
+                <br>
+                <div class="form-group col-6">
+                    <label for=""><b>Firma de Vendedor: </b></label>    
+                    <label for="" class="label2">____________________________</label>
+            </div>
+
 </body>
 </html>

@@ -166,6 +166,7 @@
                 
     </style>
     <title>Document</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
    <div class="cabeceraForm">
@@ -195,7 +196,7 @@
                                     <td>{{$ventas->clientes->nombre}}</td>
                                     <td>{{$ventas->descuentos_clientes->descuento_cliente}}</td>
                                     <td>{{$ventas->vendedores->nombre_vendedor}}</td>
-                                    <td>{{$ventas->totalgeneral}}</td>
+                                    <td>{{$ventas->total}}</td>
                                 </tr>
                                 @endforeach
                         </tbody>

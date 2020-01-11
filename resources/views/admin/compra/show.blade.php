@@ -7,6 +7,10 @@
         </div>
         <div class="contenedor">
             <div class="input-contenedor input-50 input-100">
+                <i class="icon" aria-hidden="true">N°</i>
+                {!! Form::text('codigo_factura', $facturacompra->codigo_factura, ['placeholder'=>'Fecha','id'=>"fecha",'readOnly'])!!}
+            </div>
+            <div class="input-contenedor input-50 input-100">
                 <i class="fa fa-calendar icon" aria-hidden="true"></i>
                 {!! Form::text('fecha_compra', $facturacompra->fecha_compra, ['placeholder'=>'Fecha','id'=>"fecha",'readOnly'])!!}
             </div>
@@ -45,8 +49,8 @@
                         <tr>
                             <td>{{$detalle->descripcion}}</td>
                             <td>{{$detalle->cantidad}}</td>
-                            <td>{{$detalle->precio}}</td>
-                            <td>{{$detalle->total}}</td>
+                            <td>C${{$detalle->precio}}</td>
+                            <td>C${{$detalle->subtotal}}</td>
                         </tr>
                        
                     @endforeach
@@ -54,13 +58,13 @@
                 <tfoot style="background: #aaa">
                     
                     <tr>
-                        <th><b>Total: </b>{{$facturacompra->totalgeneral}}</th>
+                        <th><b>Total: </b>C${{$facturacompra->total}}</th>
                     </tr>
                 </tfoot>
             </table>
             <div class="container">
                 @if (Auth::user()->Vendedor())
-                <a href="{{route('compras.index')}}" class="button-primary">
+                <a href="{{route('compra.index')}}" class="button-primary">
                         <i class="fa fa-undo"></i>
                 </a>
                 @endif

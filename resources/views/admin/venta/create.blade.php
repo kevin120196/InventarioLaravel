@@ -79,7 +79,7 @@
                     <option value="">Producto</option>
                     @foreach($productos as $producto)
                         <option value="{{$producto->id}}_{{$producto->cantidad}}_{{$producto->precio_venta}}">
-                            {{$producto->codigo_alterno}} {{$producto->descripcion}}
+                            {{$producto->codigo_alterno}}-{{$producto->descripcion}}
                         </option>
                     @endforeach
                 </select>
@@ -167,7 +167,7 @@
             datos=document.getElementById('productos_id').value.split('_'); 
             $('#stock').val(datos[1]);
             $('#precio').val(datos[2]); 
-    
+            $('#cantidad').focus();
           });
       });
 
@@ -177,7 +177,7 @@
         datos=document.getElementById('productos_id').value.split('_'); 
         $('#stock').val(datos[1]);
         $('#precio').val(datos[2]); 
-
+        $("#cantidad").focus();
         });
         
             var totalgeneral=0;

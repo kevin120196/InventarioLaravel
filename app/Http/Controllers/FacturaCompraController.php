@@ -160,6 +160,7 @@ class FacturaCompraController extends Controller
                 $detalle->save();
             }
             DB::commit();
+            return $this->report($compra->id);
             Alert::success('Exito!','La compra '.$compra->id .' ha sido realizada de forma Correcta!!');
             
                 return redirect()->route('compra.index');

@@ -25,8 +25,8 @@ class productoRequest extends FormRequest
     {
         return [
             //
-            'codigo_original'=>'required|unique:Producto',
-            'codigo_alterno'=>'required|unique:Producto',
+            'codigo_original'=>'required|unique:productos',
+            'codigo_alterno'=>'required|unique:productos',
             'cantidad'=>'required',
             'precio_compra'=>'required',
             'precio_venta'=>'required',

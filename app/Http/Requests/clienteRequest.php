@@ -26,8 +26,8 @@ class clienteRequest extends FormRequest
         return [
             //
 
-            'nombre'=>'min:40|max:100|required',
-            'direccion'=>'min:40|max:100|required',
+            'nombre'=>'min:10|max:100|required',
+            'direccion'=>'min:10|max:100|required',
             'cedula'=>'max:20|required|unique:clientes',
             'numero_telefono'=>'max:15|nullable',
             'correo_electronico'=>'min:4|max:250|required|unique:clientes',

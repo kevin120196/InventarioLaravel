@@ -54,7 +54,7 @@
                     <option value="">Producto</option>
                     @foreach($productos as $producto)
                         <option value="{{$producto->id}}">
-                            {{$producto->descripcion}}
+                        {{$producto->codigo_alterno}}-{{$producto->descripcion}}
                         </option>
                     @endforeach
                 </select>

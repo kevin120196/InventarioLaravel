@@ -134,8 +134,8 @@
                                         @if (Auth::user()->Gerente())
                                         <a target="_blank" href="{{route('ventas.show',$ventas->id)}}" class="button-detail"><i class="fa fa-list"></i></a>
                                         <a target="_blank" href="{{route('admin.ventas.report',$ventas->id)}}" class="button-show"><i class="fa fa-print"></i></a>
-                                        <a target="_blank" href="{{route('admin.ventas.destroy',$ventas->id)}}" class="button-danger" onclick="return confirm('¿Seguro que deseas Anular la Factura?')"><i class="fa fa-window-close"></i></a>
-                                        <a target="_blank" href="{{route('admin.ventas.devol',$ventas->id)}}" class="button-warning" onclick="return confirm('¿Seguro que deseas pasar a devolucion la Factura?')"><i class="fa fa-undo"></i></a>
+                                        <a  href="{{route('admin.ventas.destroy',$ventas->id)}}" class="button-danger" onclick="return confirm('¿Seguro que deseas Anular la Factura?')"><i class="fa fa-window-close"></i></a>
+                                        <a  href="{{route('admin.ventas.devol',$ventas->id)}}" class="button-warning" onclick="return confirm('¿Seguro que deseas pasar a devolucion la Factura?')"><i class="fa fa-undo"></i></a>
                                         @endif
 
                                         @if (Auth::user()->Vendedor())
@@ -153,7 +153,8 @@
             </div>
         </div>
     </div>
-
+@endsection
+<script src="{{asset('js/jquery-git.js')}}"></script>
     <script>
         
         jQuery(function ($) {
@@ -197,6 +198,9 @@
                 document.getElementById("buttonguardar").style.display = "block";
             }
         }
+        var int=self.setInterval("refresh()",60000);
+	function refresh()
+	{
+		location.reload(true);
+	}
     </script>
-
-@endsection

@@ -50,6 +50,7 @@ class FacturaVentaController extends Controller
             $venta->vendedores;
             $venta->productos;
         });
+        
         return view('admin.venta.index')->with('venta',$venta)->with('productos',$productos);
     }
 
@@ -166,11 +167,11 @@ class FacturaVentaController extends Controller
                     
                 $detalle->save();
                 }
-                
                 DB::commit();
+               return $this->report($venta->id);
               Alert::success('Exito!','La venta '.$venta->id .' ha sido realizada de forma Correcta!!');
   
-                return redirect()->route('ventas.index');
+                //return redirect()->route('ventas.index');
                 
         } catch (\Throwable $th) {
             //throw $th;

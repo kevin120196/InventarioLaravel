@@ -25,9 +25,26 @@ class ventaRequest extends FormRequest
     {
         return [
             //
+            'codigo_factura'=>'min:10|max:20|required',
             'fecha_factura'=>'required',
+            'tipos_factura_id'=>'required',
             'estado_factura'=>'required',
-            'descuento'=>'required',
+            'clientes_id'=>'required',
+            'descuentos_clientes_id'=>'required',
+            'vendedores_id'=>'required',
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'codigo_factura'=>'Código de Factura',
+            'fecha_factura'=>'Fecha de Facturación',
+            'tipos_factura_id'=>'Tipo de Factura',
+            'estado_factura'=>'Estado de Factura',
+            'clientes_id'=>'Cliente',
+            'descuentos_clientes_id'=>'Descuento',
+            'vendedores_id'=>'Vendedor',        
         ];
     }
 }

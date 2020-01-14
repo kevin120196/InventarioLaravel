@@ -1013,6 +1013,16 @@ tr:hover td{
     .menu ul li ul {
         margin-right: -43em;
     }
+    input[type="date"] {
+        font-size: 20px;
+        width: 80%;
+        margin: auto;
+        margin-left: 7px;
+        padding: 7px;
+        border: none;
+        outline: none;
+        color: #757575;
+    }
 }
 
 @media only screen and (max-width: 767px){
@@ -1468,8 +1478,9 @@ tr:hover td{
         margin: 0;
     }
 
-    
-
+    input[type="date"] {
+        margin-left: 7px;
+    }
 }
 
 
@@ -1521,9 +1532,22 @@ tr:hover td{
         margin-right: -28.5em;
     }
 
+    input[type="date"] {
+        margin-left: 64px;
+    }
+    .buscar-input {
+        margin: 20px 0px;
+    }
 }
 
 @media only screen and (min-width: 990px){
+   
+    input[type="date"] {
+        margin-left: 84px;
+    }
+    .buscar-input {
+        margin: 20px 0px;
+    }
     #user{
         visibility: hidden;
     }
@@ -1715,9 +1739,14 @@ tr:hover td{
     }
 
     
+    .buscar-input{
+        margin: 23px 45px;
+    }
 
 
-    
+    input[type="date"] {
+        margin-left: 0;
+    }
 
     .labl{
         visibility: visible;

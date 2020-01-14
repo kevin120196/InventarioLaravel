@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use App\Proveedor;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
-use Illuminate\Http\proveedorRequest;
+use App\Http\Requests\proveedorRequest;
 use PDF;
 use Carbon\Carbon;
 class ProveedorController extends Controller

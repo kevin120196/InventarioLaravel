@@ -149,6 +149,8 @@
             </div>
         </div>
     </div>
+@endsection
+<script src="{{asset('js/jquery-git.js')}}"></script>
     <script>
         
         jQuery(function ($) {
@@ -190,6 +192,11 @@
                 document.getElementById("inputinvervalos").style.display = "block";
                 document.getElementById("inputinvervalos1").style.display = "block";
                 document.getElementById("buttonguardar").style.display = "block";
-            }        }
+            }
+        }
+        var int=self.setInterval("refresh()",60000);
+	function refresh()
+	{
+		location.reload(true);
+	}
     </script>
-@endsection

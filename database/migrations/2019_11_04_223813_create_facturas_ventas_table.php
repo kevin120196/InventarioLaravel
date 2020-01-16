@@ -18,7 +18,7 @@ class CreateFacturasVentasTable extends Migration
             $table->integer('codigo_factura');
             $table->date('fecha_factura');
             //$table->enum('tipos_factura',['Credito','Contado']);
-            $table->enum('estado_factura',['Pagada','Pendiente','Anulada','Devolución']);
+            $table->enum('estado_factura',['Pagada','Pendiente','Anulada','Devolución'])->default('Pagada');            
             //claves foraneas
             //$table->integer('estado_id')->unsigned();
             $table->integer('tipos_factura_id')->unsigned();

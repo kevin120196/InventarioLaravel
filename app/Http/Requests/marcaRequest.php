@@ -28,4 +28,11 @@ class marcaRequest extends FormRequest
             'nombre_marca'=>'max:50|required|unique:marcas'
         ];
     }
+
+    public function attributes()
+    {
+        return [
+            'nombre_marca'=>'Nombre de Marca'
+        ];
+    }
 }

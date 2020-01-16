@@ -26,7 +26,13 @@ class categoriaRequest extends FormRequest
         return [
             //
             'nombre_categoria'=>'max:50|required|unique:categorias'
+        ];
+    }
 
+    public function attributes()
+    {
+        return [
+            'nombre_categoria'=>'Nombre de Categoria'
         ];
     }
 }

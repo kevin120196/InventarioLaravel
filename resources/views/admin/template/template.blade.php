@@ -35,7 +35,7 @@
                                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
                                         </li>
                                         <hr>
-                                        <li class="enlace1"><a href="#"><i class="fa fa-home"></i> Inicio</a></span></li>        
+                                    <li class="enlace1"><a href="{{route('admin.index')}}"><i class="fa fa-home"></i> Inicio</a></span></li>        
                                     </ul>
                                 </li>     
                             </ul>   

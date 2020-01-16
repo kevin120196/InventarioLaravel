@@ -30,4 +30,13 @@ class UserRequest extends FormRequest
             'password'=>'min:4|max:120|required'
         ];
     }
+
+    public function attributes()
+    {
+        return [
+            'name' => 'Nombre',
+            'email'=>'Correo Electronico',
+            'password'=>'Contraseña'
+        ];
+    }
 }

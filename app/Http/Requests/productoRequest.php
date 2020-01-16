@@ -39,4 +39,24 @@ class productoRequest extends FormRequest
             'proveedor_id'=>'required'
         ];
     }
+
+
+    
+    public function attributes()
+    {
+        return [
+            'codigo_original'=>'Código Original',
+            'codigo_alterno'=>'Código Alterno',
+            'cantidad'=>'Cantidad',
+            'precio_compra'=>'Precio de Compra',
+            'precio_venta'=>'Precio de Venta',
+            'aplicacion'=>'Aplicación del Producto',
+            'descripcion'=>'Descripción del Producto',
+            'unidad_medida'=>'Unidad de Medida',
+            'numero_rack'=>'Numero de Estante',
+            'marca_id'=>'Marca',
+            'categoria_id'=>'Categoria',
+            'proveedor_id'=>'Proveedor'        
+        ];
+    }
 }

@@ -28,7 +28,7 @@
     
             <div class="input-50 input-contenedor input-100">
                 <i class="icon"><img src="{{asset('img/factura (1).png')}}" alt=""></i>
-                {!! Form::select('estado_factura',['Cancelada'=>'Cancelada','Pendiente'=>'Pendiente','Anulada'=>'Anulada'],null, ['class'=>'selectFactura','id'=>"estado_factura",'placeholder'=>'Estado factura'])!!}
+                {!! Form::select('estado_factura',['Pendiente'=>'Pendiente','Pagada'=>'Pagada'],null, ['class'=>'selectFactura','id'=>"estado_factura",'placeholder'=>'Estado factura'])!!}
             </div>
     
             <div class="input-contenedor input-30 input-100">

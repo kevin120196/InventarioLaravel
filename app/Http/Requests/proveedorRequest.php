@@ -32,4 +32,14 @@ class proveedorRequest extends FormRequest
             'correo_electronico_proveedor'=>'min:4|max:250|required|unique:proveedores'
             ];
     }
+
+    public function attributes()
+    {
+        return [
+            'nombre_proveedor'=>'Nombre del Proveedor',
+            'direccion_proveedor'=>'Dirección del Proveedor',
+            'cedula'=>'Cédula',
+            'numero_telefono'=>'Número Telefonico',
+            'correo_electronico_proveedor'=>'Correo Electronico'        ];
+    }
 }

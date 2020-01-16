@@ -34,4 +34,16 @@ class clienteRequest extends FormRequest
             'descuento_id'=>'required'
         ];
     }
+
+    public function attributes()
+    {
+        return [
+            'nombre'=>'Nombre de Cliente',
+            'direccion'=>'Dirección de Cliente',
+            'cedula'=>'Cédula',
+            'numero_telefono'=>'Número Telefonico',
+            'correo_electronico'=>'Correo Electronico',
+            'descuento_id'=>'Descuento'
+        ];
+    }
 }

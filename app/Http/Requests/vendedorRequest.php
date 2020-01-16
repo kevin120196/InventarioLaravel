@@ -33,4 +33,15 @@ class vendedorRequest extends FormRequest
 
         ];
     }
+
+    public function attributes()
+    {
+        return [
+            'nombre_vendedor'=>'Nombre de Vendedor',
+            'direccion'=>'Dirección',
+            'cedula_vendedor'=>'Cédula',
+            'numero_telefono'=>'Número Telefonico',
+            'correo_electronico'=>'Correo Electronico'
+        ];
+    }
 }

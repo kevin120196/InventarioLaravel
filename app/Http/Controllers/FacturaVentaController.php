@@ -98,7 +98,8 @@ class FacturaVentaController extends Controller
         ->with('categoria',$categoria)->with('producto',$producto)->with('productos',$productos);
     }
 
-    public function report($id){
+    public function report(Request $request,$id){
+        
         $facturaventa=Factura_venta::find($id);
         $facturaventa->each(function($facturaventa){
             $facturaventa->clientes;
@@ -118,7 +119,16 @@ class FacturaVentaController extends Controller
         $dia->setTimezone('America/Managua');
         $pdf=PDF::loadView('admin.venta.report',['facturaventa'=>$facturaventa,'detalle'=>$detalle,'dia'=>$dia]);
         $fileName='factura Nº '.$facturaventa->id;
-        return $pdf->stream($fileName.'.pdf');
+        if($facturaventa->estado_impreso==0){
+            $facturaventa->estado_impreso=1;
+            $facturaventa->update();
+            return $pdf->stream($fileName.'.pdf');
+
+        }else{
+            \Session::flash('message', 'La Factura '.$facturaventa->codigo_factura. ' ya fue impresa');
+            return redirect()->route('ventas.index');
+        }
+       
 //       return view('admin.venta.report')->with('facturaventa',$facturaventa)->with('detalle',$detalle);
     }
 
@@ -150,6 +160,7 @@ class FacturaVentaController extends Controller
                 $venta->descuentos_clientes_id=$request->descuentos_clientes_id;
                 $venta->vendedores_id=$request->vendedores_id;        
                 $venta->total=$request->total;
+                $venta->estado_impreso=0;
                 $contador= count(request()->productos_id);
                 $venta->save();
                 //dd($request->producto_cantidad_id[0]);

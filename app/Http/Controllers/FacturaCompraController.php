@@ -113,7 +113,15 @@ class FacturaCompraController extends Controller
         $dia->setTimezone('America/Managua');
         $pdf=PDF::loadView('admin.compra.report',['dia'=>$dia,'facturacompra'=>$facturacompra,'detalleFact'=>$detalleFact]);
         $fileName=$facturacompra->productos_id_productos;
-        return $pdf->stream($fileName.'.pdf');
+        if($facturacompra->estado_impreso==0){
+            $facturacompra->estado_impreso=1;
+            $facturacompra->update();
+            return $pdf->stream($fileName.'.pdf');
+        }else{
+            \Session::flash('message', 'La Factura '.$facturacompra->codigo_factura. ' ya fue impresa');
+            return redirect()->route('compra.index');
+        }
+       
         //return view('admin.compra.report')->with('facturacompra',$facturacompra)->with('detalleFact',$detalleFact);
     }
 
@@ -145,6 +153,7 @@ class FacturaCompraController extends Controller
             $compra->estado_factura=$request->estado_factura;
             $compra->tipo_factura_id=$request->tipo_factura_id;
             $compra->proveedores_id=$request->proveedores_id;
+            $compra->estado_impreso=0;
             $contador=count(request()->productos_id_productos);
             $compra->save();
 

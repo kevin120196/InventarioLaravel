@@ -1,6 +1,19 @@
 @extends('admin.template.template')
 @section('title','Gestion de Ventas')
 @section('contenido')
+@if(Session::has('message'))
+   <div class="alert danger">
+        
+    <span class="closebtn">&times;</span>
+        <ul>
+
+                <li style="list-style: none">{!! Session::get('message') !!}
+                </li>
+        </ul>
+    </div>
+
+   @endif
+
     <div class="row">
         <div class="formulario" style="box-shadow: none; padding:3px;">
             <div class="cabeceraForm">

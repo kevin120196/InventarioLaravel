@@ -25,6 +25,7 @@ class CreateFacturasVentasTable extends Migration
             $table->integer('clientes_id')->unsigned();
             $table->integer('descuentos_clientes_id')->unsigned();
             $table->integer('vendedores_id')->unsigned();
+            $table->boolean('estado_impreso');
             //Referencias claves foraneas
             //$table->foreign('estado_id')->references('id')->on('estados_facturas')->onDelete('cascade');
             $table->foreign('tipos_factura_id')->references('id')->on('tipos_facturas')->onDelete('cascade');

@@ -25,7 +25,7 @@ class comprasRequest extends FormRequest
     {
         return [
             //
-            'codigo_factura'=>'required|min:5|max:20',
+            'codigo_factura'=>'required|min:5|max:10|unique:facturas_compras',
             'fecha_compra'=>'required',
             'tipo_factura_id'=>'required',
             'proveedores_id'=>'required',

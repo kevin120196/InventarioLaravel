@@ -19,7 +19,7 @@
         <div class="contenedor">
             <div class="input-contenedor input-100">
                 <i class="icon" aria-hidden="true">N°</i>
-                {!! Form::number('codigo_factura', null, ['placeholder'=>'Número de Factura','id'=>"codigo_factura"])!!}
+                {!! Form::number('codigo_factura', null, ['placeholder'=>'Número de Factura','id'=>"codigo_factura",'max'=>'1000000000'])!!}
             </div>
             <div class="input-contenedor input-50 input-100">
                 <i class="fa fa-calendar icon" aria-hidden="true"></i>

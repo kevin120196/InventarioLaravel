@@ -25,7 +25,7 @@ class ventaRequest extends FormRequest
     {
         return [
             //
-            'codigo_factura'=>'min:10|max:20|required',
+            'codigo_factura'=>'min:5|max:10|required|unique:facturas_ventas',
             'fecha_factura'=>'required',
             'tipos_factura_id'=>'required',
             'estado_factura'=>'required',

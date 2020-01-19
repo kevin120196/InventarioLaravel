@@ -8,7 +8,7 @@ class Factura_Venta extends Model
 {
     protected $table="facturas_ventas";
     protected $fillable=['codigo_factura','fecha_factura','tipos_factura','estado_factura','clientes_id',
-    'descuentos_clientes_id','vendedores_id','total'];
+    'descuentos_clientes_id','vendedores_id','total','estado_impreso'];
 
 
     public function clientes () {

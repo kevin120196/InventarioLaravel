@@ -113,7 +113,15 @@ class FacturaCompraController extends Controller
         $dia->setTimezone('America/Managua');
         $pdf=PDF::loadView('admin.compra.report',['dia'=>$dia,'facturacompra'=>$facturacompra,'detalleFact'=>$detalleFact]);
         $fileName=$facturacompra->productos_id_productos;
-        return $pdf->stream($fileName.'.pdf');
+        if($facturacompra->estado_impreso==0){
+            $facturacompra->estado_impreso=1;
+            $facturacompra->update();
+            return $pdf->stream($fileName.'.pdf');
+        }else{
+            \Session::flash('message', 'La Factura '.$facturacompra->codigo_factura. ' ya fue impresa');
+            return redirect()->route('compra.index');
+        }
+       
         //return view('admin.compra.report')->with('facturacompra',$facturacompra)->with('detalleFact',$detalleFact);
     }
 
@@ -145,6 +153,7 @@ class FacturaCompraController extends Controller
             $compra->estado_factura=$request->estado_factura;
             $compra->tipo_factura_id=$request->tipo_factura_id;
             $compra->proveedores_id=$request->proveedores_id;
+            $compra->estado_impreso=0;
             $contador=count(request()->productos_id_productos);
             $compra->save();
 
@@ -177,19 +186,46 @@ class FacturaCompraController extends Controller
 
     public function destroy($id)
     {
-     $venta=Factura_Compra::findOrFail($id);
-        $venta->estado_factura='Anulada';
-        $venta->update();
-        Alert::error('Exito!','La Factura '.$venta->id .' ha sido anulada de forma Correcta!!');
-        return redirect()->route('compra.index');
+     $compra=Factura_Compra::findOrFail($id);
+     if($compra->estado_factura=="Anulada"){
+        if ($compra->estado_factura=="Devolucion") {
+            \Session::flash('message', 'La Factura '.$compra->codigo_factura. ' ya se anulo por lo que no puede pasar a estado de devolución');
+            return redirect()->route('compra.index');
+
+        }else{
+            \Session::flash('message', 'La Factura '.$compra->codigo_factura. ' ya fue anulada');
+            return redirect()->route('compra.index');
+
+        }
+
+        }else{
+            $compra->estado_factura='Anulada';
+            $compra->update();
+            Alert::error('Exito!','La Factura '.$compra->id .' ha sido anulada de forma Correcta!!');
+            return redirect()->route('compra.index');
+            
+        }
     }
 
     public function devol($id)
     {
-     $venta=Factura_Compra::findOrFail($id);
-        $venta->estado_factura='devolución';
-        $venta->update();
-        Alert::error('Exito!','La Factura '.$venta->id .' ha pasado a ser una devolución de forma Correcta!!');
-        return redirect()->route('compra.index');
+     $compra=Factura_Compra::findOrFail($id);
+        if($compra->estado_factura=="Devolucion"){
+            if ($compra->estado_factura=="Anulada") {
+                \Session::flash('message', 'La Factura '.$compra->codigo_factura. ' ya se realizo su devolución por lo que ya no puede pasar a Anulada');
+                return redirect()->route('compra.index');
+
+            }else{
+                \Session::flash('message', 'La Factura '.$compra->codigo_factura. ' ya se realizo su devolucion');
+                return redirect()->route('compra.index');
+            }
+    
+        }else{
+            $compra->estado_factura='devolución';
+            $compra->update();
+            Alert::error('Exito!','La Factura '.$compra->id .' ha pasado a ser una devolución de forma Correcta!!');
+            return redirect()->route('compra.index');
+        }
+        
     }
 }

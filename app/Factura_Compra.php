@@ -9,7 +9,7 @@ class Factura_Compra extends Model
 {
     protected $table="facturas_compras";
     protected $fillable=['codigo_factura','fecha_compra','tipo_factura_id','proveedores_id',
-    'estado_factura','total'];
+    'estado_factura','total','estado_impreso'];
 
     public function proveedores() { 
         return $this->belongsTo('App\Proveedor');

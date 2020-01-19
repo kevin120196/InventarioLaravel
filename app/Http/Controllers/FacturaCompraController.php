@@ -187,9 +187,15 @@ class FacturaCompraController extends Controller
     public function destroy($id)
     {
      $compra=Factura_Compra::findOrFail($id);
+<<<<<<< HEAD
      if($compra->estado_factura=="Anulada" || $compra->estado_factura=="Devolución"){
         if ($compra->estado_factura=="Devolución") {
             \Session::flash('message', 'Esta factura anteriormente fue realizada su devolución');
+=======
+     if($compra->estado_factura=="Anulada"){
+        if ($compra->estado_factura=="Devolucion") {
+            \Session::flash('message', 'La Factura '.$compra->codigo_factura. ' ya se anulo por lo que no puede pasar a estado de devolución');
+>>>>>>> 5f028c4b171b772bedb241d2c15fae884c29fc9c
             return redirect()->route('compra.index');
 
         }else{
@@ -210,6 +216,7 @@ class FacturaCompraController extends Controller
     public function devol($id)
     {
      $compra=Factura_Compra::findOrFail($id);
+<<<<<<< HEAD
         if($compra->estado_factura=="Devolución" || $compra->estado_factura=="Anulada"){
             if ($compra->estado_factura=="Anulada") {
                 \Session::flash('message', 'Esta factura anteriormente fue anulada');
@@ -217,11 +224,24 @@ class FacturaCompraController extends Controller
 
             }else{
                 \Session::flash('message', 'La Factura '.$compra->codigo_factura. ' ya se realizo su devolución');
+=======
+        if($compra->estado_factura=="Devolucion"){
+            if ($compra->estado_factura=="Anulada") {
+                \Session::flash('message', 'La Factura '.$compra->codigo_factura. ' ya se realizo su devolución por lo que ya no puede pasar a Anulada');
+                return redirect()->route('compra.index');
+
+            }else{
+                \Session::flash('message', 'La Factura '.$compra->codigo_factura. ' ya se realizo su devolucion');
+>>>>>>> 5f028c4b171b772bedb241d2c15fae884c29fc9c
                 return redirect()->route('compra.index');
             }
     
         }else{
+<<<<<<< HEAD
             $compra->estado_factura='Devolución';
+=======
+            $compra->estado_factura='devolución';
+>>>>>>> 5f028c4b171b772bedb241d2c15fae884c29fc9c
             $compra->update();
             Alert::error('Exito!','La Factura '.$compra->id .' ha pasado a ser una devolución de forma Correcta!!');
             return redirect()->route('compra.index');

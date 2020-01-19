@@ -196,6 +196,7 @@ class FacturaVentaController extends Controller
     public function destroy($id)
     {
      $venta=Factura_Venta::findOrFail($id);
+<<<<<<< HEAD
         if($venta->estado_factura=="Anulada"||$venta->estado_factura=="Devolución"){
             if ($venta->estado_factura=="Devolución") {
                 \Session::flash('message', 'Esta factura anteriormente fue realizada su devolución');
@@ -203,6 +204,15 @@ class FacturaVentaController extends Controller
 
             }else{
                 \Session::flash('message', 'La Factura '.$venta->codigo_factura. ' ya se realizo su Anulación');
+=======
+        if($venta->estado_factura=="Anulada"){
+            if ($venta->estado_factura=="Devolucion") {
+                \Session::flash('message', 'La Factura '.$venta->codigo_factura. ' ya se realizo su devolución por lo que ya no puede pasar a Anulada');
+                return redirect()->route('ventas.index');
+
+            }else{
+                \Session::flash('message', 'La Factura '.$venta->codigo_factura. ' ya se realizo su devolucion');
+>>>>>>> 5f028c4b171b772bedb241d2c15fae884c29fc9c
                 return redirect()->route('ventas.index');
             }
 
@@ -219,6 +229,7 @@ class FacturaVentaController extends Controller
     {        
         $venta=Factura_Venta::findOrFail($id);
 
+<<<<<<< HEAD
         if($venta->estado_factura=="Devolución"||$venta->estado_factura=="Anulada"){
             if ($venta->estado_factura=="Anulada") {
                 \Session::flash('message', 'Esta factura anteriormente fue anulada');
@@ -226,11 +237,24 @@ class FacturaVentaController extends Controller
 
             }else{
                 \Session::flash('message', 'La Factura '.$venta->codigo_factura. ' ya se realizo su devolución');
+=======
+        if($venta->estado_factura=="Devolucion"){
+            if ($venta->estado_factura=="Anulada") {
+                \Session::flash('message', 'La Factura '.$venta->codigo_factura. ' ya se realizo su devolución por lo que ya no puede pasar a Anulada');
+                return redirect()->route('ventas.index');
+
+            }else{
+                \Session::flash('message', 'La Factura '.$venta->codigo_factura. ' ya se realizo su devolucion');
+>>>>>>> 5f028c4b171b772bedb241d2c15fae884c29fc9c
                 return redirect()->route('ventas.index');
             }
 
         }else{
+<<<<<<< HEAD
             $venta->estado_factura='Devolución';
+=======
+            $venta->estado_factura='devolución';
+>>>>>>> 5f028c4b171b772bedb241d2c15fae884c29fc9c
             $venta->update();
             Alert::error('Exito!','La Factura '.$venta->id .' ha pasado a ser una devolución de forma Correcta!!');
             return redirect()->route('ventas.index');

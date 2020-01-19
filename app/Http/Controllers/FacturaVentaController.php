@@ -186,7 +186,7 @@ class FacturaVentaController extends Controller
                 
         } catch (\Throwable $th) {
             //throw $th;
-            dd($th);
+            Alert::error('Error!',$th);
             DB::rollBack();
         }
 

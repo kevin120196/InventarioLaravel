@@ -22,6 +22,7 @@ class CreateFacturasComprasTable extends Migration
             //claves foraneas
             $table->integer('tipo_factura_id')->unsigned();
             $table->integer('proveedores_id')->unsigned();
+            $table->boolean('estado_impreso');
             //$table->integer('estados_facturas_id')->unsigned();
             //Referencias claves
             $table->foreign('tipo_factura_id')->references('id')->on('tipos_facturas')->onDelete('cascade');

@@ -98,7 +98,8 @@ class FacturaVentaController extends Controller
         ->with('categoria',$categoria)->with('producto',$producto)->with('productos',$productos);
     }
 
-    public function report($id){
+    public function report(Request $request,$id){
+        
         $facturaventa=Factura_venta::find($id);
         $facturaventa->each(function($facturaventa){
             $facturaventa->clientes;
@@ -118,7 +119,16 @@ class FacturaVentaController extends Controller
         $dia->setTimezone('America/Managua');
         $pdf=PDF::loadView('admin.venta.report',['facturaventa'=>$facturaventa,'detalle'=>$detalle,'dia'=>$dia]);
         $fileName='factura Nº '.$facturaventa->id;
-        return $pdf->stream($fileName.'.pdf');
+        if($facturaventa->estado_impreso==0){
+            $facturaventa->estado_impreso=1;
+            $facturaventa->update();
+            return $pdf->stream($fileName.'.pdf');
+
+        }else{
+            \Session::flash('message', 'La Factura '.$facturaventa->codigo_factura. ' ya fue impresa');
+            return redirect()->route('ventas.index');
+        }
+       
 //       return view('admin.venta.report')->with('facturaventa',$facturaventa)->with('detalle',$detalle);
     }
 
@@ -150,6 +160,7 @@ class FacturaVentaController extends Controller
                 $venta->descuentos_clientes_id=$request->descuentos_clientes_id;
                 $venta->vendedores_id=$request->vendedores_id;        
                 $venta->total=$request->total;
+                $venta->estado_impreso=0;
                 $contador= count(request()->productos_id);
                 $venta->save();
                 //dd($request->producto_cantidad_id[0]);
@@ -185,18 +196,45 @@ class FacturaVentaController extends Controller
     public function destroy($id)
     {
      $venta=Factura_Venta::findOrFail($id);
-        $venta->estado_factura='Anulada';
-        $venta->update();
-        Alert::error('Exito!','La Factura '.$venta->id .' ha sido anulada de forma Correcta!!');
-        return redirect()->route('ventas.index');
+        if($venta->estado_factura=="Anulada"||$venta->estado_factura=="Devolución"){
+            if ($venta->estado_factura=="Devolución") {
+                \Session::flash('message', 'Esta factura anteriormente fue realizada su devolución');
+                return redirect()->route('ventas.index');
+
+            }else{
+                \Session::flash('message', 'La Factura '.$venta->codigo_factura. ' ya se realizo su Anulación');
+                return redirect()->route('ventas.index');
+            }
+
+        }else{
+            $venta->estado_factura='Anulada';
+            $venta->update();
+            Alert::error('Exito!','La Factura '.$venta->id .' ha sido anulada de forma Correcta!!');
+            return redirect()->route('ventas.index');
+
+        }
     }
 
     public function devol($id)
-    {
-     $venta=Factura_Venta::findOrFail($id);
-        $venta->estado_factura='devolución';
-        $venta->update();
-        Alert::error('Exito!','La Factura '.$venta->id .' ha pasado a ser una devolución de forma Correcta!!');
-        return redirect()->route('ventas.index');
+    {        
+        $venta=Factura_Venta::findOrFail($id);
+
+        if($venta->estado_factura=="Devolución"||$venta->estado_factura=="Anulada"){
+            if ($venta->estado_factura=="Anulada") {
+                \Session::flash('message', 'Esta factura anteriormente fue anulada');
+                return redirect()->route('ventas.index');
+
+            }else{
+                \Session::flash('message', 'La Factura '.$venta->codigo_factura. ' ya se realizo su devolución');
+                return redirect()->route('ventas.index');
+            }
+
+        }else{
+            $venta->estado_factura='Devolución';
+            $venta->update();
+            Alert::error('Exito!','La Factura '.$venta->id .' ha pasado a ser una devolución de forma Correcta!!');
+            return redirect()->route('ventas.index');
+    
+        }
     }
 }

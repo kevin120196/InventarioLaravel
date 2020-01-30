@@ -169,8 +169,25 @@ class FacturaCompraController extends Controller
                 $detalle->save();
             }
             DB::commit();
-            return $this->report($compra->id);
-            //Alert::success('Exito!','La compra '.$compra->id .' ha sido realizada de forma Correcta!!');
+            $facturacompra=Factura_compra::find($compra->id);
+            $facturacompra->each(function($facturacompra){
+                $facturacompra->producto;
+                $facturacompra->proveedores;
+                $facturacompra->tipoFactura;
+            });
+            $detalleFact=DB::table('factura_producto_compra as fac')
+            ->join('productos as p', 'fac.productos_id_productos','=','p.id')
+            ->join('facturas_compras as f','fac.facturas_compras_id','=','f.id')
+            ->select('p.descripcion','fac.cantidad','fac.precio','fac.subtotal')
+            ->where('fac.facturas_compras_id','=',$compra->id)
+            ->get();
+            $timestamp = Carbon::now('-6:00');
+            $dia = Carbon::createFromFormat('Y-m-d H:i:s', $timestamp, 'America/Managua');
+            $dia->setTimezone('America/Managua');
+            $pdf=PDF::loadView('admin.compra.report',['dia'=>$dia,'facturacompra'=>$facturacompra,'detalleFact'=>$detalleFact]);
+            $fileName=$facturacompra->id;
+            return $pdf->stream($fileName.'.pdf');
+                //Alert::success('Exito!','La compra '.$compra->id .' ha sido realizada de forma Correcta!!');
             //return redirect()->route('compra.index');
             
 
@@ -200,8 +217,9 @@ class FacturaCompraController extends Controller
 
         }else{
             $compra->estado_factura='Anulada';
+            $compra->estado_impreso=0;
             $compra->update();
-            Alert::error('Exito!','La Factura '.$compra->id .' ha sido anulada de forma Correcta!!');
+            Alert::error('Exito!','La Factura '.$compra->codigo_factura .' ha sido anulada de forma Correcta!!');
             return redirect()->route('compra.index');
             
         }
@@ -222,8 +240,9 @@ class FacturaCompraController extends Controller
     
         }else{
             $compra->estado_factura='Devolución';
+            $compra->estado_impreso=0;
             $compra->update();
-            Alert::error('Exito!','La Factura '.$compra->id .' ha pasado a ser una devolución de forma Correcta!!');
+            Alert::error('Exito!','La Factura '.$compra->codigo_factura .' ha pasado a ser una devolución de forma Correcta!!');
             return redirect()->route('compra.index');
         }
         

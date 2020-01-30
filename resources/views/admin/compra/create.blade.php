@@ -63,7 +63,7 @@
 
             <div class="input-contenedor input-50 input-100">
                 <i class="icon"><img src="{{asset('img/cantidad (4).png')}}" alt=""></i>
-                {!! Form::number('cantidad', null, ['placeholder'=>'Cantidad','id'=>"cantidad"])!!}
+                {!! Form::text('cantidad', null, ['placeholder'=>'Cantidad','id'=>"cantidad"])!!}
             </div>
     
             <div class="input-contenedor input-50 input-100">

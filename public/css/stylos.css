@@ -1539,7 +1539,19 @@ tr:hover td{
         margin: 20px 0px;
     }
 }
+@media only screen and (min-width: 800px) and (max-width: 810px){
+    .buscar-input {
+        margin: 20px 0px;
+    }
 
+    main{
+        width: 103%;
+    }
+
+    .cabecera{
+        width: 103%;
+    }
+}
 @media only screen and (min-width: 990px){
    
     input[type="date"] {

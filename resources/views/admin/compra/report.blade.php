@@ -176,7 +176,7 @@
                 }
                 
     </style>
-    <title>Factura de Compra <?php echo $facturacompra->codigo_factura?></title>
+    <title>Factura de Compra Nº <?php echo $facturacompra->codigo_factura?></title>
 </head>
 <body>
    

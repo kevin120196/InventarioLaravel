@@ -10,12 +10,12 @@
 
                                 <div style="border: none; width:100%;" class="input-contenedor input-100">
                                     @if (Auth::user()->Gerente())
-                                    <a class="button-primary" href="{{route('ventas.create')}}">Realizar Venta</a>
-                                    <a class="button-primary" href="{{route('compra.create')}}">Realizar Compra</a>
+                                    <a target="_blank" class="button-primary" href="{{route('ventas.create')}}">Realizar Venta</a>
+                                    <a target="_blank" class="button-primary" href="{{route('compra.create')}}">Realizar Compra</a>
                                     @endif
                                     @if (Auth::user()->Vendedor())
-                                    <a class="button-primary" href="{{route('ventas.create')}}">Realizar Venta</a>
-                                    <a class="button-primary" href="{{route('compra.create')}}">Realizar Compra</a>
+                                    <a target="_blank" class="button-primary" href="{{route('ventas.create')}}">Realizar Venta</a>
+                                    <a target="_blank" class="button-primary" href="{{route('compra.create')}}">Realizar Compra</a>
                                     @endif
                                 </div>
                             </div>

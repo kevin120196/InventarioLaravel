@@ -179,7 +179,27 @@ class FacturaVentaController extends Controller
                 $detalle->save();
                 }
                 DB::commit();
-               return $this->report($venta->id);
+                $facturaventa=Factura_venta::find($venta->id);
+                $facturaventa->each(function($facturaventa){
+                    $facturaventa->clientes;
+                    $facturaventa->descuentos_clientes;
+                    $facturaventa->vendedores;
+                    $facturaventa->productos;
+                    $facturaventa->tipos_factura;
+                });
+                $detalle=DB::table('factura_producto_venta as fac')
+                ->join('productos as p', 'fac.productos_id','=','p.id')
+                ->join('facturas_ventas as f','fac.ventas_id','=','f.id')
+                ->select('p.descripcion','fac.cantidad','fac.precio','fac.subtotal','fac.iva')
+                ->where('fac.ventas_id','=',$venta->id)
+                ->get();
+                $timestamp = Carbon::now('-6:00');
+                $dia = Carbon::createFromFormat('Y-m-d H:i:s', $timestamp, 'America/Managua');
+                $dia->setTimezone('America/Managua');
+                $pdf=PDF::loadView('admin.venta.report',['facturaventa'=>$facturaventa,'detalle'=>$detalle,'dia'=>$dia]);
+                $fileName='factura Nº '.$facturaventa->id;
+                return $pdf->stream($fileName.'.pdf');
+        
                 //Alert::success('Exito!','La venta '.$venta->id .' ha sido realizada de forma Correcta!!');
                 //return redirect()->route('ventas.index');
                 
@@ -208,8 +228,9 @@ class FacturaVentaController extends Controller
 
         }else{
             $venta->estado_factura='Anulada';
+            $venta->estado_impreso=0;
             $venta->update();
-            Alert::error('Exito!','La Factura '.$venta->id .' ha sido anulada de forma Correcta!!');
+            Alert::error('Exito!','La Factura '.$venta->codigo_factura .' ha sido anulada de forma Correcta!!');
             return redirect()->route('ventas.index');
 
         }
@@ -231,8 +252,9 @@ class FacturaVentaController extends Controller
 
         }else{
             $venta->estado_factura='Devolución';
+            $venta->estado_impreso=0;
             $venta->update();
-            Alert::error('Exito!','La Factura '.$venta->id .' ha pasado a ser una devolución de forma Correcta!!');
+            Alert::error('Exito!','La Factura '.$venta->codigo_factura .' ha pasado a ser una devolución de forma Correcta!!');
             return redirect()->route('ventas.index');
     
         }

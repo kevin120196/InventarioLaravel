@@ -169,7 +169,10 @@
 </head>
 <body>
    <div class="cabeceraForm">
-       <h1>Reporte de Ventas</h1>
+    <div>
+        <img style="width: 560px;height:auto;" src="./img/logoeltriunfo.png" alt="">
+    </div>
+    <h1>Reporte de Ventas</h1>
    </div>
         <div class="main-container">
                 <table class="proveedor">
@@ -193,14 +196,14 @@
                                     <td>{{$ventas->estado_factura}}</td>
                                     <td>{{$ventas->tipos_factura->tipo_factura_nombre}}</td>
                                     <td>{{$ventas->clientes->nombre}}</td>
-                                    <td>%{{$ventas->descuentos_clientes->descuento_cliente}}</td>
+                                    <td>{{$ventas->descuentos_clientes->descuento_cliente}}%</td>
                                     <td>{{$ventas->vendedores->nombre_vendedor}}</td>
                                     <td>C${{$ventas->total}}</td>
                                 </tr>
                                 @endforeach
                         </tbody>
                     </table>
-                    <label for="" class=""><b>Impreso por: {{Auth::user()->name}} </b></label><br>
+                    <label for="" class=""><b>Impreso por: {{Auth::user()->nameUser}} </b></label><br>
                     <label for="" class=""><b>Elaborado el: <?php echo $dia ?></b></label>
 
             </div>

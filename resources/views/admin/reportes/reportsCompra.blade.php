@@ -169,6 +169,9 @@
 </head>
 <body>
    <div class="cabeceraForm">
+    <div>
+        <img style="width: 560px;height:auto;" src="./img/logoeltriunfo.png" alt="">
+    </div>
        <h1>Reporte de Compras</h1>
    </div>
         <div class="main-container">
@@ -186,7 +189,7 @@
                     <tbody>
                         @foreach($facturacompra as $compras)
                             <tr>
-                                <td>{{$compras->id}}</td>
+                                <td>{{$compras->codigo_factura}}</td>
                                 <td>{{$compras->fecha_compra}}</td>
                                 <td>{{$compras->estado_factura}}</td>
                                 <td>{{$compras->tipoFactura->tipo_factura_nombre}}</td>
@@ -197,7 +200,7 @@
                     </tbody>
 
                 </table>
-                <label for="" class=""><b>Impreso por: {{Auth::user()->name}} </b></label><br>
+                <label for="" class=""><b>Impreso por: {{Auth::user()->nameUser}} </b></label><br>
                 <label for="" class=""><b>Elaborado: <?php echo $dia ?></b></label>
                     
             </div>

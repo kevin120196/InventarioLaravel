@@ -120,7 +120,7 @@
                         <tbody>
                             @foreach($facturacompra as $compras)
                                 <tr>
-                                    <td>{{$compras->id}}</td>
+                                    <td>{{$compras->codigo_factura}}</td>
                                     <td>{{$compras->fecha_compra}}</td>
                                     <td>{{$compras->estado_factura}}</td>
                                     <td>{{$compras->tipoFactura->tipo_factura_nombre}}</td>

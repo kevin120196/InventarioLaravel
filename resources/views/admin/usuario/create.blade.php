@@ -21,7 +21,12 @@
         {!! csrf_field() !!}
         <div class="input-contenedor input-100">
             <i class="fa fa-user icon"></i>
-            {!! Form::text('name', null, ['placeholder'=>'Nombre de Usuario'])!!}
+            {!! Form::text('nameUser', null, ['placeholder'=>'Nombre de Usuario'])!!}
+        </div>
+
+        <div class="input-contenedor input-100">
+            <i class="fa fa-user icon"></i>
+            {!! Form::text('name', null, ['placeholder'=>'Alias de Usuario'])!!}
         </div>
     
         <div class="input-contenedor input-100">

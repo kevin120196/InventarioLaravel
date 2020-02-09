@@ -26,6 +26,7 @@
                             <thead>
                                 <tr>
                                     <th>Nombre Usuario</th>
+                                    <th>Alias Usuario</th>
                                     <th>Email</th>
                                     <th>Tipo de Usuario</th>
                                     <th>Accion</th>
@@ -35,6 +36,7 @@
                                 @foreach ($user as $usuario)
                                     
                                     <tr> 
+                                        <td>{{$usuario->nameUser}}</td>
                                         <td>{{$usuario->name}}</td>
                                         <td>{{$usuario->email}}</td>
                                         <td>{{$usuario->user_type}}</td>                            

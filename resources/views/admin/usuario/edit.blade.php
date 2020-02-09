@@ -18,9 +18,15 @@
     </div>
     <div class="contenedor">
         {!! csrf_field() !!}
+
         <div class="input-contenedor input-100">
             <i class="fa fa-user icon"></i>
-            {!! Form::text('name', $user->name, ['placeholder'=>'Nombre de Usuario'])!!}
+            {!! Form::text('nameUser', $user->nameUser, ['placeholder'=>'Nombre de Usuario'])!!}
+        </div>
+
+        <div class="input-contenedor input-100">
+            <i class="fa fa-user icon"></i>
+            {!! Form::text('name', $user->name, ['placeholder'=>'Alias de Usuario'])!!}
         </div>
     
         <div class="input-contenedor input-100">

@@ -169,6 +169,9 @@
 </head>
 <body>  
     <div class="cabeceraForm">
+        <div>
+            <img style="width: 560px;height:auto;" src="./img/logoeltriunfo.png" alt="">
+        </div>
         <h1>Reporte de Producto</h1>
     </div>      
     <div class="main-container">
@@ -210,7 +213,7 @@
                         @endforeach
                 </tbody>
             </table>
-            <label for="" class=""><b>Impreso por: {{Auth::user()->name}} </b></label><br>
+            <label for="" class=""><b>Impreso por: {{Auth::user()->nameUser}} </b></label><br>
             <label for="" class=""><b>Elaborado: <?php echo $dia ?></b></label>
 
     </div>

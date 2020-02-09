@@ -15,7 +15,7 @@ class CreateFacturasVentasTable extends Migration
     {
         Schema::create('facturas_ventas', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('codigo_factura');
+            $table->integer('codigo_factura')->unsigned();
             $table->date('fecha_factura');
             //$table->enum('tipos_factura',['Credito','Contado']);
             $table->enum('estado_factura',['Pagada','Pendiente','Anulada','Devolución'])->default('Pagada');            

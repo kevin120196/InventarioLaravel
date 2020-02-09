@@ -88,7 +88,7 @@
             
             <div class="input-contenedor input-40 input-100">
                 <i class="icon"><img src="{{asset('img/cantidad (4).png')}}" alt=""></i>
-                {!! Form::text('cantidad', null, ['placeholder'=>'Cantidad','id'=>"cantidad"])!!}
+                {!! Form::number('cantidad', null, ['placeholder'=>'Cantidad','id'=>"cantidad"])!!}
             </div>
 
             <div class="input-contenedor input-30 input-100">
@@ -220,7 +220,7 @@
                 //var total=subtotal+subtotal1;
                     if(producto!="" && cantidad!="" && cantidad>0 && precio!="" &&descuento!="Descuento"){
 
-                        if(stock>cantidad){
+                        if(stock > parseInt(cantidad)){
                             subtotal[cont]=(parseFloat(subtotal1)).toFixed(2);
                             
                             total=(parseFloat(total)+parseFloat(subtotal[cont])).toFixed(2);

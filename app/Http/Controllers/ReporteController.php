@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\VentaExport;
+use App\Factura;
 use Illuminate\Http\Request;
 use App\producto;
 use App\Factura_Compra;
 use App\Factura_Venta;
+use App\productos;
 use PDF;
 use Carbon\Carbon;
+use Maatwebsite\Excel\Facades\Excel;
 class ReporteController extends Controller
 {
     //
@@ -113,7 +117,27 @@ class ReporteController extends Controller
         return $pdf->stream($fileName.'.pdf');
     }
     
-    public function reporteVenta(Request $request){
+    public function ExcelVenta(Request $request)
+    {
+
+        if($request->inicio && $request->fin != null){
+            $venta= Factura_Venta::orderBy('id','DESC')
+            ->codigo($request->codigo)
+            ->fecha($request->fecha)
+            ->estado($request->estado)
+            ->intervalo($request->inicio,$request->fin)
+            ->get()->toArray();
+        }else{
+            $venta= Factura_Venta::orderBy('id','DESC')
+            ->codigo($request->codigo)
+            ->fecha($request->fecha)
+            ->estado($request->estado)
+            ->get()->toArray();            
+        }      
+                     
+    }
+    
+    public function ReporteVenta(Request $request){
 
         if($request->inicio && $request->fin != null){
             $venta= Factura_Venta::orderBy('id','DESC')
@@ -141,9 +165,10 @@ class ReporteController extends Controller
         $dia->setTimezone('America/Managua');
         $pdf=PDF::loadView('admin.reportes.reportsVenta',['venta'=>$venta,'dia'=>$dia]);
         $fileName='reportes_venta' .Carbon::Now();
+        return Excel::download(new VentaExport, 'Reporte_Venta '.Carbon::Now().'.xls');
         return $pdf->stream($fileName.'.pdf');
+        
         //return view('admin.compra.report')->with('facturacompra',$facturacompra)->with('detalleFact',$detalleFact);
     }
-
 
 }

@@ -242,7 +242,7 @@
                     </tfoot>
                 </table>
                 <br>
-                <label for="" class=""><b class="etiqueta">Impreso por: {{Auth::user()->name}} </b></label><br>
+                <label for="" class=""><b class="etiqueta">Impreso por: {{Auth::user()->nameUser}} </b></label><br>
                 <label for="" class=""><b class="etiqueta">Elaborado: <?php echo $dia ?></b></label>
         </div>
 </body>

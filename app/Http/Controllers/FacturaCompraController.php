@@ -235,7 +235,7 @@ class FacturaCompraController extends Controller
                     \Session::flash('message', 'Esta Compra no se puede devolver porque supera la existencia del Producto en inventario');
                     return redirect()->route('compra.index');        
                 }else{
-                    $compra->estado_factura='Anulada';
+                    $compra->estado_factura='Devolución';
                     $compra->estado_impreso=0;
                     $compra->update();
                     Alert::error('Exito!','La Factura '.$compra->codigo_factura .' ha pasado a devolución de forma Correcta!!');

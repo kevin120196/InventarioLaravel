@@ -118,7 +118,7 @@ class FacturaVentaController extends Controller
         $dia = Carbon::createFromFormat('Y-m-d H:i:s', $timestamp, 'America/Managua');
         $dia->setTimezone('America/Managua');
         $pdf=PDF::loadView('admin.venta.report',['facturaventa'=>$facturaventa,'detalle'=>$detalle,'dia'=>$dia]);
-        $fileName='factura Nº '.$facturaventa->id;
+        $fileName='Factura Nº '.$facturaventa->id;
         if($facturaventa->estado_impreso==0){
             $facturaventa->estado_impreso=1;
             $facturaventa->update();
@@ -197,7 +197,7 @@ class FacturaVentaController extends Controller
                 $dia = Carbon::createFromFormat('Y-m-d H:i:s', $timestamp, 'America/Managua');
                 $dia->setTimezone('America/Managua');
                 $pdf=PDF::loadView('admin.venta.report',['facturaventa'=>$facturaventa,'detalle'=>$detalle,'dia'=>$dia]);
-                $fileName='factura Nº '.$facturaventa->id;
+                $fileName='Factura Nº '.$facturaventa->id;
                 return $pdf->stream($fileName.'.pdf');
         
                 //Alert::success('Exito!','La venta '.$venta->id .' ha sido realizada de forma Correcta!!');

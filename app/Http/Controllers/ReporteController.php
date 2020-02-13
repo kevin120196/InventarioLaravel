@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Exports\VentaExport;
+use App\Exports\CompraExport;
+use App\Exports\ProductosExport;
 use App\Factura;
 use Illuminate\Http\Request;
 use App\producto;
@@ -50,19 +52,18 @@ class ReporteController extends Controller
     }
 
     public function venta(Request $request){
-        $productos=Producto::orderBy('id','ASC')->get();
         $venta= Factura_Venta::orderBy('id','DESC')
         ->codigo($request->codigo)
         ->fecha($request->fecha)
         ->estado($request->estado)
-        ->paginate(5);
+        ->get();
         $venta->each(function($venta){
             $venta->clientes;
             $venta->descuentos_clientes;
             $venta->vendedores;
             $venta->productos;
         });
-        return view('admin.reportes.venta')->with('venta',$venta)->with('productos',$productos);
+        return view('admin.reportes.venta')->with('venta',$venta);
     }
 
     public function reportCompra(Request $request){
@@ -114,27 +115,24 @@ class ReporteController extends Controller
         $dia->setTimezone('America/Managua');
         $pdf=PDF::loadView('admin.reportes.reporteProduct',['productos'=>$productos,'dia'=>$dia])->setPaper('A4', 'landscape');;
         $fileName='reporte_productos '. Carbon::now();
+        
         return $pdf->stream($fileName.'.pdf');
     }
     
-    public function ExcelVenta(Request $request)
+    public function ExcelProducto()
     {
+        return Excel::download(new ProductosExport, 'Inventario de Productos '.Carbon::Now().'.xls');                        
+    }
 
-        if($request->inicio && $request->fin != null){
-            $venta= Factura_Venta::orderBy('id','DESC')
-            ->codigo($request->codigo)
-            ->fecha($request->fecha)
-            ->estado($request->estado)
-            ->intervalo($request->inicio,$request->fin)
-            ->get()->toArray();
-        }else{
-            $venta= Factura_Venta::orderBy('id','DESC')
-            ->codigo($request->codigo)
-            ->fecha($request->fecha)
-            ->estado($request->estado)
-            ->get()->toArray();            
-        }      
-                     
+    public function ExcelVenta()
+    {
+        return Excel::download(new VentaExport, 'Reporte_Venta '.Carbon::Now().'.xls');
+                        
+    }
+
+    public function ExcelCompra()
+    {
+        return Excel::download(new CompraExport, 'Reporte_Compra '.Carbon::Now().'.xls');                
     }
     
     public function ReporteVenta(Request $request){
@@ -165,7 +163,6 @@ class ReporteController extends Controller
         $dia->setTimezone('America/Managua');
         $pdf=PDF::loadView('admin.reportes.reportsVenta',['venta'=>$venta,'dia'=>$dia]);
         $fileName='reportes_venta' .Carbon::Now();
-        return Excel::download(new VentaExport, 'Reporte_Venta '.Carbon::Now().'.xls');
         return $pdf->stream($fileName.'.pdf');
         
         //return view('admin.compra.report')->with('facturacompra',$facturacompra)->with('detalleFact',$detalleFact);

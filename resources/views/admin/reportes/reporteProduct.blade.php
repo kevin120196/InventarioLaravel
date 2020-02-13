@@ -165,14 +165,14 @@
                 }
                 
     </style>
-    <title>Reporte de productos</title>
+    <title>Reporte de Inventario de Productos</title>
 </head>
 <body>  
     <div class="cabeceraForm">
         <div>
             <img style="width: 560px;height:auto;" src="./img/logoeltriunfo.png" alt="">
         </div>
-        <h1>Reporte de Producto</h1>
+        <h1>Reporte Inventario de Productos</h1>
     </div>      
     <div class="main-container">
             <table class="productos">

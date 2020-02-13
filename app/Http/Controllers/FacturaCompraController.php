@@ -20,6 +20,7 @@ class FacturaCompraController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        
     }
 
     public function index(Request $request){
@@ -112,7 +113,7 @@ class FacturaCompraController extends Controller
         $dia = Carbon::createFromFormat('Y-m-d H:i:s', $timestamp, 'America/Managua');
         $dia->setTimezone('America/Managua');
         $pdf=PDF::loadView('admin.compra.report',['dia'=>$dia,'facturacompra'=>$facturacompra,'detalleFact'=>$detalleFact]);
-        $fileName=$facturacompra->productos_id_productos;
+        $fileName='Factura Nº'.$facturacompra->id;
         if($facturacompra->estado_impreso==0){
             $facturacompra->estado_impreso=1;
             $facturacompra->update();
@@ -126,9 +127,7 @@ class FacturaCompraController extends Controller
     }
 
     public function reports(Request $request){
-        $facturacompra=Factura_Compra::orderBy('id','ASC')
-        ->get();
-
+        $facturacompra=Factura_Compra::orderBy('id','ASC')->get();
         $facturacompra->each(function($facturacompra){
             $facturacompra->producto;
             $facturacompra->proveedores;
@@ -185,7 +184,7 @@ class FacturaCompraController extends Controller
             $dia = Carbon::createFromFormat('Y-m-d H:i:s', $timestamp, 'America/Managua');
             $dia->setTimezone('America/Managua');
             $pdf=PDF::loadView('admin.compra.report',['dia'=>$dia,'facturacompra'=>$facturacompra,'detalleFact'=>$detalleFact]);
-            $fileName=$facturacompra->id;
+            $fileName='Factura Nº'.$facturacompra->id;
             return $pdf->stream($fileName.'.pdf');
                 //Alert::success('Exito!','La compra '.$compra->id .' ha sido realizada de forma Correcta!!');
             //return redirect()->route('compra.index');
@@ -204,31 +203,67 @@ class FacturaCompraController extends Controller
     public function destroy($id)
     {
      $compra=Factura_Compra::findOrFail($id);
-     if($compra->estado_factura=="Anulada" || $compra->estado_factura=="Devolución"){
-        if ($compra->estado_factura=="Devolución") {
-            \Session::flash('message', 'Esta factura anteriormente fue realizada su devolución');
-            return redirect()->route('compra.index');
+        
+        $stockFactura=DB::table('factura_producto_compra as fa')
+        ->join('productos as p','p.id','=','fa.productos_id_productos')
+        ->join('facturas_compras as com','com.id','=','fa.facturas_compras_id')
+        ->where('fa.facturas_compras_id','=',$compra->id)
+        ->select('fa.cantidad as stockfa')->get();
+        $stockproductos=DB::table('productos as p')
+        ->join('factura_producto_compra as fa','fa.productos_id_productos','=','p.id')
+        ->join('facturas_compras as com','com.id','=','fa.facturas_compras_id')
+        ->where('fa.facturas_compras_id','=',$compra->id)
+        ->select('p.cantidad as stock')->get();
+        $resta=0;
+        if($compra->estado_factura=="Anulada" || $compra->estado_factura=="Devolución"){
+       
+            if ($compra->estado_factura=="Devolución") {
+                \Session::flash('message', 'Esta factura anteriormente fue realizada su devolución');
+                return redirect()->route('compra.index');
 
-        }else{
-            \Session::flash('message', 'La Factura '.$compra->codigo_factura. ' ya fue anulada');
-            return redirect()->route('compra.index');
+            }else{
+                \Session::flash('message', 'La Factura '.$compra->codigo_factura. ' ya fue anulada');
+                return redirect()->route('compra.index');
 
-        }
-
-        }else{
-            $compra->estado_factura='Anulada';
-            $compra->estado_impreso=0;
-            $compra->update();
-            Alert::error('Exito!','La Factura '.$compra->codigo_factura .' ha sido anulada de forma Correcta!!');
-            return redirect()->route('compra.index');
+            }    
             
+        }else{
+
+            for ($i=0; $i <= $stockproductos->count(); $i++) { 
+                $resta=$stockproductos[$i++]->stock-$stockFactura[$i++]->stockfa;
+                if ($resta<0) {
+                    \Session::flash('message', 'Esta Compra no se puede devolver porque supera la existencia del Producto en inventario');
+                    return redirect()->route('compra.index');        
+                }else{
+                    $compra->estado_factura='Anulada';
+                    $compra->estado_impreso=0;
+                    $compra->update();
+                    Alert::error('Exito!','La Factura '.$compra->codigo_factura .' ha pasado a devolución de forma Correcta!!');
+                    return redirect()->route('compra.index');                      
+                }                
+            }
         }
+
+
+
     }
 
     public function devol($id)
     {
      $compra=Factura_Compra::findOrFail($id);
-        if($compra->estado_factura=="Devolución" || $compra->estado_factura=="Anulada"){
+     $stockFactura=DB::table('factura_producto_compra as fa')
+     ->join('productos as p','p.id','=','fa.productos_id_productos')
+     ->join('facturas_compras as com','com.id','=','fa.facturas_compras_id')
+     ->where('fa.facturas_compras_id','=',$compra->id)
+     ->select('fa.cantidad as stockfa')->get();
+     $stockproductos=DB::table('productos as p')
+     ->join('factura_producto_compra as fa','fa.productos_id_productos','=','p.id')
+     ->join('facturas_compras as com','com.id','=','fa.facturas_compras_id')
+     ->where('fa.facturas_compras_id','=',$compra->id)
+     ->select('p.cantidad as stock')->get();
+     $resta=0;
+
+     if($compra->estado_factura=="Devolución" || $compra->estado_factura=="Anulada"){
             if ($compra->estado_factura=="Anulada") {
                 \Session::flash('message', 'Esta factura anteriormente fue anulada');
                 return redirect()->route('compra.index');
@@ -239,11 +274,19 @@ class FacturaCompraController extends Controller
             }
     
         }else{
-            $compra->estado_factura='Devolución';
-            $compra->estado_impreso=0;
-            $compra->update();
-            Alert::error('Exito!','La Factura '.$compra->codigo_factura .' ha pasado a ser una devolución de forma Correcta!!');
-            return redirect()->route('compra.index');
+            for ($i=0; $i <= $stockproductos->count(); $i++) { 
+                $resta=$stockproductos[$i++]->stock-$stockFactura[$i++]->stockfa;
+                if ($resta<0) {
+                    \Session::flash('message', 'Esta Compra no se puede devolver porque supera la existencia del Producto en inventario');
+                    return redirect()->route('compra.index');        
+                }else{
+                    $compra->estado_factura='Anulada';
+                    $compra->estado_impreso=0;
+                    $compra->update();
+                    Alert::error('Exito!','La Factura '.$compra->codigo_factura .' ha sido anulada de forma Correcta!!');
+                    return redirect()->route('compra.index');                    
+                }                
+            }
         }
         
     }

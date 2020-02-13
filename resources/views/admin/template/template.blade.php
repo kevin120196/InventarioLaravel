@@ -18,7 +18,7 @@
         <main>
                 <header> 
                         <nav class="men">
-                            <a href="#" class="enlaceLogo" >Respuestos El Triunfo</a>
+                            <a href="{{route('admin.index')}}" class="enlaceLogo" >Respuestos El Triunfo</a>
                             <ul>
                                 <li>
                                     <label for="check"><span class="fa fa-bars" aria-hidden="true"></span> Menu</label>
@@ -45,9 +45,13 @@
             <div class="content-all">
                     <input type="checkbox" name="" id="check">          
 
+                    @if (Auth::user()->Bodega())
+                    @include('admin.template.menuBodega')                        
+                    @endif
                     @if (Auth::user()->Gerente())
                         @include('admin.template.menuGerente')
-                    @else
+                    @endif
+                    @if(Auth::user()->Vendedor())
                         @include('admin.template.menuVendedor')
                     @endif
                     

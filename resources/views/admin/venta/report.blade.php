@@ -180,6 +180,10 @@
    
         <form style="box-shadow: 1px 4px 10px 1px black">
                 <div class="cabeceraForm">
+                    <div>
+                        <img style="width: 250px;height:auto;" src="./img/logoeltriunfo.png" alt="">
+                    </div>
+            
                     <h1>Factura de Venta</h1>
                     <h3>Repuestos El Triunfo</h3>
                 </div>

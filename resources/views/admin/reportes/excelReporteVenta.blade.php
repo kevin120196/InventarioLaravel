@@ -7,10 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <style>
 
-            body{
-                font-family: 'Montserrat', sans-serif;
-                
-            }
+
             .input-contenedor{
                 margin-bottom: 15px;
                 border: 1px solid #aaa;
@@ -55,7 +52,7 @@
                 margin-left: 6.1em;
             }
             .label3{
-                margin-left: 6.1em;
+                margin-left: 6em;
             }
             .label4{
                 margin-left: 7.3em;
@@ -166,87 +163,46 @@
                 color: #606774;
                 font-weight: bold;
                 }
-
-                .etiqueta{
-                    font-size: 14px;
-                }
-
-                .label6{
-                    margin-left: 13.9em;
-                }
                 
     </style>
-    <title>Factura de Compra Nº <?php echo $facturacompra->codigo_factura?></title>
+    <title>Reporte de Venta</title>
 </head>
 <body>
-   
-        <form style="box-shadow: 1px 4px 10px 1px black">
-                <div class="cabeceraForm">
-                    <div>
-                        <img style="width: 250px;height:auto;" src="./img/logoeltriunfo.png" alt="">
-                    </div>
-                    <h1>Orden de Compra</h1>
-                    <h3>Repuestos El Triunfo</h3>
-                </div>
-                <br>
-                <div class="col-md-12">
-                        <div class="form-group col-6">
-                            <label for=""><b>Nº: </b></label>
-                            <label for="" class="label6"><?php echo $facturacompra->codigo_factura?></label>
-                        </div>
-                        <div class="form-group col-6">
-                                <label for=""><b>Proveedor: </b></label>
-                                <label for="" class="label1"><?php echo $facturacompra->proveedores->nombre_proveedor?></label>
-                        </div>
-                        <div class="form-group col-6">
-                            <label for=""><b>Fecha Facturación: </b></label>    
-                            <label for="" class="label2"><?php echo $facturacompra->fecha_compra?></label>
-                        </div>
-        
-                        <div class="form-group col-6">
-                                <label for=""><b>Estado de Factura: </b></label>    
-                                <label for="" class="label3"><?php echo $facturacompra->estado_factura?></label>
-                        </div>
-        
-                        <div class="form-group col-6">
-                                <label for=""><b>Tipo de Factura: </b></label>
-                                <label for="" class="label4"><?php echo $facturacompra->tipoFactura->tipo_factura_nombre?></label>    
-                        </div>
-                        <br>
-                </div>
-            </form>
-            
-            <div class="main-container" style="overflow: hidden">
-                <table id="venta" class="detallefact" style="margin-left: 10px">
-                    <thead>
-                        <tr>
-                            <th>Descripcion</th>
-                            <th>Cantidad</th>
-                            <th>precio</th>
-                            <th>SubTotal</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($detalleFact as $detalle)
+   <div class="cabeceraForm">
+    <h1>Reporte de Ventas</h1>
+   </div>
+        <div class="main-container">
+                <table class="proveedor">
+                        <thead>
                             <tr>
-                                <td>{{$detalle->descripcion}}</td>
-                                <td>{{$detalle->cantidad}}</td>
-                                <td>C${{$detalle->precio}}</td>
-                                <td>C${{$detalle->subtotal}}</td>
+                                <th>N° Factura</th>
+                                <th>Fecha de Facturacion</th>
+                                <th>Estado de Factura</th>
+                                <th>Tipo de Factura</th>
+                                <th>Cliente</th>
+                                <th>Descuento</th>
+                                <th>Vendedor</th>
+                                <th>Total</th>
                             </tr>
-                           
-                        @endforeach
-                    </tbody>
-                    <tfoot style="background: #aaa">
-                        
-                        <tr>
-                            <th><b>Total: </b>C${{$facturacompra->total}}</th>
-                        </tr>
-                    </tfoot>
-                </table>
-                <br>
-                <label for="" class=""><b class="etiqueta">Impreso por: {{Auth::user()->nameUser}} </b></label><br>
-                <label for="" class=""><b class="etiqueta">Elaborado: <?php echo $dia ?></b></label>
-        </div>
+                        </thead>
+                        <tbody>
+                            @foreach($venta as $ventas)
+                                <tr>
+                                    <td>{{$ventas->codigo_factura}}</td>
+                                    <td>{{$ventas->fecha_factura}}</td>
+                                    <td>{{$ventas->estado_factura}}</td>
+                                    <td>{{$ventas->tipos_factura->tipo_factura_nombre}}</td>
+                                    <td>{{$ventas->clientes->nombre}}</td>
+                                    <td>{{$ventas->descuentos_clientes->descuento_cliente}}%</td>
+                                    <td>{{$ventas->vendedores->nombre_vendedor}}</td>
+                                    <td>C${{$ventas->total}}</td>
+                                </tr>
+                                @endforeach
+                        </tbody>
+                    </table>
+                    <label for="" class=""><b>Impreso por: {{Auth::user()->nameUser}} </b></label><br>
+                    <label for="" class=""><b>Elaborado el: <?php echo $dia ?></b></label>
+
+            </div>
 </body>
 </html>

@@ -1,7 +1,9 @@
 <nav class="menu">
     <ul>
         <li><i class="fa fa-home"></i><a href="{{route('admin.index')}}"> Inicio</a></li>
-
+        <li><i><img src="{{asset('img/inventario.png')}}" alt=""></i> <a href="{{route('proveedores.index')}}">Proveedores</a></li>
+        <li><i><img src="{{asset('img/clientes (1).png')}}" alt=""></i> <a href="{{route('cliente.index')}}">Clientes</a></li>
+        
         <li><i><img src="{{asset('img/cajas.png')}}" alt=""></i> <a href="{{ route('productos.index')}}">Productos</a></li>
         <li><i><img src="{{asset('img/compras.png')}}" alt=""></i> <a>Compras</a>
             <ul>
@@ -11,9 +13,9 @@
         </li>
         <li><i><img src="{{asset('img/firma (2).png')}}" alt=""></i> <a href="#">Reportes</a>
             <ul>
-                <li><i><img src="{{asset('img/Factura.png')}}" alt=""></i><a href="{{ route('admin.reporte.producto')}}"> Reporte Producto</a></li>
-                <li><i><img src="{{asset('img/Factura.png')}}" alt=""></i> <a href="{{ route('admin.reporte.venta')}}"> Reporte Ventas</a></li>
-                <li><i><img src="{{asset('img/Factura.png')}}" alt=""></i> <a href="{{ route('admin.reporte.compra')}}"> Reporte Compras</a></li>
+                <li><i><img src="{{asset('img/Factura.png')}}" alt=""></i><a href="{{ route('admin.reportes.producto')}}"> Reporte Producto</a></li>
+                <li><i><img src="{{asset('img/Factura.png')}}" alt=""></i> <a href="{{ route('admin.reportes.venta')}}"> Reporte Ventas</a></li>
+                <li><i><img src="{{asset('img/Factura.png')}}" alt=""></i> <a href="{{ route('admin.reportes.compra')}}"> Reporte Compras</a></li>
             </ul>
         </li>
         <li><i><img src="{{asset('img/camion-de-reparto.png')}}" alt=""></i> <a>Ventas</a>

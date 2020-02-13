@@ -16,7 +16,7 @@
 <form class="formulario" action="{{route('login')}}" method="POST">
     <h1>Login</h1>
     <h2>Sistema de Inventario y Facturación</h2>
-    <h3>Repuestos El Triunfo</h3>
+    <h3>Auto Repuestos El Triunfo</h3>
     <div class="contenedor">
         {!! csrf_field() !!}
         <div class="input-contenedor {{ $errors->has('email') ? ' has-error' : '' }}">

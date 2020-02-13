@@ -35,6 +35,12 @@ class User extends Authenticatable
         return $this->user_type === 'Venta';
     }
 
+
+    public function Bodega(){
+        return $this->user_type === 'Bodega';
+    }
+
+
     public function scopeName($query,$name){
         return $query->where('name','LIKE',"%$name%");
     }

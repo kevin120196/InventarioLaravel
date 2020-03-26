@@ -60,6 +60,7 @@ class ClienteController extends Controller
     }
 
     public function update(clienteRequest $request,$id){
+        
         $cliente=Cliente::find($id);
         $cliente->fill($request->all());
         $cliente->save();

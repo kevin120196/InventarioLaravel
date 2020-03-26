@@ -53,7 +53,7 @@
                 <select id="productos_id_productos" name="productos_id_productos" class="selectproduc chosen">
                     <option value="">Producto</option>
                     @foreach($productos as $producto)
-                        <option value="{{$producto->id}}">
+                        <option value="{{$producto->id}}_{{$producto->cantidad}}_{{$producto->precio_compra}}">
                         {{$producto->codigo_alterno}}-{{$producto->descripcion}}
                         </option>
                     @endforeach
@@ -61,12 +61,18 @@
             </div>
             
 
-            <div class="input-contenedor input-50 input-100">
+            <div class="input-contenedor input-30 input-100">
                 <i class="icon"><img src="{{asset('img/cantidad (4).png')}}" alt=""></i>
-                {!! Form::text('cantidad', null, ['placeholder'=>'Cantidad','id'=>"cantidad"])!!}
+                {!! Form::number('cantidad', null, ['placeholder'=>'Cantidad','id'=>"cantidad",'style'=>'width:79%'])!!}
             </div>
-    
-            <div class="input-contenedor input-50 input-100">
+
+            <div class="input-contenedor input-30 input-100">
+                <i class="icon"><img src="{{asset('img/cantidad (4).png')}}" alt=""></i>
+                {!! Form::number('stock', null, ['placeholder'=>'Stock','id'=>"stock","disabled"])!!}
+            </div>
+
+            
+            <div class="input-contenedor input-40 input-100">
                 <i class="fa fa-money icon"></i>
                 {!! Form::text('precio', null, ['placeholder'=>'Precio','id'=>"precio"]) !!}
             </div>
@@ -107,8 +113,26 @@
         $(document).ready(function(){ 
     
             $("#guardar").hide();
-            $(".chosen").chosen();    
-          });
+            $(".chosen").chosen();     
+            limpiar();  
+        
+            $('.selectproduc').on('change', function(evt, params) {
+                datos=document.getElementById('productos_id_productos').value.split('_');             
+                $('#stock').val(datos[1]);
+                $('#precio').val(datos[2]); 
+                $('#cantidad').focus();
+              });  
+        });
+
+          $(document).on('change', '#productos_id_productos', function() {
+            // Does some stuff and logs the event to the console
+            datos=document.getElementById('productos_id_productos').value.split('_'); 
+            $('#stock').val(datos[1]);
+            $('#precio').val(datos[2]); 
+            $("#cantidad").focus();
+            });
+        
+
         
         var totalgeneral=0;
         var totalgeneral1=0;
@@ -124,7 +148,8 @@
             var proveedor= $('#proveedores_id option:selected').text();
             var proveedor1= $('#proveedores_id option:selected').val();    
             var producto= $('#productos_id_productos option:selected').text();
-            var producto1= $('#productos_id_productos option:selected').val();
+            var producto1= datos[0];
+            console.log(producto1);
             var cantidad= $('#cantidad').val();
             var precio= $('#precio').val();
             if(producto!="" && cantidad!="" && cantidad>0 && precio!=""){

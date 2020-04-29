@@ -3,10 +3,16 @@
 namespace App\Http\Controllers;
 use App\Marca; //levi siempre tiene que ir en mayuscula el App porque es donde estan los modelos fujate como esta escrito
 use Illuminate\Http\Request;
+use App\Http\Requests\marcaRequest;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class MarcaController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index(){
         $marca=Marca::orderBy('id','ASC')->paginate(3);
         return view('admin.marca.index')->with('marca',$marca);
@@ -18,7 +24,7 @@ class MarcaController extends Controller
 
     }
 
-    public function store(Request $reques){
+    public function store(marcaRequest $reques){
         $marca=new Marca($reques->all());
         $marca->save();
         Alert::success('Exito!','La marca ' . $marca->nombre_marca . ' ha sido creada con exito' );
@@ -31,7 +37,7 @@ class MarcaController extends Controller
         return view('admin.marca.edit')->with('marca',$marca);
     }
 
-    public function update(Request $request,$id){
+    public function update(marcaRequest $request,$id){
         $marca=Marca::find($id);
         $marca->fill($request->all());
         $marca->save();

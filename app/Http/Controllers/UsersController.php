@@ -8,15 +8,22 @@ use App\Http\Requests\UserRequest;
 use RealRashid\SweetAlert\Facades\Alert;
 class UsersController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        $user=User::orderBy('id','ASC')->paginate(10);
+        $user=User::orderBy('id','ASC')
+        ->name($request->name)
+        ->paginate(10);
         return view('admin.usuario.index')->with('user',$user);
     }
 
@@ -42,6 +49,7 @@ class UsersController extends Controller
     {
         //
         $user=new User($request->all());
+        $user->password=bcrypt($request->password);
         $user->save();
         Alert::success('Exito!', 'El usuario ' .$user->name. ' ha sido registrado de forma exitosa');
         return redirect()->route('usuarios.index');

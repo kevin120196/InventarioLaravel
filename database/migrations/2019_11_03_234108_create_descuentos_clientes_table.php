@@ -15,7 +15,7 @@ class CreateDescuentosClientesTable extends Migration
     {
         Schema::create('descuentos_clientes', function (Blueprint $table) {
             $table->increments('id');
-            $table->double('descuento_cliente');
+            $table->double('descuento_cliente',8,4);
             $table->timestamps();
         });
     }

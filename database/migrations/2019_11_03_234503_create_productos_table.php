@@ -17,13 +17,13 @@ class CreateProductosTable extends Migration
             $table->increments('id');
             $table->string('codigo_original',20);
             $table->string('codigo_alterno',20);
-            $table->integer('cantidad');
-            $table->double('precio_compra');
-            $table->double('precio_venta');
+            $table->integer('cantidad')->unsigned();
+            $table->double('precio_compra')->unsigned();
+            $table->double('precio_venta')->unsigned();
             $table->text('aplicacion');
             $table->text('descripcion');
             $table->string('unidad_medida');
-            $table->integer('numero_rack');
+            $table->integer('numero_rack')->unsigned();
             //claves foraneas
             $table->integer('marca_id')->unsigned();
             $table->integer('categoria_id')->unsigned();

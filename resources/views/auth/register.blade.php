@@ -5,9 +5,20 @@
     <h1>Registrate</h1>
     {{ csrf_field() }}
     <div class="contenedor">
+
+        <div class="input-contenedor {{ $errors->has('nameUser') ? ' has-error' : '' }}">
+            <i class="fa fa-user icon"></i>
+            <input id="nameUser" name="nameUser" value="{{old('nameUser')}}" type="text" placeholder="Nombre Completo" required autofocus>
+
+            @if ($errors->has('name'))
+            <span class="help-block">
+                <strong>{{ $errors->first('nameUser') }}</strong>
+            </span>
+            @endif
+        </div>
         <div class="input-contenedor {{ $errors->has('name') ? ' has-error' : '' }}">
             <i class="fa fa-user icon"></i>
-            <input id="name" name="name" value="{{old('name')}}" type="text" placeholder="Nombre Completo" required autofocus>
+            <input id="name" name="name" value="{{old('name')}}" type="text" placeholder="Alias de Usuario" required autofocus>
 
             @if ($errors->has('name'))
             <span class="help-block">

@@ -83,7 +83,7 @@ main{
     border-bottom: 10px solid #fff;
     position: absolute;
     margin-top: -10px;
-    margin-left: 20px;
+    margin-left: 20px; 
 
 }
 
@@ -270,6 +270,20 @@ article{
     z-index: 3;
 }
 
+.label{
+    top: 0;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    width: 15%;
+    max-width: 1000px;
+    top: 14px;
+    font-size: 20px;
+    color: white;
+    cursor: pointer;
+    z-index: 3;
+}
+
 
 .content-all h4{
     position: fixed;
@@ -379,15 +393,77 @@ select{
     font-size: 20px;
     margin:0px;
     padding: 10px;
+    color: #757575;
 }
 
-input[type="number"],
+.selectFactura{
+    width: 86.3%;
+}
+
+.selectproduc{
+    width: 78.3%;
+}
+
+.selectipoclien{
+    width: 84.3%;
+    padding: 9.8px;
+}
+
+.selectipofactura{
+    width: 78.3%;
+}
+
+.selectdescuen{
+    width: 78.3%;
+}
+
+input[type="date"]{
+    font-size: 20px;
+    width: 80%;
+    margin: auto;
+    margin-left: 1px;
+    padding: 7px;
+    border: none;
+    outline: none;
+    color: #757575;
+}
+
+input[type="number"]{
+    font-size: 20px;
+    width: 79%;
+    margin: auto;
+    margin-left: 1px;
+    padding: 10px;
+    border: none;
+    outline: none;
+    color: #757575;
+}
+
+input[type="text"]:read-only{
+    text-transform: capitalize;   
+}
+
+input[type="number"]:disabled{
+    background-color: transparent;
+}
+
+input[type="search"]{
+    font-size: 18px;
+    width: 200px;
+    margin: auto;
+    margin-left: 1px;
+    padding: 4px;
+    outline: none;    
+}
+
+input[type="email"],
 input[type="text"],
 input[type="password"],
 .button-primary,
 .button-danger,
 .button-show,
-.button-warning
+.button-warning,
+.button-detail
 {
     font-size: 20px;
     width: 80%;
@@ -430,7 +506,7 @@ input[type="password"],
     text-align: center;
     color: #999;
     border-right: 2px solid #999;
-    padding: 11px 11px 11px 0px;
+    padding:8px 1px 7px 0px;
 }
 
 .buscar-input{
@@ -476,6 +552,7 @@ p{
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
     left: 0;
     top: 0;
     width: 100%; /* Full width */
@@ -483,46 +560,6 @@ p{
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-  }
-  
-  /* Modal Content/Box */
-  .modal-content {
-    background-color: #fefefe;
-    margin: 15% auto; /* 15% from the top and centered */
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
-  }
-  
-  /* The Close Button */
-  .close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-  }
-  
-  .close:hover,
-  .close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-  }
-  
-  .modal-header {
-    padding: 2px 16px;
-    background-color: #5cb85c;
-    color: white;
-  }
-  
-  /* Modal Body */
-  .modal-body {padding: 2px 16px;}
-  
-  /* Modal Footer */
-  .modal-footer {
-    padding: 2px 16px;
-    background-color: #5cb85c;
-    color: white;
   }
   
   /* Modal Content */
@@ -534,16 +571,53 @@ p{
     border: 1px solid #888;
     width: 80%;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
     animation-name: animatetop;
     animation-duration: 0.4s
   }
   
   /* Add Animation */
-  @keyframes animatetop {
-    from {top: -300px; opacity: 0}
-    to {top: 0; opacity: 1}
+  @-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0} 
+    to {top:0; opacity:1}
   }
   
+  @keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+  }
+  
+  /* The Close Button */
+  .close {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  .modal-header {
+    padding: 2px 16px;
+    background-color: #5cb85c;
+    color: white;
+  }
+  
+  .modal-body {padding: 0px 16px;}
+  
+  .modal-footer {
+    padding: 2px 16px;
+    background-color: white;
+    color: black;
+  }
+    
 /**/
 
 /**botones*/
@@ -566,7 +640,7 @@ p{
 
 
 .button-primary:hover{
-    background: transparent;
+    background: white;
     border: 3px solid #00796B;
     color: #00796B;
 }
@@ -578,8 +652,8 @@ p{
     font-family: sans-serif;
     font-weight: bold;
     font-size: 1.25em;
-    margin: 3px;
-    padding: 10px 0px;
+    margin: 2px;
+    padding: 4px 0px;
     text-align: center;
     width: 50px;
     text-decoration: none;
@@ -590,10 +664,36 @@ p{
 
 
 .button-warning:hover{
-    background: transparent;
+    background: white;
     border: 3px solid #FFA000;
     color: #FFA000;
 }
+
+.button-detail{
+    background: #033060;
+    color: #fff;
+    display: inline-block;
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 1.25em;
+    margin: 2px;
+    padding: 4px 0px;
+    text-align: center;
+    width: 50px;
+    text-decoration: none;
+    border-radius: 5px;
+    box-shadow:2px 5px 5px black;
+    transition:all 0.5s;
+}
+
+
+.button-detail:hover{
+    background: white;
+    border: 3px solid #033060;
+    color: #033060;
+}
+
+
 
 .button-danger{
     background: #D32F2F;
@@ -602,8 +702,8 @@ p{
     font-family: sans-serif;
     font-weight: bold;
     font-size: 1.25em;
-    margin: 3px;
-    padding: 10px 0px;
+    margin: 2px;
+    padding: 4px 0px;
     text-align: center;
     width: 50px;
     text-decoration: none;
@@ -614,7 +714,7 @@ p{
 
 
 .button-danger:hover{
-    background: transparent;
+    background: white;
     border: 3px solid #D32F2F;
     color: #D32F2F;
 }
@@ -626,8 +726,8 @@ p{
     font-family: sans-serif;
     font-weight: bold;
     font-size: 1.25em;
-    margin: 3px;
-    padding: 10px 0px;
+    margin: 2px;
+    padding: 4px 0px;
     text-align: center;
     width: 50px;
     text-decoration: none;
@@ -638,7 +738,7 @@ p{
 
 
 .button-show:hover{
-    background: transparent;
+    background: white;
     border: 3px solid #388E3C;
     color: #388E3C;
 }
@@ -712,6 +812,14 @@ th,td{
     padding: 10px;
     font-family: 'Montserrat', sans-serif;
     text-transform: capitalize;
+}
+
+.Compras th,td{
+    padding: 4px 20px 1px 42px;
+}
+
+.Ventas th,td{
+    padding: 10px 1px 10px 9px;
 }
 
 thead th{
@@ -896,7 +1004,7 @@ tr:hover td{
     }
 
     textarea,select{
-        width: 89.3%;
+        width: 88.3%;
     }
     
 }
@@ -904,6 +1012,16 @@ tr:hover td{
 @media only screen and (min-width: 681px){
     .menu ul li ul {
         margin-right: -43em;
+    }
+    input[type="date"] {
+        font-size: 20px;
+        width: 80%;
+        margin: auto;
+        margin-left: 7px;
+        padding: 7px;
+        border: none;
+        outline: none;
+        color: #757575;
     }
 }
 
@@ -915,6 +1033,14 @@ tr:hover td{
     }
     thead th{
         display: none;
+    }
+
+    .selectdescuen {
+        width: 86.8%;
+    }
+
+    .selectipofactura {
+        width: 86.8%;
     }
 
     table{
@@ -939,9 +1065,36 @@ tr:hover td{
     .input-90{
         width: 90%;
     }
-    
+
+    .input-70{
+        width: 70%;
+    }
+
     .input-100{
         width: 100%;
+    }
+
+
+
+
+    .descuento td:before{
+        content: '';
+        font-weight: bold;
+        position: relative;
+        font-family: sans-serif;
+        top: 7%;
+        left: -100px;
+        transform: translateY(-50%);
+    }
+
+
+    .descuento td:nth-of-type(1)::before{
+        content: 'Descuento:';
+        margin-right: -8px;
+    }
+
+    .descuento td:nth-of-type(2)::before{
+        content: 'Acción:';
     }
 
     .categoria td:before{
@@ -1027,6 +1180,198 @@ tr:hover td{
         content: 'Acción:';
     }
 
+    .detalleVenta td:before{
+        content: '';
+        font-weight: bold;
+        position: relative;
+        font-family: sans-serif;
+        top: 7%;
+        left: -100px;
+        transform: translateY(-50%);
+    }
+
+    .detalleVenta td:nth-of-type(1)::before{
+        content: 'Producto:';
+        margin-right: 2px;
+    }
+
+    .detalleVenta td:nth-of-type(2)::before{
+        content: 'Cantidad:';
+        margin-right: 4px;
+    }
+
+    .detalleVenta td:nth-of-type(3)::before{
+        content: 'Precio:';
+        margin-right: 22px;
+    }
+
+    .detalleVenta td:nth-of-type(4)::before{
+        content: 'Descuento:';
+        margin-right: -10px;
+    }
+
+    .detalleVenta td:nth-of-type(5)::before{
+        content: 'SubTotal:';
+        margin-right: 4px;
+    }
+
+    .detalleVenta th:nth-of-type(1)::before{
+        content: '';
+        margin-left: 37px;
+    }
+
+
+
+    .Venta td:before{
+        content: '';
+        font-weight: bold;
+        position: relative;
+        font-family: sans-serif;
+        top: 7%;
+        left: -100px;
+        transform: translateY(-50%);
+    }
+
+    .Venta td:nth-of-type(1)::before{
+        content: 'Nº Factura:';
+        margin-right: 37px;
+    }
+
+    .Venta td:nth-of-type(2)::before{
+        content: 'Fecha de Facturación:';
+        margin-right: -49px;
+    }
+
+    .Venta td:nth-of-type(3)::before{
+        content: 'Estado de Factura:';
+        margin-right: -25px;
+    }
+
+    .Venta td:nth-of-type(4)::before{
+        content: 'Tipo de Factura:';
+        margin-right: -5px;
+    }
+
+    .Venta td:nth-of-type(5)::before{
+        content: 'Cliente:';
+        margin-right: 62px;
+    }
+
+    .Venta td:nth-of-type(6)::before{
+        content: 'Descuento:';
+        margin-right: 33px;
+    }
+
+    .Venta td:nth-of-type(7)::before{
+        content: 'Vendedor:';
+        margin-right: 40px;
+    }
+    
+    .Venta td:nth-of-type(8)::before{
+        content: 'Total:';
+        margin-right: 75px;
+    }
+
+    .Venta td:nth-of-type(9)::before{
+        content: 'Acciones:';
+        margin-right: 21px;
+    }
+
+    .Venta th:nth-of-type(1)::before{
+        content: '';
+    }
+
+
+    .Compras td:before{
+        content: '';
+        font-weight: bold;
+        position: relative;
+        font-family: sans-serif;
+        top: 7%;
+        left: -100px;
+        transform: translateY(-50%);
+    }
+
+    .Compras td:nth-of-type(1)::before{
+        content: 'Nº Factura:';
+        margin-right: 37px;
+    }
+
+    .Compras td:nth-of-type(2)::before{
+        content: 'Fecha de Facturación:';
+        margin-right: -49px;
+    }
+
+    .Compras td:nth-of-type(3)::before{
+        content: 'Estado de Factura:';
+        margin-right: -25px;
+    }
+
+    .Compras td:nth-of-type(4)::before{
+        content: 'Tipo de Factura:';
+        margin-right: -5px;
+    }
+
+    .Compras td:nth-of-type(5)::before{
+        content: 'Proveedor:';
+        margin-right: 37px;
+    }
+    
+    .Compras td:nth-of-type(6)::before{
+        content: 'Total:';
+        margin-right: 78px;
+    }
+
+    .Compras td:nth-of-type(7)::before{
+        content: 'Acciones:';
+        margin-right: 25px;
+    }
+
+    .Compras th:nth-of-type(1)::before{
+        content: '';
+    }
+
+
+
+
+
+    .detallefact td:before{
+        content: '';
+        font-weight: bold;
+        position: relative;
+        font-family: sans-serif;
+        top: 7%;
+        left: -100px;
+        transform: translateY(-50%);
+    }
+
+    .detallefact td:nth-of-type(1)::before{
+        content: 'Producto:';
+        margin-right: 2px;
+    }
+
+    .detallefact td:nth-of-type(2)::before{
+        content: 'Cantidad:';
+        margin-right: 4px;
+    }
+
+    .detallefact td:nth-of-type(3)::before{
+        content: 'Precio:';
+        margin-right: 22px;
+    }
+
+    .detallefact td:nth-of-type(4)::before{
+        content: 'SubTotal:';
+        margin-right: 4px;
+    }
+
+    .detallefact th:nth-of-type(1)::before{
+        content: '';
+        margin-left: 37px;
+    }
+
+
+
     .productos td:before{
         content: '';
         font-weight: bold;
@@ -1101,15 +1446,18 @@ tr:hover td{
         content: 'Acción:';
         margin-right: 44px;
     }
+    .contenedor{
+        width: 100%;
+    }
 
     
     input[type="button"],
-    .button-danger,.button-warning, .button-show{
+    .button-detail,.button-danger,.button-warning, .button-show{
         border: none;
         padding: 0;
         min-width: 0;
         color: #606774;
-        background: none;
+        background: white;
         overflow: visible;
         box-shadow: none;
     }
@@ -1125,16 +1473,14 @@ tr:hover td{
         width: 90%;
     }
     
-    .input-100{
-        width: 100%;
-    }
-
+    
     .buscar-input{
         margin: 0;
     }
 
-    
-
+    input[type="date"] {
+        margin-left: 7px;
+    }
 }
 
 
@@ -1167,9 +1513,6 @@ tr:hover td{
         width: 60%;
     }
     
-    .input-70{
-        width: 70%;
-    }
     
     .input-80{
         width: 80%;
@@ -1189,9 +1532,34 @@ tr:hover td{
         margin-right: -28.5em;
     }
 
+    input[type="date"] {
+        margin-left: 64px;
+    }
+    .buscar-input {
+        margin: 20px 0px;
+    }
 }
+@media only screen and (min-width: 800px) and (max-width: 810px){
+    .buscar-input {
+        margin: 20px 0px;
+    }
 
+    main{
+        width: 103%;
+    }
+
+    .cabecera{
+        width: 103%;
+    }
+}
 @media only screen and (min-width: 990px){
+   
+    input[type="date"] {
+        margin-left: 84px;
+    }
+    .buscar-input {
+        margin: 20px 0px;
+    }
     #user{
         visibility: hidden;
     }
@@ -1212,9 +1580,6 @@ tr:hover td{
         width: 60%;
     }
     
-    .input-70{
-        width: 70%;
-    }
     
     .input-80{
         width: 80%;
@@ -1279,9 +1644,6 @@ tr:hover td{
         width: 60%;
     }
     
-    .input-70{
-        width: 70%;
-    }
     
     .input-80{
         width: 80%;
@@ -1318,9 +1680,6 @@ tr:hover td{
         width: 60%;
     }
     
-    .input-70{
-        width: 70%;
-    }
     
     .input-80{
         width: 80%;
@@ -1392,6 +1751,14 @@ tr:hover td{
     }
 
     
+    .buscar-input{
+        margin: 23px 45px;
+    }
+
+
+    input[type="date"] {
+        margin-left: 0;
+    }
 
     .labl{
         visibility: visible;

@@ -17,8 +17,8 @@ class CreateClientesTable extends Migration
             $table->increments('id');
             $table->string('nombre',100);
             $table->string('direccion',100);
-            $table->string('cedula',15)->unique();
-            $table->string('numero_telefono',8);
+            $table->string('cedula',20)->unique();
+            $table->string('numero_telefono',15);
             $table->string('correo_electronico',100)->unique();
             //clave foranea
             $table->integer('descuento_id')->unsigned();

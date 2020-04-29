@@ -16,8 +16,9 @@ class CreateVendedoresTable extends Migration
         Schema::create('vendedores', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nombre_vendedor',100);
+            $table->string('cedula_vendedor',20)->unique();
             $table->string('direccion',100);
-            $table->string('telefono_vendedor',11);
+            $table->string('telefono_vendedor',15);
             $table->string('correo_electronico')->unique();
             $table->timestamps();
         });

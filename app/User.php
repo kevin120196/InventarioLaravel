@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','user_type'
+        'name', 'email', 'password','user_type','nameUser'
     ];
 
     /**
@@ -26,4 +26,23 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function Gerente(){
+        return $this->user_type === 'Gerente';
+    }
+
+    public function Vendedor(){
+        return $this->user_type === 'Venta';
+    }
+
+
+    public function Bodega(){
+        return $this->user_type === 'Bodega';
+    }
+
+
+    public function scopeName($query,$name){
+        return $query->where('name','LIKE',"%$name%");
+    }
+
 }

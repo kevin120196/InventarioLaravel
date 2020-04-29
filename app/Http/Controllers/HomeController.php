@@ -21,8 +21,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        Alert::success('Exito!', 'Estimado Usuario a iniciado sesión de forma Correcta!!');
-        return view('admin');
+        return view('welcome');
         
     }
 }

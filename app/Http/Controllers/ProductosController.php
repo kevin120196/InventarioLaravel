@@ -7,13 +7,24 @@ use App\Categoria;
 use App\Producto;
 use App\Marca;
 use App\Proveedor;
+use PDF;
+use App\Http\Requests\productoRequest;
+use Carbon\Carbon;
 use RealRashid\SweetAlert\Facades\Alert;
 class ProductosController extends Controller
 {
     //
+    public function __construct()
+    {
+        $this->middleware('auth');
+                
+    }
 
     public function index(Request $request){
-        $productos=Producto::codigo($request->codigo)->orderBy('id','ASC')->paginate(10);
+        $productos=Producto::codigo($request->codigo)->orderBy('id','ASC')
+        ->descripcion($request->descripcion)
+        ->estante($request->estante)
+        ->paginate(10);
         $productos->each(function($productos){
             $productos->categoria;
             $productos->marca;
@@ -23,6 +34,20 @@ class ProductosController extends Controller
          
     }
 
+    public function show(){
+        $productos=Producto::orderBy('id','ASC')
+        ->paginate(10);
+        $productos->each(function($productos){
+            $productos->categoria;
+            $productos->marca;
+            $productos->proveedor;
+        });
+        $pdf=PDF::loadView('admin.productos.show',['productos'=>$productos])->setPaper('A4', 'landscape');;
+        $fileName='reporte_productos '. Carbon::now();
+        return $pdf->stream($fileName.'.pdf');
+    }
+
+
 
     public function create(){
         $categoria=Categoria::orderBy('nombre_categoria','ASC')->pluck('nombre_categoria','id')->prepend('Seleccione una categoria');
@@ -31,10 +56,10 @@ class ProductosController extends Controller
         return view('admin.productos.create')->with('categoria',$categoria)->with('marcas',$marcas)->with('proveedores',$proveedores);
     }
 
-    public function store(Request $request){
+    public function store(productoRequest $request){
         
         $producto=new Producto($request->all());
-        dd($producto->categoria);
+        //dd($producto->categoria);
         /*$producto->codigo_original=$request->codigo_original;
         $producto->codigo_alterno=$request->codigo_alterno;
         $producto->cantidad=$request->cantidad;
@@ -64,12 +89,15 @@ class ProductosController extends Controller
         return view('admin.productos.edit')->with('producto',$producto)->with('categoria',$categoria)->with('marcas',$marcas)->with('proveedores',$proveedores);
     }
 
-    public function update(Request $request, $id){
+    public function update(productoRequest $request, $id){
         $producto=Producto::find($id);
         $producto->fill($request->all());
         $producto->save();
         Alert::success('Exito!','El producto '.$producto->marca->nombre_marca .' ha sido actualizado');
+        
+
         return redirect()->route('productos.index');
+    
     }
 
     public function destroy($id){

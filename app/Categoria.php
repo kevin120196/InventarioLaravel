@@ -11,6 +11,6 @@ class Categoria extends Model
     protected $fillable=['nombre_categoria'];
 
     public function producto() {
-        return $this ->hasMany('App\Productos');     
+        return $this->hasMany('App\Productos');     
     }
 }

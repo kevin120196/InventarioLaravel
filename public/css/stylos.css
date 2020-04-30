@@ -854,18 +854,13 @@ tr:hover td{
 
 /*paginacion*/
 .pagination {
-	margin:20px 0;
-}
- 
-.pagination ul {
-	list-style:none;
-	text-align: center;
-}
- 
-.pagination ul li {
-	display:inline-block;
-	margin-right:10px;
-}
+    display: -ms-flexbox;
+    display: flex;
+    padding-left: 2px;
+    list-style: none;
+    border-radius: 0.25rem;
+  }
+  
  
 .pagination ul li a {
 	display:block;
@@ -875,14 +870,47 @@ tr:hover td{
 	text-decoration: none;
 }
  
-.pagination ul li a:hover {
-	background:#34495E;
-}
- 
-.pagination ul li .active {
-	background:#34495E;
-	font-weight:bold;
-}
+
+.page-link {
+    position: relative;
+    display: block;
+    padding: 0.5rem 0.75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #fff;
+    background-color: #2D3E50;
+    border: 1px solid #dee2e6;
+  }
+  
+  .page-link:hover {
+    z-index: 2;
+    color: #fff;
+    text-decoration: none;
+    background-color: #354d72;
+    border-color: #dee2e6;
+  }
+
+  .page-link:focus {
+    z-index: 2;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem #34495E;
+  }
+
+  
+.page-item.active .page-link {
+    z-index: 1;
+    color: #fff;
+    background-color: #354d72;
+   
+  }
+
+  .page-item.disabled .page-link {
+    color: #6c757d;
+    pointer-events: none;
+    cursor: auto;
+    background-color: rgba(192, 192, 192, 0.5);
+  }
+  
 /**/
 /* Extra small devices (phones, 600px and down) */
 @media  screen and (max-width: 588px) {

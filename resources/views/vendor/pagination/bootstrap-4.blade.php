@@ -1,3 +1,6 @@
+@push('styles')
+    <link href="{{ asset('css/stylos.css') }}" rel="stylesheet">
+@endpush    
 @if ($paginator->hasPages())
     <ul class="pagination">
         {{-- Previous Page Link --}}

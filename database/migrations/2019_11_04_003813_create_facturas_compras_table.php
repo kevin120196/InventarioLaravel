@@ -37,7 +37,7 @@ class CreateFacturasComprasTable extends Migration
 
         Schema::create('factura_producto_compra', function (Blueprint $table) {
             $table->increments('id');
-            $table->double('cantidad');
+            $table->integer('cantidad');
             $table->double('precio');
             $table->double('subtotal');
             //claves foraneas

@@ -229,17 +229,20 @@ class FacturaCompraController extends Controller
             
         }else{
 
-            for ($i=0; $i <= $stockproductos->count(); $i++) { 
-                $resta=$stockproductos[$i++]->stock-$stockFactura[$i++]->stockfa;
-                if ($resta<0) {
-                    \Session::flash('message', 'Esta Compra no se puede devolver porque supera la existencia del Producto en inventario');
-                    return redirect()->route('compra.index');        
-                }else{
-                    $compra->estado_factura='Devolución';
-                    $compra->estado_impreso=0;
-                    $compra->update();
-                    Alert::error('Exito!','La Factura '.$compra->codigo_factura .' ha pasado a devolución de forma Correcta!!');
-                    return redirect()->route('compra.index');                      
+            for ($i=0; $i <= $stockproductos->count(); $i++) {
+                for ($f=0; $f <= $stockFactura->count(); $f++) { 
+                    $resta=$stockproductos[$i++]->stock-$stockFactura[$f++]->stockfa;
+                    
+                    if ($resta <= 0) {
+                        \Session::flash('message', 'Esta Compra no se puede devolver porque supera la existencia del Producto en inventario');
+                        return redirect()->route('compra.index');        
+                    }else{
+                        $compra->estado_factura='Devolución';
+                        $compra->estado_impreso=0;
+                        $compra->update();
+                        Alert::error('Exito!','La Factura '.$compra->codigo_factura .' ha pasado a devolución de forma Correcta!!');
+                        return redirect()->route('compra.index');                      
+                    } 
                 }                
             }
         }
@@ -261,6 +264,8 @@ class FacturaCompraController extends Controller
      ->join('facturas_compras as com','com.id','=','fa.facturas_compras_id')
      ->where('fa.facturas_compras_id','=',$compra->id)
      ->select('p.cantidad as stock')->get();
+     
+     
      $resta=0;
 
      if($compra->estado_factura=="Devolución" || $compra->estado_factura=="Anulada"){
@@ -275,17 +280,23 @@ class FacturaCompraController extends Controller
     
         }else{
             for ($i=0; $i <= $stockproductos->count(); $i++) { 
-                $resta=$stockproductos[$i++]->stock-$stockFactura[$i++]->stockfa;
-                if ($resta<0) {
-                    \Session::flash('message', 'Esta Compra no se puede devolver porque supera la existencia del Producto en inventario');
-                    return redirect()->route('compra.index');        
-                }else{
-                    $compra->estado_factura='Anulada';
-                    $compra->estado_impreso=0;
-                    $compra->update();
-                    Alert::error('Exito!','La Factura '.$compra->codigo_factura .' ha sido anulada de forma Correcta!!');
-                    return redirect()->route('compra.index');                    
-                }                
+                for ($f=0; $f <=$stockFactura->count(); $f++) { 
+                    # code...
+                    $resta=$stockproductos[$i++]->stock-$stockFactura[$f++]->stockfa;
+                    
+                    if ($resta <= 0) {
+                        
+                        \Session::flash('message', 'Esta Compra no se puede devolver porque supera la existencia del Producto en inventario');
+                        return redirect()->route('compra.index');        
+                    }else{
+                        $compra->estado_factura='Anulada';
+                        $compra->estado_impreso=0;
+                        $compra->update();
+                        Alert::error('Exito!','La Factura '.$compra->codigo_factura .' ha sido anulada de forma Correcta!!');
+                        return redirect()->route('compra.index');                    
+                    }                
+                }
+
             }
         }
         

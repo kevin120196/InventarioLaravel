@@ -167,7 +167,7 @@
         </div>
     </div>
 @endsection
-<script src="{{asset('js/jquery-git.js')}}"></script>
+    <script src="{{asset('js/jquery-git.js')}}"></script>
     <script>
         
         jQuery(function ($) {

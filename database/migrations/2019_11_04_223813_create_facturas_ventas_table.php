@@ -39,7 +39,7 @@ class CreateFacturasVentasTable extends Migration
 
         Schema::create('factura_producto_venta', function (Blueprint $table) {
             $table->increments('id');
-            $table->double('cantidad');
+            $table->integer('cantidad');
             $table->double('precio');
             $table->double('subtotal');
             $table->double('iva');
